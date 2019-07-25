@@ -4,7 +4,7 @@ function App() {
   return (
     <>
       <h1>Coach Board</h1>
-      <h3>...in Progress</h3>
+      <h3>...in progress</h3>
     </>
   );
 }
