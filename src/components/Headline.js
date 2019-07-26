@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import React from "react";
 
 const sizes = {
-  Header: "32px",
-  Main: "24px",
-  Sub: "18px"
+  Header: "36px",
+  Main: "28px",
+  Sub: "22px"
 };
 
 function getSize(size) {

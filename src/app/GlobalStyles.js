@@ -7,7 +7,7 @@ export default createGlobalStyle`
 
     body {
         color: #fff;
-        font-family: 'Bahianita', cursive;
+        font-family: 'Bahianita', 'cursive';
         background-color: gray;
         margin: 0;
     }
