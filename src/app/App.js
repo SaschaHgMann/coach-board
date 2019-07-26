@@ -1,11 +1,12 @@
 import React from "react";
 import GlobalStyles from "./GlobalStyles";
+import Headline from "../components/Headline";
 
 function App() {
   return (
     <>
       <GlobalStyles />
-      <h1>Coach Board</h1>
+      <Headline size="Header">Coaching Board</Headline>
       <h3>...in progress</h3>
     </>
   );
