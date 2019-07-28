@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import Headline from "./Headline";
 import Devider from "./Devider";
 import Tag from "./Tag";
+import Content from "./Content";
 
 const StyledCard = styled.div`
   margin: 0px;
@@ -46,8 +47,8 @@ function Card() {
       <StyledCardBody>
         <Headline size="Sub">FreeFight</Headline>
         <Devider />
-        <p>treten</p>
-        <p>schlagen</p>
+        <Content>treten</Content>
+        <Content>schlagen</Content>
         <Tag>Basics</Tag>
         <Tag>Kumite</Tag>
       </StyledCardBody>
