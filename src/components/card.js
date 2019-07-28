@@ -3,6 +3,7 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import Headline from "./Headline";
 import Devider from "./Devider";
+import Tag from "./Tag";
 
 const StyledCard = styled.div`
   margin: 0px;
@@ -23,6 +24,7 @@ const StyledCardBody = styled.div`
   margin: 0px;
   padding-left: 5px;
   padding-right: 5px;
+  padding-bottom: 5px;
   background-color: #fefffe;
   border-radius: 10px;
 `;
@@ -46,6 +48,8 @@ function Card() {
         <Devider />
         <p>treten</p>
         <p>schlagen</p>
+        <Tag>Basics</Tag>
+        <Tag>Kumite</Tag>
       </StyledCardBody>
       <StyledCardFooter>author date</StyledCardFooter>
     </StyledCard>
