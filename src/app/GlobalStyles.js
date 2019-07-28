@@ -11,4 +11,5 @@ export default createGlobalStyle`
         background-color: gray;
         margin: 0;
     }
+    
 `;
