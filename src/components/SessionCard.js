@@ -40,18 +40,17 @@ const StyledCardFooter = styled.div`
   color: #fff8f0;
 `;
 
-function Card() {
+function SessionCard({ group, topic, content, tags }) {
   return (
     <StyledCard>
       <StyledCardHeader>
-        <Headline size="Main">Gruppe Kids</Headline>
+        <Headline size="Main">Gruppe Kids{group}</Headline>
         <button>Teilnehmer: 12/15</button>
       </StyledCardHeader>
       <StyledCardBody>
-        <Headline size="Sub">FreeFight</Headline>
+        <Headline size="Sub">FreeFight{topic}</Headline>
         <Devider />
-        <Content>treten</Content>
-        <Content>schlagen</Content>
+        <Content>treten{content}</Content>
         <Tag>Basics</Tag>
         <Tag>Kumite</Tag>
       </StyledCardBody>
@@ -60,11 +59,14 @@ function Card() {
   );
 }
 
-Card.propTypes = {
-  title: PropTypes.string,
+SessionCard.propTypes = {
+  group: PropTypes.string,
   topic: PropTypes.string,
   content: PropTypes.string,
-  tags: PropTypes.arrayOf(PropTypes.string)
+  tags: PropTypes.arrayOf(PropTypes.string),
+  author: PropTypes.func,
+  date: PropTypes.func,
+  students: PropTypes.func
 };
 
-export default Card;
+export default SessionCard;
