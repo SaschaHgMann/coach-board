@@ -40,6 +40,7 @@ const StyledCardFooter = styled.div`
   justify-content: right;
   color: #fff8f0;
 `;
+
 const TagList = styled.div`
   display: flex;
   width: 100%;
@@ -62,8 +63,7 @@ function SessionCard({ group, topic, content, tags }) {
         <Headline size="Sub">{topic}</Headline>
         <Devider />
         <Content>{content}</Content>
-        {tags && tags.length && <TagList>{tags.map(renderTag)}</TagList>}
-        {(!tags || !tags.length) && <TagList>-</TagList>}
+        <TagList>{tags.map(renderTag)}</TagList>
       </StyledCardBody>
       <StyledCardFooter>author date</StyledCardFooter>
     </StyledCard>

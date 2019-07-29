@@ -3,7 +3,7 @@
     "_id": 1,
     "group": "Gr 1 - Bonsais",
     "topic": "Einführung Grundtechniken",
-    "content": "ipsum",
+    "content": "Lorem",
     "tags": ["Koordination"],
     "author": "Claudia",
     "date": "Montag, 01.07.2019"
@@ -12,7 +12,7 @@
     "_id": 2,
     "group": "Gr 3 - Jugend",
     "topic": "Wettkampf Vorbereitung",
-    "content": "ipsum",
+    "content": "Larum",
     "tags": ["Kondition", "Freikampf"],
     "author": "Sascha",
     "date": "Dienstag, 02.07.2019"
@@ -21,7 +21,7 @@
     "_id": 3,
     "group": "Gr 2  - Kids",
     "topic": "Einführung neuer Tritt",
-    "content": "ipsum",
+    "content": "Ipsum",
     "tags": ["Partnerkampf", "Basics"],
     "author": "Dennis",
     "date": "Mittwoch, 03.07.2019"
