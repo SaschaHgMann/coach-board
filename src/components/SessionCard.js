@@ -5,6 +5,7 @@ import Headline from "./Headline";
 import Devider from "./Devider";
 import Tag from "./Tag";
 import Content from "./Content";
+//import sessions from "../pages/__mock__/sessions";
 
 const StyledCard = styled.div`
   margin: 0px;
@@ -39,20 +40,30 @@ const StyledCardFooter = styled.div`
   justify-content: right;
   color: #fff8f0;
 `;
+const TagList = styled.div`
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  padding: 0;
+`;
 
 function SessionCard({ group, topic, content, tags }) {
+  function renderTag(tag) {
+    return <Tag key={tag}>{tag}</Tag>;
+  }
+
   return (
     <StyledCard>
       <StyledCardHeader>
-        <Headline size="Main">Gruppe Kids{group}</Headline>
+        <Headline size="Main">{group}</Headline>
         <button>Teilnehmer: 12/15</button>
       </StyledCardHeader>
       <StyledCardBody>
-        <Headline size="Sub">FreeFight{topic}</Headline>
+        <Headline size="Sub">{topic}</Headline>
         <Devider />
-        <Content>treten{content}</Content>
-        <Tag>Basics</Tag>
-        <Tag>Kumite</Tag>
+        <Content>{content}</Content>
+        {tags && tags.length && <TagList>{tags.map(renderTag)}</TagList>}
+        {(!tags || !tags.length) && <TagList>-</TagList>}
       </StyledCardBody>
       <StyledCardFooter>author date</StyledCardFooter>
     </StyledCard>

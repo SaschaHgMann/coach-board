@@ -1,7 +1,7 @@
 [
   {
     "_id": 1,
-    "title": "Gr 1 - Bonsais",
+    "group": "Gr 1 - Bonsais",
     "topic": "Einführung Grundtechniken",
     "content": "ipsum",
     "tags": ["Koordination"],
@@ -10,7 +10,7 @@
   },
   {
     "_id": 2,
-    "title": "Gr 3 - Jugend",
+    "group": "Gr 3 - Jugend",
     "topic": "Wettkampf Vorbereitung",
     "content": "ipsum",
     "tags": ["Kondition", "Freikampf"],
@@ -19,7 +19,7 @@
   },
   {
     "_id": 3,
-    "title": "Gr 2 Kids",
+    "group": "Gr 2  - Kids",
     "topic": "Einführung neuer Tritt",
     "content": "ipsum",
     "tags": ["Partnerkampf", "Basics"],

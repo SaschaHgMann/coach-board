@@ -1,13 +1,19 @@
 import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import GlobalStyles from "./GlobalStyles";
-import Header from "../components/Header";
+import Sessions from "../pages/Sessions";
 
 function App() {
   return (
     <>
-      <GlobalStyles />
-      <Header title="Coach Board" />
-      <h3>...in progress</h3>
+      <Router>
+        <GlobalStyles />
+        <Switch>
+          <Route>
+            <Route path="/" render={props => <Sessions {...props} />} />
+          </Route>
+        </Switch>
+      </Router>
     </>
   );
 }
