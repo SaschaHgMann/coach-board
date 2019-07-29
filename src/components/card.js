@@ -15,6 +15,8 @@ const StyledCard = styled.div`
 
 const StyledCardHeader = styled.div`
   margin: 0px;
+  display: flex;
+  justify-content: space-between;
   padding-left: 5px;
   padding-right: 5px;
   background-color: #cecccc;
@@ -26,7 +28,7 @@ const StyledCardBody = styled.div`
   padding-left: 5px;
   padding-right: 5px;
   padding-bottom: 5px;
-  background-color: #fefffe;
+  background-color: #fff8f0;
   border-radius: 10px;
 `;
 
@@ -43,6 +45,7 @@ function Card() {
     <StyledCard>
       <StyledCardHeader>
         <Headline size="Main">Gruppe Kids</Headline>
+        <button>Teilnehmer: 12/15</button>
       </StyledCardHeader>
       <StyledCardBody>
         <Headline size="Sub">FreeFight</Headline>
@@ -59,7 +62,9 @@ function Card() {
 
 Card.propTypes = {
   title: PropTypes.string,
-  content: PropTypes.string
+  topic: PropTypes.string,
+  content: PropTypes.string,
+  tags: PropTypes.arrayOf(PropTypes.string)
 };
 
 export default Card;
