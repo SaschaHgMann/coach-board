@@ -27,7 +27,7 @@ function Sessions() {
 
   return (
     <>
-      <Header size="Header" title="Sessions" />
+      <Header title="Sessions" />
       <CardContainer>
         {SessionsData.map(sessionCard => renderSessionCard(sessionCard))}
       </CardContainer>

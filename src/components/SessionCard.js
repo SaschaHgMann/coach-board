@@ -5,7 +5,6 @@ import Headline from "./Headline";
 import Devider from "./Devider";
 import Tag from "./Tag";
 import Content from "./Content";
-//import sessions from "../pages/__mock__/sessions";
 
 const StyledCard = styled.div`
   margin: 0px;
