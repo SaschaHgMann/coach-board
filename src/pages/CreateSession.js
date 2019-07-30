@@ -5,6 +5,7 @@ import Headline from "../components/Headline";
 import PropTypes from "prop-types";
 import Devider from "../components/Devider";
 import StyledTag from "../components/Tag";
+import Button from "../components/Button";
 
 const StyledForm = styled.form`
   margin: 10px;
@@ -114,8 +115,8 @@ function CreateSession() {
           </TagList>
         </StyledCardBody>
         <StyledCardFooter>
-          <button>Back</button>
-          <button>Add</button>
+          <Button>Back</Button>
+          <Button>Add</Button>
         </StyledCardFooter>
       </StyledForm>
     </>
