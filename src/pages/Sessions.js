@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Header from "../components/Header";
 import SessionCard from "../components/SessionCard";
-import SessionsData from "./__mock__/sessions.json";
+
 import Button from "../components/Button";
 import ButtonLink from "../components/ButtonLink";
 
@@ -22,7 +22,9 @@ const ActionLine = styled.div`
   justify-content: space-evenly;
 `;
 
-function Sessions() {
+function Sessions({ sessionCards }) {
+  // const [sessionData, setSessionData] = React.useState(mockData);
+
   function renderSessionCard(sessionCard) {
     return (
       <SessionCard
@@ -30,7 +32,7 @@ function Sessions() {
         group={sessionCard.group}
         topic={sessionCard.topic}
         content={sessionCard.content}
-        tags={sessionCard.tags}
+        //tags={sessionCard.tags}
       />
     );
   }
@@ -39,7 +41,7 @@ function Sessions() {
     <>
       <Header title="Sessions" />
       <CardContainer>
-        {SessionsData.map(sessionCard => renderSessionCard(sessionCard))}
+        {sessionCards.map(sessionCard => renderSessionCard(sessionCard))}
       </CardContainer>
       <ActionLine>
         <Button>All</Button>

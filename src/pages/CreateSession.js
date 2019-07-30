@@ -30,7 +30,6 @@ const StyledCardBody = styled.div`
   flex-direction: column;
   margin: 0px;
   padding: 5px;
-
   background-color: #fff8f0;
   border-radius: 10px;
 `;
@@ -80,11 +79,27 @@ const InfoLine = styled.div`
   padding-left: 10px;
 `;
 
-function CreateSession() {
+function CreateSession({ history, onCreateSession }) {
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    const form = event.target;
+
+    const sessionCard = {
+      group: form.group.value,
+      topic: form.topic.value,
+      content: form.content.value
+      //tags: form.tags
+    };
+    console.log(sessionCard);
+    onCreateSession(sessionCard);
+    history.replace("/");
+  }
+
   return (
     <>
       <Header title="Add Session" />
-      <StyledForm>
+      <StyledForm onSubmit={handleSubmit}>
         <StyledCardHeader>
           <Headline size="Main">Add a new Training Session</Headline>
         </StyledCardHeader>

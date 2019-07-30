@@ -40,16 +40,16 @@ const StyledCardFooter = styled.div`
   color: #fff8f0;
 `;
 
-const TagList = styled.div`
-  display: flex;
-  width: 100%;
-  flex-wrap: wrap;
-`;
+// const TagList = styled.div`
+//   display: flex;
+//   width: 100%;
+//   flex-wrap: wrap;
+// `;
 
 function SessionCard({ group, topic, content, tags }) {
-  function renderTag(tag) {
-    return <Tag key={tag}>{tag}</Tag>;
-  }
+  // function renderTag(tag) {
+  //   return <Tag key={tag}>{tag}</Tag>;
+  // }
 
   return (
     <StyledCard>
@@ -61,7 +61,7 @@ function SessionCard({ group, topic, content, tags }) {
         <Headline size="Sub">{topic}</Headline>
         <Devider />
         <Content>{content}</Content>
-        <TagList>{tags.map(renderTag)}</TagList>
+        {/* <TagList>{tags.map(renderTag)}</TagList> */}
       </StyledCardBody>
       <StyledCardFooter>author date</StyledCardFooter>
     </StyledCard>
