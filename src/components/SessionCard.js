@@ -44,7 +44,6 @@ const TagList = styled.div`
   display: flex;
   width: 100%;
   flex-wrap: wrap;
-  padding: 0;
 `;
 
 function SessionCard({ group, topic, content, tags }) {

@@ -6,7 +6,7 @@ const StyledTag = styled.span`
   color: #fff8f0;
   border-radius: 3px;
   padding: 3px;
-  margin-top: 5px;
+
   margin-right: 5px;
 `;
 
