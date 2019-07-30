@@ -11,5 +11,7 @@ export default createGlobalStyle`
         background-color: fff8f0;
         margin: 0;
     }
-    
+    ::placeholder {
+        font-family: 'Bahianita', 'cursive';
+}
 `;

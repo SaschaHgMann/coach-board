@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import Devider from "../components/Devider";
 import StyledTag from "../components/Tag";
 import Button from "../components/Button";
+import ButtonLink from "../components/ButtonLink";
 
 const StyledForm = styled.form`
   margin: 10px;
@@ -106,7 +107,7 @@ function CreateSession() {
           <InfoLine>Details</InfoLine>
           <Textarea name="content" placeholder="Insert Details" />
           <InfoLine>Choose Kathegories</InfoLine>
-          <TagList>
+          <TagList name="tags">
             <StyledTag>Koordination</StyledTag>
             <StyledTag>Kondition</StyledTag>
             <StyledTag>Basics</StyledTag>
@@ -115,7 +116,7 @@ function CreateSession() {
           </TagList>
         </StyledCardBody>
         <StyledCardFooter>
-          <Button>Back</Button>
+          <ButtonLink to="/">Cancel</ButtonLink>
           <Button>Add</Button>
         </StyledCardFooter>
       </StyledForm>

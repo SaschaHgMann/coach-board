@@ -12,7 +12,7 @@ function App() {
         <Switch>
           <Route>
             <Route path="/" exact component={Sessions} />
-            <Route path="/createSession" exact component={CreateSession} />
+            <Route path="/createsession" exact component={CreateSession} />
           </Route>
         </Switch>
       </Router>
