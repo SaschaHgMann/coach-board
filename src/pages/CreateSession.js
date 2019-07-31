@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import Headline from "../components/Headline";
 import PropTypes from "prop-types";
 import Devider from "../components/Devider";
-import StyledTag from "../components/Tag";
+import Tag from "../components/Tag";
 import Button from "../components/Button";
 import ButtonLink from "../components/ButtonLink";
 import ContentHeader from "../components/ContentHeader";
@@ -15,6 +15,7 @@ import Input from "../components/Input";
 import DropDown from "../components/DropDown";
 import Textarea from "../components/Textarea";
 import InfoLine from "../components/InfoLine";
+import Categories from "../components/Categories";
 
 const StyledContentBody = styled(ContentBody)`
   display: flex;
@@ -34,6 +35,10 @@ const TagList = styled.div`
 `;
 
 function CreateSession({ history, onCreateSession }) {
+  function renderCategorie(Categories) {
+    return <Tag title={Categories.title}>{Categories.title}</Tag>;
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
 
@@ -63,7 +68,7 @@ function CreateSession({ history, onCreateSession }) {
             <option value="Bonsais">Bonsais</option>
             <option value="Kids">Kids</option>
             <option value="Youth">Youth</option>
-            <option value="Adults">Adults</option>
+            <option value="Seniors">Seniors</option>
           </DropDown>
           <InfoLine>Set Students</InfoLine>
           <DropDown name="students">
@@ -75,11 +80,7 @@ function CreateSession({ history, onCreateSession }) {
           <Textarea name="content" placeholder="Insert Details" />
           <InfoLine>Choose Kathegories</InfoLine>
           <TagList name="tags">
-            <StyledTag>Koordination</StyledTag>
-            <StyledTag>Kondition</StyledTag>
-            <StyledTag>Basics</StyledTag>
-            <StyledTag>Kata</StyledTag>
-            <StyledTag>Kumite</StyledTag>
+            {Categories.map(Categorie => renderCategorie(Categorie))}
           </TagList>
         </StyledContentBody>
         <StyledContentFooter>

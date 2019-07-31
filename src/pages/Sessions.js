@@ -14,7 +14,7 @@ const CardContainer = styled.div`
   overflow-y: auto;
 `;
 
-const ActionLine = styled.div`
+const ButtonContainer = styled.div`
   padding: 10px;
   width: 100%;
   display: flex;
@@ -23,8 +23,6 @@ const ActionLine = styled.div`
 `;
 
 function Sessions({ sessionCards }) {
-  // const [sessionData, setSessionData] = React.useState(mockData);
-
   function renderSessionCard(sessionCard) {
     return (
       <SessionCard
@@ -43,14 +41,14 @@ function Sessions({ sessionCards }) {
       <CardContainer>
         {sessionCards.map(sessionCard => renderSessionCard(sessionCard))}
       </CardContainer>
-      <ActionLine>
+      <ButtonContainer>
         <Button>All</Button>
-        <Button>1</Button>
-        <Button>2</Button>
-        <Button>3</Button>
-        <Button>4</Button>
+        <Button>Bonsais</Button>
+        <Button>Kids</Button>
+        <Button>Youth</Button>
+        <Button>Seniors</Button>
         <ButtonLink to="/createsession">New</ButtonLink>
-      </ActionLine>
+      </ButtonContainer>
     </>
   );
 }
