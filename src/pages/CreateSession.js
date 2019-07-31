@@ -89,7 +89,7 @@ function CreateSession({ history, onCreateSession }) {
       group: form.group.value,
       topic: form.topic.value,
       content: form.content.value
-      //tags: form.tags
+      //  tags:
     };
     console.log(sessionCard);
     onCreateSession(sessionCard);
