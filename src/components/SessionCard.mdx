@@ -1,0 +1,26 @@
+---
+name: SessionCard
+menu: Components
+---
+
+import { Props, Playground } from "docz";
+import SessionCard from "../components/SessionCard";
+import GlobalStyles from "../app/GlobalStyles";
+import Tag from "../components/Tag";
+
+<GlobalStyles />
+
+# SessionCard
+
+<Props of={SessionCard} />
+
+## Basic Usage
+
+<Playground>
+  <SessionCard
+    group="Gr 1- Kids"
+    topic="FreeFight"
+    content="Treten und schlagen aus allen Lagen"
+    tags={["treten", "schlagen"]}
+  />
+</Playground>

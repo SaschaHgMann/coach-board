@@ -1,0 +1,104 @@
+import React from "react";
+import styled from "styled-components";
+import Header from "../components/Header";
+import Headline from "../components/Headline";
+import PropTypes from "prop-types";
+import Devider from "../components/Devider";
+import StyledTag from "../components/Tag";
+import Button from "../components/Button";
+import ButtonLink from "../components/ButtonLink";
+import ContentHeader from "../components/ContentHeader";
+import ContentBody from "../components/ContentBody";
+import ContentFooter from "../components/ContentFooter";
+import Form from "../components/Form";
+import Input from "../components/Input";
+import DropDown from "../components/DropDown";
+import Textarea from "../components/Textarea";
+import InfoLine from "../components/InfoLine";
+
+const StyledContentBody = styled(ContentBody)`
+  display: flex;
+  flex-direction: column;
+`;
+
+const StyledContentFooter = styled(ContentFooter)`
+  justify-content: space-between;
+`;
+
+const TagList = styled.div`
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  padding-left: 10px;
+  margin-bottom: 10px;
+`;
+
+function CreateSession({ history, onCreateSession }) {
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    const form = event.target;
+
+    const sessionCard = {
+      group: form.group.value,
+      topic: form.topic.value,
+      content: form.content.value
+      //  tags:
+    };
+
+    onCreateSession(sessionCard);
+    history.replace("/");
+  }
+
+  return (
+    <>
+      <Header title="Add Session" />
+      <Form onSubmit={handleSubmit}>
+        <ContentHeader title="Add a new Training Session" />
+        <StyledContentBody>
+          <Headline size="Sub">Please fill in Details</Headline>
+          <Devider />
+          <InfoLine>Choose Group</InfoLine>
+          <DropDown name="group">
+            <option value="Bonsais">Bonsais</option>
+            <option value="Kids">Kids</option>
+            <option value="Youth">Youth</option>
+            <option value="Adults">Adults</option>
+          </DropDown>
+          <InfoLine>Set Students</InfoLine>
+          <DropDown name="students">
+            <option value="memberArray">Array der Gruppe</option>
+          </DropDown>
+          <InfoLine>Topic</InfoLine>
+          <Input name="topic" placeholder="Insert Topic" />
+          <InfoLine>Details</InfoLine>
+          <Textarea name="content" placeholder="Insert Details" />
+          <InfoLine>Choose Kathegories</InfoLine>
+          <TagList name="tags">
+            <StyledTag>Koordination</StyledTag>
+            <StyledTag>Kondition</StyledTag>
+            <StyledTag>Basics</StyledTag>
+            <StyledTag>Kata</StyledTag>
+            <StyledTag>Kumite</StyledTag>
+          </TagList>
+        </StyledContentBody>
+        <StyledContentFooter>
+          <ButtonLink to="/">Cancel</ButtonLink>
+          <Button>Add</Button>
+        </StyledContentFooter>
+      </Form>
+    </>
+  );
+}
+
+CreateSession.propTypes = {
+  group: PropTypes.string,
+  topic: PropTypes.string,
+  content: PropTypes.string,
+  tags: PropTypes.arrayOf(PropTypes.string),
+  author: PropTypes.func,
+  date: PropTypes.func,
+  students: PropTypes.func
+};
+
+export default CreateSession;

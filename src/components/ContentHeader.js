@@ -4,27 +4,24 @@ import PropTypes from "prop-types";
 import Headline from "./Headline";
 
 const StyledHeader = styled.div`
-  background: #292929;
+  margin: 0px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 90px;
+  justify-content: space-between;
+  padding: 5px;
 `;
 
-const StyledHeadline = styled(Headline)`
-  color: #fff8f0;
-`;
+const StyledHeadline = styled(Headline)``;
 
-function Header({ title, ...props }) {
+function ContentHeader({ title, ...props }) {
   return (
     <StyledHeader {...props}>
-      <StyledHeadline size="Header">{title}</StyledHeadline>
+      <StyledHeadline size="Main">{title}</StyledHeadline>
     </StyledHeader>
   );
 }
 
-Header.propTypes = {
+ContentHeader.propTypes = {
   title: PropTypes.string.isRequired
 };
 
-export default Header;
+export default ContentHeader;
