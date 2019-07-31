@@ -3,41 +3,15 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import Headline from "./Headline";
 import Devider from "./Devider";
-import Tag from "./Tag";
+//import Tag from "./Tag";
+import Card from "./Card";
 import Content from "./Content";
+import ContentHeader from "./ContentHeader";
+import ContentBody from "./ContentBody";
+import ContentFooter from "./ContentFooter";
 
-const StyledCard = styled.div`
-  margin: 0px;
-  border: solid 2px #292929;
-  border-radius: 10px;
-  background-color: #cecccc;
-`;
-
-const StyledCardHeader = styled.div`
-  margin: 0px;
-  display: flex;
-  justify-content: space-between;
-  padding-left: 5px;
-  padding-right: 5px;
-  background-color: #cecccc;
-  border-radius: 10px;
-`;
-
-const StyledCardBody = styled.div`
-  margin: 0px;
-  padding-left: 5px;
-  padding-right: 5px;
-  padding-bottom: 5px;
-  background-color: #fff8f0;
-  border-radius: 10px;
-`;
-
-const StyledCardFooter = styled.div`
-  margin: 0;
-  padding-right: 5px;
-  display: grid;
-  justify-content: right;
-  color: #fff8f0;
+const StyledContentFooter = styled(ContentFooter)`
+  justify-content: flex-end;
 `;
 
 // const TagList = styled.div`
@@ -52,19 +26,17 @@ function SessionCard({ group, topic, content, tags }) {
   // }
 
   return (
-    <StyledCard>
-      <StyledCardHeader>
-        <Headline size="Main">{group}</Headline>
-        <button>Teilnehmer: 12/15</button>
-      </StyledCardHeader>
-      <StyledCardBody>
+    <Card>
+      <ContentHeader title={group} />
+      <ContentBody>
         <Headline size="Sub">{topic}</Headline>
         <Devider />
+        <button>Teilnehmer: 12/15</button>
         <Content>{content}</Content>
         {/* <TagList>{tags.map(renderTag)}</TagList> */}
-      </StyledCardBody>
-      <StyledCardFooter>author date</StyledCardFooter>
-    </StyledCard>
+      </ContentBody>
+      <StyledContentFooter>author date</StyledContentFooter>
+    </Card>
   );
 }
 

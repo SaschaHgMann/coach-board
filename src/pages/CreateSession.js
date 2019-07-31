@@ -7,62 +7,22 @@ import Devider from "../components/Devider";
 import StyledTag from "../components/Tag";
 import Button from "../components/Button";
 import ButtonLink from "../components/ButtonLink";
+import ContentHeader from "../components/ContentHeader";
+import ContentBody from "../components/ContentBody";
+import ContentFooter from "../components/ContentFooter";
+import Form from "../components/Form";
+import Input from "../components/Input";
+import DropDown from "../components/DropDown";
+import Textarea from "../components/Textarea";
+import InfoLine from "../components/InfoLine";
 
-const StyledForm = styled.form`
-  margin: 10px;
-  border: solid 2px #292929;
-  border-radius: 10px;
-  background-color: #cecccc;
-`;
-
-const StyledCardHeader = styled.div`
-  margin: 0px;
-  display: flex;
-  justify-content: space-between;
-  padding-left: 5px;
-  padding-right: 5px;
-  background-color: #cecccc;
-  border-radius: 10px;
-`;
-
-const StyledCardBody = styled.div`
+const StyledContentBody = styled(ContentBody)`
   display: flex;
   flex-direction: column;
-  margin: 0px;
-  padding: 5px;
-  background-color: #fff8f0;
-  border-radius: 10px;
 `;
 
-const StyledCardFooter = styled.div`
-  margin: 0;
-  padding-right: 5px;
-  display: flex;
+const StyledContentFooter = styled(ContentFooter)`
   justify-content: space-between;
-  color: #fff8f0;
-`;
-
-const Input = styled.input`
-  margin: 0 10px 10px 10px;
-  height: 30px;
-  border: solid 2px #cecccc;
-  border-radius: 3px;
-  padding: 2px;
-`;
-
-const DropDown = styled.select`
-  margin: 0 10px 10px 10px;
-  height: 30px;
-  border: solid 2px #cecccc;
-  border-radius: 3px;
-`;
-
-const Textarea = styled.textarea`
-  margin: 0 10px 10px 10px;
-  height: 100px;
-  border: solid 2px #cecccc;
-  border-radius: 3px;
-  padding: 2px;
 `;
 
 const TagList = styled.div`
@@ -71,12 +31,6 @@ const TagList = styled.div`
   flex-wrap: wrap;
   padding-left: 10px;
   margin-bottom: 10px;
-`;
-
-const InfoLine = styled.div`
-  color: #cecccc;
-  margin-top: 10px;
-  padding-left: 10px;
 `;
 
 function CreateSession({ history, onCreateSession }) {
@@ -91,7 +45,7 @@ function CreateSession({ history, onCreateSession }) {
       content: form.content.value
       //  tags:
     };
-    console.log(sessionCard);
+
     onCreateSession(sessionCard);
     history.replace("/");
   }
@@ -99,11 +53,9 @@ function CreateSession({ history, onCreateSession }) {
   return (
     <>
       <Header title="Add Session" />
-      <StyledForm onSubmit={handleSubmit}>
-        <StyledCardHeader>
-          <Headline size="Main">Add a new Training Session</Headline>
-        </StyledCardHeader>
-        <StyledCardBody>
+      <Form onSubmit={handleSubmit}>
+        <ContentHeader title="Add a new Training Session" />
+        <StyledContentBody>
           <Headline size="Sub">Please fill in Details</Headline>
           <Devider />
           <InfoLine>Choose Group</InfoLine>
@@ -129,12 +81,12 @@ function CreateSession({ history, onCreateSession }) {
             <StyledTag>Kata</StyledTag>
             <StyledTag>Kumite</StyledTag>
           </TagList>
-        </StyledCardBody>
-        <StyledCardFooter>
+        </StyledContentBody>
+        <StyledContentFooter>
           <ButtonLink to="/">Cancel</ButtonLink>
           <Button>Add</Button>
-        </StyledCardFooter>
-      </StyledForm>
+        </StyledContentFooter>
+      </Form>
     </>
   );
 }
