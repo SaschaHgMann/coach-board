@@ -4,7 +4,7 @@
     "group": "Bonsais",
     "topic": "Einführung Grundtechniken",
     "content": "Lorem",
-    "tags": ["Koordination"],
+    "categories": ["Koordination"],
     "author": "Claudia",
     "date": "Montag, 01.07.2019"
   },
@@ -13,7 +13,7 @@
     "group": "Youth",
     "topic": "Wettkampf Vorbereitung",
     "content": "Larum",
-    "tags": ["Kondition", "Freikampf"],
+    "categories": ["Kondition", "Kumite"],
     "author": "Sascha",
     "date": "Dienstag, 02.07.2019"
   },
@@ -22,7 +22,7 @@
     "group": "Kids",
     "topic": "Einführung neuer Tritt",
     "content": "Ipsum",
-    "tags": ["Partnerkampf", "Basics"],
+    "categories": ["Kumite", "Kihon"],
     "author": "Dennis",
     "date": "Mittwoch, 03.07.2019"
   }

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import Headline from "./Headline";
 import Devider from "./Devider";
-//import Tag from "./Tag";
+import Tag from "./Tag";
 import Card from "./Card";
 import Content from "./Content";
 import ContentHeader from "./ContentHeader";
@@ -14,16 +14,19 @@ const StyledContentFooter = styled(ContentFooter)`
   justify-content: flex-end;
 `;
 
-// const TagList = styled.div`
-//   display: flex;
-//   width: 100%;
-//   flex-wrap: wrap;
-// `;
+const TagList = styled.div`
+  display: flex;
+  margin: 5px 0;
+`;
 
-function SessionCard({ group, topic, content, tags }) {
-  // function renderTag(tag) {
-  //   return <Tag key={tag}>{tag}</Tag>;
-  // }
+function SessionCard({ group, topic, content, categories }) {
+  function renderTag(category) {
+    return (
+      <Tag key={category} active={true}>
+        {category}
+      </Tag>
+    );
+  }
 
   return (
     <Card>
@@ -31,9 +34,9 @@ function SessionCard({ group, topic, content, tags }) {
       <ContentBody>
         <Headline size="Sub">{topic}</Headline>
         <Devider />
-        <button>Teilnehmer: 12/15</button>
+        <TagList>{categories && categories.map(renderTag)}</TagList>
+        <button>Teilnehmer: 12/15</button> {/* placeholder*/}
         <Content>{content}</Content>
-        {/* <TagList>{tags.map(renderTag)}</TagList> */}
       </ContentBody>
       <StyledContentFooter>author date</StyledContentFooter>
     </Card>
@@ -41,10 +44,10 @@ function SessionCard({ group, topic, content, tags }) {
 }
 
 SessionCard.propTypes = {
-  group: PropTypes.string,
-  topic: PropTypes.string,
-  content: PropTypes.string,
-  tags: PropTypes.arrayOf(PropTypes.string),
+  group: PropTypes.string.isRequired,
+  topic: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+  categories: PropTypes.arrayOf(PropTypes.string),
   author: PropTypes.func,
   date: PropTypes.func,
   students: PropTypes.func

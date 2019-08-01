@@ -15,7 +15,7 @@ import Input from "../components/Input";
 import DropDown from "../components/DropDown";
 import Textarea from "../components/Textarea";
 import InfoLine from "../components/InfoLine";
-import Categories from "../components/Categories";
+import categories from "./category-data";
 
 const StyledContentBody = styled(ContentBody)`
   display: flex;
@@ -28,27 +28,44 @@ const StyledContentFooter = styled(ContentFooter)`
 
 const TagList = styled.div`
   display: flex;
-  width: 100%;
-  flex-wrap: wrap;
   padding-left: 10px;
   margin-bottom: 10px;
 `;
 
 function CreateSession({ history, onCreateSession }) {
-  function renderCategorie(Categories) {
-    return <Tag title={Categories.title}>{Categories.title}</Tag>;
+  const [selectedCategories, setSelectedCategories] = React.useState([]);
+
+  function renderCategory(category) {
+    return (
+      <Tag
+        key={category}
+        active={selectedCategories.includes(category)}
+        onClick={() => handleSelectCategory(category)}
+      >
+        {category}
+      </Tag>
+    );
+  }
+
+  function handleSelectCategory(category) {
+    if (selectedCategories.includes(category)) {
+      setSelectedCategories(
+        selectedCategories.filter(item => item !== category)
+      );
+    } else {
+      setSelectedCategories([...selectedCategories, category]);
+    }
   }
 
   function handleSubmit(event) {
     event.preventDefault();
 
     const form = event.target;
-
     const sessionCard = {
       group: form.group.value,
       topic: form.topic.value,
-      content: form.content.value
-      //  tags:
+      content: form.content.value,
+      categories: selectedCategories
     };
 
     onCreateSession(sessionCard);
@@ -65,6 +82,8 @@ function CreateSession({ history, onCreateSession }) {
           <Devider />
           <InfoLine>Choose Group</InfoLine>
           <DropDown name="group">
+            <option value="">select</option>
+            <option value="">---</option>
             <option value="Bonsais">Bonsais</option>
             <option value="Kids">Kids</option>
             <option value="Youth">Youth</option>
@@ -72,6 +91,8 @@ function CreateSession({ history, onCreateSession }) {
           </DropDown>
           <InfoLine>Set Students</InfoLine>
           <DropDown name="students">
+            {" "}
+            {/* placeholder*/}
             <option value="memberArray">Array der Gruppe</option>
           </DropDown>
           <InfoLine>Topic</InfoLine>
@@ -79,8 +100,8 @@ function CreateSession({ history, onCreateSession }) {
           <InfoLine>Details</InfoLine>
           <Textarea name="content" placeholder="Insert Details" />
           <InfoLine>Choose Kathegories</InfoLine>
-          <TagList name="tags">
-            {Categories.map(Categorie => renderCategorie(Categorie))}
+          <TagList name="categories">
+            {categories.map(category => renderCategory(category))}
           </TagList>
         </StyledContentBody>
         <StyledContentFooter>

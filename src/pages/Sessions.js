@@ -23,14 +23,14 @@ const ButtonContainer = styled.div`
 `;
 
 function Sessions({ sessionCards }) {
-  function renderSessionCard(sessionCard) {
+  function renderSessionCard(sessionCard, index) {
     return (
       <SessionCard
-        key={sessionCard._id}
+        key={index}
         group={sessionCard.group}
         topic={sessionCard.topic}
         content={sessionCard.content}
-        //tags={sessionCard.tags}
+        categories={sessionCard.categories}
       />
     );
   }
@@ -39,7 +39,9 @@ function Sessions({ sessionCards }) {
     <>
       <Header title="Sessions" />
       <CardContainer>
-        {sessionCards.map(sessionCard => renderSessionCard(sessionCard))}
+        {sessionCards.map((sessionCard, index) =>
+          renderSessionCard(sessionCard, index)
+        )}
       </CardContainer>
       <ButtonContainer>
         <Button>All</Button>
