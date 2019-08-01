@@ -14,7 +14,7 @@ const CardContainer = styled.div`
   overflow-y: auto;
 `;
 
-const ActionLine = styled.div`
+const ButtonContainer = styled.div`
   padding: 10px;
   width: 100%;
   display: flex;
@@ -23,16 +23,14 @@ const ActionLine = styled.div`
 `;
 
 function Sessions({ sessionCards }) {
-  // const [sessionData, setSessionData] = React.useState(mockData);
-
-  function renderSessionCard(sessionCard) {
+  function renderSessionCard(sessionCard, index) {
     return (
       <SessionCard
-        key={sessionCard._id}
+        key={index}
         group={sessionCard.group}
         topic={sessionCard.topic}
         content={sessionCard.content}
-        //tags={sessionCard.tags}
+        categories={sessionCard.categories}
       />
     );
   }
@@ -41,16 +39,18 @@ function Sessions({ sessionCards }) {
     <>
       <Header title="Sessions" />
       <CardContainer>
-        {sessionCards.map(sessionCard => renderSessionCard(sessionCard))}
+        {sessionCards.map((sessionCard, index) =>
+          renderSessionCard(sessionCard, index)
+        )}
       </CardContainer>
-      <ActionLine>
+      <ButtonContainer>
         <Button>All</Button>
-        <Button>1</Button>
-        <Button>2</Button>
-        <Button>3</Button>
-        <Button>4</Button>
+        <Button>Bonsais</Button>
+        <Button>Kids</Button>
+        <Button>Youth</Button>
+        <Button>Seniors</Button>
         <ButtonLink to="/createsession">New</ButtonLink>
-      </ActionLine>
+      </ButtonContainer>
     </>
   );
 }

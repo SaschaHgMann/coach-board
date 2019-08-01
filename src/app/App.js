@@ -1,10 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import GlobalStyles from "./GlobalStyles";
-import Sessions from "../pages/Sessions";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import CreateSession from "../pages/CreateSession";
+import Sessions from "../pages/Sessions";
 import mockData from "../pages/__mock__/sessions.json";
 import { getFromLocal, setToLocal } from "../services/localStorage";
+import GlobalStyles from "./GlobalStyles";
 
 function App() {
   const [sessionCards, setSessionCards] = React.useState(
@@ -18,6 +18,7 @@ function App() {
   function handleCreateSession(sessionCard) {
     setSessionCards([sessionCard, ...sessionCards]);
   }
+
   return (
     <>
       <Router>
