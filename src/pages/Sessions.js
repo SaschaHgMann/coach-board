@@ -1,24 +1,23 @@
 import React from "react";
 import styled from "styled-components";
-import Header from "../components/Header";
-import SessionCard from "../components/SessionCard";
-
 import Button from "../components/Button";
 import ButtonLink from "../components/ButtonLink";
+import Header from "../components/Header";
+import SessionCard from "../components/SessionCard";
 
 const CardContainer = styled.div`
   position: relative;
   display: grid;
-  grid-gap: 10px;
-  padding: 10px;
   overflow-y: auto;
 `;
 
 const ButtonContainer = styled.div`
+  position: fixed;
+  background-color: rgba(255, 255, 255, 0.7);
+  bottom: 0px;
   padding: 10px;
   width: 100%;
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-evenly;
 `;
 
@@ -42,15 +41,16 @@ function Sessions({ sessionCards }) {
         {sessionCards.map((sessionCard, index) =>
           renderSessionCard(sessionCard, index)
         )}
+
+        <ButtonContainer>
+          <Button>All</Button>
+          <Button>Bonsais</Button>
+          <Button>Kids</Button>
+          <Button>Youth</Button>
+          <Button>Seniors</Button>
+          <ButtonLink to="/createsession">New</ButtonLink>
+        </ButtonContainer>
       </CardContainer>
-      <ButtonContainer>
-        <Button>All</Button>
-        <Button>Bonsais</Button>
-        <Button>Kids</Button>
-        <Button>Youth</Button>
-        <Button>Seniors</Button>
-        <ButtonLink to="/createsession">New</ButtonLink>
-      </ButtonContainer>
     </>
   );
 }
