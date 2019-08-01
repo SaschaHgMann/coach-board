@@ -4,6 +4,7 @@ import Button from "../components/Button";
 import ButtonLink from "../components/ButtonLink";
 import Header from "../components/Header";
 import SessionCard from "../components/SessionCard";
+import groups from "./group-data";
 
 const CardContainer = styled.div`
   position: relative;
@@ -34,6 +35,26 @@ function Sessions({ sessionCards }) {
     );
   }
 
+  function renderFilterButtons(groups) {
+    return (
+      <Button
+        key={groups}
+        // onClick={() => handleFilterGroups}
+      >
+        {groups}
+      </Button>
+    );
+  }
+
+  // function handleFilterGroups(group) {
+  //   const [selectedGroup, setSelectedGroup] = React.useState(sessionCards);
+
+  //   setSelectedGroup(!selectedGroup);
+
+  // return  === "all"
+  //   ? sessionCards
+  //   : sessionCards.filter(entry => entry.group === selectedGroup);}
+
   return (
     <>
       <Header title="Sessions" />
@@ -41,13 +62,14 @@ function Sessions({ sessionCards }) {
         {sessionCards.map((sessionCard, index) =>
           renderSessionCard(sessionCard, index)
         )}
-
         <ButtonContainer>
-          <Button>All</Button>
-          <Button>Bonsais</Button>
-          <Button>Kids</Button>
-          <Button>Youth</Button>
-          <Button>Seniors</Button>
+          <Button
+            group="all"
+            // onClick={handleFilterGroups}
+          >
+            All
+          </Button>
+          {groups.map(group => renderFilterButtons(group))}
           <ButtonLink to="/createsession">New</ButtonLink>
         </ButtonContainer>
       </CardContainer>
