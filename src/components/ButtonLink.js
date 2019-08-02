@@ -10,4 +10,6 @@ function ButtonLink({ children, to, ...other }) {
   );
 }
 
+//PropTypes
+
 export default ButtonLink;

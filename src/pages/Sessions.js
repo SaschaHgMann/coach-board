@@ -23,6 +23,11 @@ const ButtonContainer = styled.div`
 `;
 
 function Sessions({ sessionCards }) {
+  const [trainingGroups, setTrainingGroups] = React.useState([
+    "All",
+    ...groups
+  ]);
+  const [selectedGroup, setSelectedGroup] = React.useState("All");
   function renderSessionCard(sessionCard, index) {
     return (
       <SessionCard
@@ -35,41 +40,36 @@ function Sessions({ sessionCards }) {
     );
   }
 
-  function renderFilterButtons(groups) {
+  function renderFilterButtons(group) {
     return (
       <Button
-        key={groups}
-        // onClick={() => handleFilterGroups}
+        key={group}
+        name={group}
+        onClick={event => handleFilterGroups(event)}
       >
-        {groups}
+        {group}
       </Button>
     );
   }
 
-  // function handleFilterGroups(group) {
-  //   const [selectedGroup, setSelectedGroup] = React.useState(sessionCards);
-
-  //   setSelectedGroup(!selectedGroup);
-
-  // return  === "all"
-  //   ? sessionCards
-  //   : sessionCards.filter(entry => entry.group === selectedGroup);}
-
+  function handleFilterGroups(event) {
+    setSelectedGroup(event.target.name);
+  }
   return (
     <>
       <Header title="Sessions" />
       <CardContainer>
-        {sessionCards.map((sessionCard, index) =>
-          renderSessionCard(sessionCard, index)
-        )}
+        {selectedGroup === "All"
+          ? sessionCards.map((sessionCard, index) =>
+              renderSessionCard(sessionCard, index)
+            )
+          : sessionCards
+              .filter(sessionCard => sessionCard.group === selectedGroup)
+              .map((sessionCard, index) =>
+                renderSessionCard(sessionCard, index)
+              )}
         <ButtonContainer>
-          <Button
-            group="all"
-            // onClick={handleFilterGroups}
-          >
-            All
-          </Button>
-          {groups.map(group => renderFilterButtons(group))}
+          {trainingGroups.map(group => renderFilterButtons(group))}
           <ButtonLink to="/createsession">New</ButtonLink>
         </ButtonContainer>
       </CardContainer>
