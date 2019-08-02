@@ -23,11 +23,10 @@ const ButtonContainer = styled.div`
 `;
 
 function Sessions({ sessionCards }) {
-  const [trainingGroups, setTrainingGroups] = React.useState([
-    "All",
-    ...groups
-  ]);
+  const trainingGroups = ["All", ...groups];
   const [selectedGroup, setSelectedGroup] = React.useState("All");
+  // const [buttonActive, setButtonActive] = React.useState({});
+
   function renderSessionCard(sessionCard, index) {
     return (
       <SessionCard
@@ -41,10 +40,15 @@ function Sessions({ sessionCards }) {
   }
 
   function renderFilterButtons(group) {
+    // function showActive(Button) {
+    //   setButtonActive(Button.active === true);
+    // }
+
     return (
       <Button
         key={group}
         name={group}
+        // active={showActive}
         onClick={event => handleFilterGroups(event)}
       >
         {group}
