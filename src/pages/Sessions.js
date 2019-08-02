@@ -4,6 +4,7 @@ import Button from "../components/Button";
 import ButtonLink from "../components/ButtonLink";
 import Header from "../components/Header";
 import SessionCard from "../components/SessionCard";
+import groups from "./group-data";
 
 const CardContainer = styled.div`
   position: relative;
@@ -22,6 +23,10 @@ const ButtonContainer = styled.div`
 `;
 
 function Sessions({ sessionCards }) {
+  const trainingGroups = ["All", ...groups];
+  const [selectedGroup, setSelectedGroup] = React.useState("All");
+  // const [buttonActive, setButtonActive] = React.useState({});
+
   function renderSessionCard(sessionCard, index) {
     return (
       <SessionCard
@@ -34,20 +39,41 @@ function Sessions({ sessionCards }) {
     );
   }
 
+  function renderFilterButtons(group) {
+    // function showActive(Button) {
+    //   setButtonActive(Button.active === true);
+    // }
+
+    return (
+      <Button
+        key={group}
+        name={group}
+        // active={showActive}
+        onClick={event => handleFilterGroups(event)}
+      >
+        {group}
+      </Button>
+    );
+  }
+
+  function handleFilterGroups(event) {
+    setSelectedGroup(event.target.name);
+  }
   return (
     <>
       <Header title="Sessions" />
       <CardContainer>
-        {sessionCards.map((sessionCard, index) =>
-          renderSessionCard(sessionCard, index)
-        )}
-
+        {selectedGroup === "All"
+          ? sessionCards.map((sessionCard, index) =>
+              renderSessionCard(sessionCard, index)
+            )
+          : sessionCards
+              .filter(sessionCard => sessionCard.group === selectedGroup)
+              .map((sessionCard, index) =>
+                renderSessionCard(sessionCard, index)
+              )}
         <ButtonContainer>
-          <Button>All</Button>
-          <Button>Bonsais</Button>
-          <Button>Kids</Button>
-          <Button>Youth</Button>
-          <Button>Seniors</Button>
+          {trainingGroups.map(group => renderFilterButtons(group))}
           <ButtonLink to="/createsession">New</ButtonLink>
         </ButtonContainer>
       </CardContainer>
