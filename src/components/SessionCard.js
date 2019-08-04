@@ -10,10 +10,6 @@ import ContentHeader from "./ContentHeader";
 import ContentBody from "./ContentBody";
 import ContentFooter from "./ContentFooter";
 
-const StyledContentFooter = styled(ContentFooter)`
-  justify-content: flex-end;
-`;
-
 const TagList = styled.div`
   display: flex;
   margin: 5px 0;
@@ -38,7 +34,7 @@ function SessionCard({ group, topic, content, categories }) {
         <button>Teilnehmer: 12/15</button> {/* placeholder*/}
         <Content>{content}</Content>
       </ContentBody>
-      <StyledContentFooter>author date</StyledContentFooter>
+      <ContentFooter>author date</ContentFooter>
     </Card>
   );
 }

@@ -16,20 +16,28 @@ import DropDown from "../components/DropDown";
 import Textarea from "../components/Textarea";
 import InfoLine from "../components/InfoLine";
 import categories from "./category-data";
+import Fullscreen from "../components/Fullscreen";
+import BackgroundImage from "../components/BackgroundImage";
+import Container from "../components/Container";
+//import ButtonContainer from "../components/ButtonContainer";
 
 const StyledContentBody = styled(ContentBody)`
+  width: 100%;
   display: flex;
   flex-direction: column;
-`;
-
-const StyledContentFooter = styled(ContentFooter)`
-  justify-content: space-between;
 `;
 
 const TagList = styled.div`
   display: flex;
   padding-left: 10px;
   margin-bottom: 10px;
+`;
+
+const FormButtons = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  margin: 10px 0;
 `;
 
 function CreateSession({ history, onCreateSession }) {
@@ -74,41 +82,50 @@ function CreateSession({ history, onCreateSession }) {
 
   return (
     <>
-      <Header title="Add Session" />
-      <Form onSubmit={handleSubmit}>
-        <ContentHeader title="Add a new Training Session" />
-        <StyledContentBody>
-          <Headline size="Sub">Please fill in Details</Headline>
-          <Devider />
-          <InfoLine>Choose Group</InfoLine>
-          <DropDown name="group">
-            <option value="">select</option>
-            <option value="">---</option>
-            <option value="Bonsais">Bonsais</option>
-            <option value="Kids">Kids</option>
-            <option value="Youth">Youth</option>
-            <option value="Seniors">Seniors</option>
-          </DropDown>
-          <InfoLine>Set Students</InfoLine>
-          <DropDown name="students">
-            {" "}
-            {/* placeholder*/}
-            <option value="memberArray">Array der Gruppe</option>
-          </DropDown>
-          <InfoLine>Topic</InfoLine>
-          <Input name="topic" placeholder="Insert Topic" />
-          <InfoLine>Details</InfoLine>
-          <Textarea name="content" placeholder="Insert Details" />
-          <InfoLine>Choose Kathegories</InfoLine>
-          <TagList name="categories">
-            {categories.map(category => renderCategory(category))}
-          </TagList>
-        </StyledContentBody>
-        <StyledContentFooter>
-          <ButtonLink to="/Sessions">Cancel</ButtonLink>
-          <Button>Add</Button>
-        </StyledContentFooter>
-      </Form>
+      <Fullscreen>
+        <BackgroundImage src="/Background.jpg" />
+        <Header title="Add Session" />
+        <Container>
+          <Form onSubmit={handleSubmit}>
+            <ContentHeader title="Add a new Training Session" />
+            <StyledContentBody>
+              <Headline size="Sub">Please fill in Details</Headline>
+              <Devider />
+              <InfoLine>Choose Group</InfoLine>
+              <DropDown name="group">
+                <option value="">select</option>
+                <option value="">---</option>
+                <option value="Bonsais">Bonsais</option>
+                <option value="Kids">Kids</option>
+                <option value="Youth">Youth</option>
+                <option value="Seniors">Seniors</option>
+              </DropDown>
+              <InfoLine>Set Students</InfoLine>
+              <DropDown name="students">
+                {" "}
+                {/* placeholder*/}
+                <option value="memberArray">Array der Gruppe</option>
+              </DropDown>
+              <InfoLine>Topic</InfoLine>
+              <Input name="topic" placeholder="Insert Topic" />
+              <InfoLine>Details</InfoLine>
+              <Textarea name="content" placeholder="Insert Details" />
+              <InfoLine>Choose Kathegories</InfoLine>
+              <TagList name="categories">
+                {categories.map(category => renderCategory(category))}
+              </TagList>
+              <Devider />
+              <FormButtons>
+                <ButtonLink to="/Sessions">Cancel</ButtonLink>
+                <Button>Add</Button>
+              </FormButtons>
+            </StyledContentBody>
+
+            <ContentFooter>author date</ContentFooter>
+          </Form>
+          <></>
+        </Container>
+      </Fullscreen>
     </>
   );
 }
