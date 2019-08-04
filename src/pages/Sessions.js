@@ -1,6 +1,6 @@
 import React from "react";
-//import styled from "styled-components";
-import Button from "../components/Button";
+import styled from "styled-components";
+//import Button from "../components/Button";
 import ButtonLink from "../components/ButtonLink";
 import Header from "../components/Header";
 import SessionCard from "../components/SessionCard";
@@ -9,6 +9,20 @@ import Fullscreen from "../components/Fullscreen";
 import BackgroundImage from "../components/BackgroundImage";
 import Container from "../components/Container";
 import ButtonContainer from "../components/ButtonContainer";
+
+const FilterButton = styled.button`
+  height: 28px;
+  background: #fff8f0;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 2px 2px 4px rgba(255, 248, 240, 0.5);
+`;
+
+const StyledButtonLink = styled(ButtonLink)`
+  margin-left: 10px;
+  background-color: #fff8f0;
+  box-shadow: 3px 2px 4px rgba(255, 248, 240, 0.5);
+`;
 
 function Sessions({ sessionCards }) {
   const trainingGroups = ["All", ...groups];
@@ -33,14 +47,14 @@ function Sessions({ sessionCards }) {
     // }
 
     return (
-      <Button
+      <FilterButton
         key={group}
         name={group}
         // active={showActive}
         onClick={event => handleFilterGroups(event)}
       >
         {group}
-      </Button>
+      </FilterButton>
     );
   }
 
@@ -64,7 +78,9 @@ function Sessions({ sessionCards }) {
                 )}
           <ButtonContainer>
             {trainingGroups.map(group => renderFilterButtons(group))}
-            <ButtonLink to="/createsession">New</ButtonLink>
+            <StyledButtonLink to="/createsession">
+              <i className="fas fa-plus-circle" />
+            </StyledButtonLink>
           </ButtonContainer>
         </Container>
       </Fullscreen>

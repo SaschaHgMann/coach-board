@@ -1,24 +1,24 @@
+import PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
-import Header from "../components/Header";
-import Headline from "../components/Headline";
-import PropTypes from "prop-types";
-import Devider from "../components/Devider";
-import Tag from "../components/Tag";
+import BackgroundImage from "../components/BackgroundImage";
 import Button from "../components/Button";
 import ButtonLink from "../components/ButtonLink";
-import ContentHeader from "../components/ContentHeader";
+import Container from "../components/Container";
 import ContentBody from "../components/ContentBody";
 import ContentFooter from "../components/ContentFooter";
-import Form from "../components/Form";
-import Input from "../components/Input";
+import ContentHeader from "../components/ContentHeader";
+import Devider from "../components/Devider";
 import DropDown from "../components/DropDown";
-import Textarea from "../components/Textarea";
-import InfoLine from "../components/InfoLine";
-import categories from "./category-data";
+import Form from "../components/Form";
 import Fullscreen from "../components/Fullscreen";
-import BackgroundImage from "../components/BackgroundImage";
-import Container from "../components/Container";
+import Header from "../components/Header";
+import Headline from "../components/Headline";
+import InfoLine from "../components/InfoLine";
+import Input from "../components/Input";
+import Tag from "../components/Tag";
+import Textarea from "../components/Textarea";
+import categories from "./category-data";
 //import ButtonContainer from "../components/ButtonContainer";
 
 const StyledContentBody = styled(ContentBody)`
@@ -37,7 +37,6 @@ const FormButtons = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 5px;
-  margin: 10px 0;
 `;
 
 function CreateSession({ history, onCreateSession }) {
@@ -93,7 +92,7 @@ function CreateSession({ history, onCreateSession }) {
               <Devider />
               <InfoLine>Choose Group</InfoLine>
               <DropDown name="group">
-                <option value="">select</option>
+                <option value="">select Group!</option>
                 <option value="">---</option>
                 <option value="Bonsais">Bonsais</option>
                 <option value="Kids">Kids</option>
@@ -116,8 +115,12 @@ function CreateSession({ history, onCreateSession }) {
               </TagList>
               <Devider />
               <FormButtons>
-                <ButtonLink to="/Sessions">Cancel</ButtonLink>
-                <Button>Add</Button>
+                <ButtonLink to="/Sessions">
+                  <i className="fas fa-ban" />
+                </ButtonLink>
+                <Button>
+                  <i className="fas fa-plus-circle" />
+                </Button>
               </FormButtons>
             </StyledContentBody>
 

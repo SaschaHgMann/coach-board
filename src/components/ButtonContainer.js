@@ -6,9 +6,10 @@ const ButtonContainer = styled.div`
   bottom: 0px;
   background: #292929;
   /* opacity: 0.7; */
-  padding: 10px;
+  padding: 5px;
   width: 100%;
   display: flex;
+  align-items: center;
   justify-content: space-evenly;
   animation: ${fadeInBottom} 1.5s;
 `;
