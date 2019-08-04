@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Landing from "../pages/Landing";
 import CreateSession from "../pages/CreateSession";
 import Sessions from "../pages/Sessions";
 import mockData from "../pages/__mock__/sessions.json";
@@ -24,9 +25,11 @@ function App() {
       <Router>
         <GlobalStyles />
         <Switch>
+          <Route exact path="/" component={Landing} />
+          )} />
           <Route
             exact
-            path="/"
+            path="/sessions"
             render={props => (
               <Sessions sessionCards={sessionCards} {...props} />
             )}

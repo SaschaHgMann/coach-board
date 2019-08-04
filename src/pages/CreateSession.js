@@ -105,7 +105,7 @@ function CreateSession({ history, onCreateSession }) {
           </TagList>
         </StyledContentBody>
         <StyledContentFooter>
-          <ButtonLink to="/">Cancel</ButtonLink>
+          <ButtonLink to="/Sessions">Cancel</ButtonLink>
           <Button>Add</Button>
         </StyledContentFooter>
       </Form>
