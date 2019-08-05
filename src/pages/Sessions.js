@@ -27,6 +27,7 @@ const StyledButtonLink = styled(ButtonLink)`
 function Sessions({ sessionCards }) {
   const trainingGroups = ["All", ...groups];
   const [selectedGroup, setSelectedGroup] = React.useState("All");
+
   // const [buttonActive, setButtonActive] = React.useState({});
 
   function renderSessionCard(sessionCard, index) {
