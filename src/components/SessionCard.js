@@ -30,8 +30,10 @@ function SessionCard({ group, topic, content, categories }) {
       <ContentBody>
         <Headline size="Sub">{topic}</Headline>
         <Devider />
-        <TagList>{categories && categories.map(renderTag)}</TagList>
-        <button>Teilnehmer: 12/15</button> {/* placeholder*/}
+        <TagList>
+          {categories && categories.map(renderTag)}
+          <button>Teilnehmer: 12/15</button> {/* placeholder*/}
+        </TagList>
         <Content>{content}</Content>
       </ContentBody>
       <ContentFooter>author date</ContentFooter>

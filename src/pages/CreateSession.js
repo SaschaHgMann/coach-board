@@ -76,7 +76,7 @@ function CreateSession({ history, onCreateSession }) {
     };
 
     onCreateSession(sessionCard);
-    history.replace("/");
+    history.replace("/sessions");
   }
 
   return (
@@ -92,7 +92,7 @@ function CreateSession({ history, onCreateSession }) {
               <Devider />
               <InfoLine>Choose Group</InfoLine>
               <DropDown name="group">
-                <option value="">select Group!</option>
+                <option value="">Select Group</option>
                 <option value="">---</option>
                 <option value="Bonsais">Bonsais</option>
                 <option value="Kids">Kids</option>
@@ -103,7 +103,7 @@ function CreateSession({ history, onCreateSession }) {
               <DropDown name="students">
                 {" "}
                 {/* placeholder*/}
-                <option value="memberArray">Array der Gruppe</option>
+                <option value="memberArray">Students</option>
               </DropDown>
               <InfoLine>Topic</InfoLine>
               <Input name="topic" placeholder="Insert Topic" />
