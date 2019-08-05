@@ -14,4 +14,5 @@ export default createGlobalStyle`
     ::placeholder {
         font-family: 'Bahianita', 'cursive';
 }
+
 `;

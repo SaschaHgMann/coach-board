@@ -3,6 +3,9 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Landing from "../pages/Landing";
 import CreateSession from "../pages/CreateSession";
 import Sessions from "../pages/Sessions";
+import Groups from "../pages/Groups";
+import Members from "../pages/Members";
+import Settings from "../pages/Settings";
 import mockData from "../pages/__mock__/sessions.json";
 import { getFromLocal, setToLocal } from "../services/localStorage";
 import GlobalStyles from "./GlobalStyles";
@@ -41,6 +44,9 @@ function App() {
               <CreateSession onCreateSession={handleCreateSession} {...props} />
             )}
           />
+          <Route exact path="/groups" component={Groups} />
+          <Route exact path="/members" component={Members} />
+          <Route exact path="/settings" component={Settings} />
         </Switch>
       </Router>
     </>
