@@ -4,6 +4,7 @@ const ContentFooter = styled.div`
   margin: 0;
   padding-right: 5px;
   display: flex;
+  justify-content: flex-end;
   color: #fff8f0;
 `;
 

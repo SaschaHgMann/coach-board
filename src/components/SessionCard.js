@@ -10,10 +10,6 @@ import ContentHeader from "./ContentHeader";
 import ContentBody from "./ContentBody";
 import ContentFooter from "./ContentFooter";
 
-const StyledContentFooter = styled(ContentFooter)`
-  justify-content: flex-end;
-`;
-
 const TagList = styled.div`
   display: flex;
   margin: 5px 0;
@@ -34,11 +30,13 @@ function SessionCard({ group, topic, content, categories }) {
       <ContentBody>
         <Headline size="Sub">{topic}</Headline>
         <Devider />
-        <TagList>{categories && categories.map(renderTag)}</TagList>
-        <button>Teilnehmer: 12/15</button> {/* placeholder*/}
+        <TagList>
+          {categories && categories.map(renderTag)}
+          <button>Teilnehmer: 12/15</button> {/* placeholder*/}
+        </TagList>
         <Content>{content}</Content>
       </ContentBody>
-      <StyledContentFooter>author date</StyledContentFooter>
+      <ContentFooter>author date</ContentFooter>
     </Card>
   );
 }

@@ -1,35 +1,42 @@
+import PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
-import Header from "../components/Header";
-import Headline from "../components/Headline";
-import PropTypes from "prop-types";
-import Devider from "../components/Devider";
-import Tag from "../components/Tag";
+import BackgroundImage from "../components/BackgroundImage";
 import Button from "../components/Button";
 import ButtonLink from "../components/ButtonLink";
-import ContentHeader from "../components/ContentHeader";
+import Container from "../components/Container";
 import ContentBody from "../components/ContentBody";
 import ContentFooter from "../components/ContentFooter";
-import Form from "../components/Form";
-import Input from "../components/Input";
+import ContentHeader from "../components/ContentHeader";
+import Devider from "../components/Devider";
 import DropDown from "../components/DropDown";
-import Textarea from "../components/Textarea";
+import Form from "../components/Form";
+import Fullscreen from "../components/Fullscreen";
+import Header from "../components/Header";
+import Headline from "../components/Headline";
 import InfoLine from "../components/InfoLine";
+import Input from "../components/Input";
+import Tag from "../components/Tag";
+import Textarea from "../components/Textarea";
 import categories from "./category-data";
+//import ButtonContainer from "../components/ButtonContainer";
 
 const StyledContentBody = styled(ContentBody)`
+  width: 100%;
   display: flex;
   flex-direction: column;
-`;
-
-const StyledContentFooter = styled(ContentFooter)`
-  justify-content: space-between;
 `;
 
 const TagList = styled.div`
   display: flex;
   padding-left: 10px;
   margin-bottom: 10px;
+`;
+
+const FormButtons = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
 `;
 
 function CreateSession({ history, onCreateSession }) {
@@ -69,46 +76,59 @@ function CreateSession({ history, onCreateSession }) {
     };
 
     onCreateSession(sessionCard);
-    history.replace("/");
+    history.replace("/sessions");
   }
 
   return (
     <>
-      <Header title="Add Session" />
-      <Form onSubmit={handleSubmit}>
-        <ContentHeader title="Add a new Training Session" />
-        <StyledContentBody>
-          <Headline size="Sub">Please fill in Details</Headline>
-          <Devider />
-          <InfoLine>Choose Group</InfoLine>
-          <DropDown name="group">
-            <option value="">select</option>
-            <option value="">---</option>
-            <option value="Bonsais">Bonsais</option>
-            <option value="Kids">Kids</option>
-            <option value="Youth">Youth</option>
-            <option value="Seniors">Seniors</option>
-          </DropDown>
-          <InfoLine>Set Students</InfoLine>
-          <DropDown name="students">
-            {" "}
-            {/* placeholder*/}
-            <option value="memberArray">Array der Gruppe</option>
-          </DropDown>
-          <InfoLine>Topic</InfoLine>
-          <Input name="topic" placeholder="Insert Topic" />
-          <InfoLine>Details</InfoLine>
-          <Textarea name="content" placeholder="Insert Details" />
-          <InfoLine>Choose Kathegories</InfoLine>
-          <TagList name="categories">
-            {categories.map(category => renderCategory(category))}
-          </TagList>
-        </StyledContentBody>
-        <StyledContentFooter>
-          <ButtonLink to="/">Cancel</ButtonLink>
-          <Button>Add</Button>
-        </StyledContentFooter>
-      </Form>
+      <Fullscreen>
+        <BackgroundImage src="/Background.jpg" />
+        <Header title="Add Session" />
+        <Container>
+          <Form onSubmit={handleSubmit}>
+            <ContentHeader title="Add a new Training Session" />
+            <StyledContentBody>
+              <Headline size="Sub">Please fill in Details</Headline>
+              <Devider />
+              <InfoLine>Choose Group</InfoLine>
+              <DropDown name="group">
+                <option value="">Select Group</option>
+                <option value="">---</option>
+                <option value="Bonsais">Bonsais</option>
+                <option value="Kids">Kids</option>
+                <option value="Youth">Youth</option>
+                <option value="Seniors">Seniors</option>
+              </DropDown>
+              <InfoLine>Set Students</InfoLine>
+              <DropDown name="students">
+                {" "}
+                {/* placeholder*/}
+                <option value="memberArray">Students</option>
+              </DropDown>
+              <InfoLine>Topic</InfoLine>
+              <Input name="topic" placeholder="Insert Topic" />
+              <InfoLine>Details</InfoLine>
+              <Textarea name="content" placeholder="Insert Details" />
+              <InfoLine>Choose Kathegories</InfoLine>
+              <TagList name="categories">
+                {categories.map(category => renderCategory(category))}
+              </TagList>
+              <Devider />
+              <FormButtons>
+                <ButtonLink to="/Sessions">
+                  <i className="fas fa-ban" />
+                </ButtonLink>
+                <Button>
+                  <i className="fas fa-plus-circle" />
+                </Button>
+              </FormButtons>
+            </StyledContentBody>
+
+            <ContentFooter>author date</ContentFooter>
+          </Form>
+          <></>
+        </Container>
+      </Fullscreen>
     </>
   );
 }

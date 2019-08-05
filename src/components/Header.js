@@ -4,11 +4,14 @@ import PropTypes from "prop-types";
 import Headline from "./Headline";
 
 const StyledHeader = styled.div`
+  position: fixed;
+  top: 0px;
   background: #292929;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 90px;
+  width: 100%;
+  z-index: 1;
 `;
 
 const StyledHeadline = styled(Headline)`
