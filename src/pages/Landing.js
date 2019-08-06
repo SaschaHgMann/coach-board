@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Fullscreen from "../components/Fullscreen";
-import BackgroundImage from "../components/BackgroundImage";
+import Layout from "../components/Layout";
 import ButtonLink from "../components/ButtonLink";
 
 const StyledButtonLink = styled(ButtonLink)`
@@ -14,12 +13,9 @@ const StyledButtonLink = styled(ButtonLink)`
 
 function Landing() {
   return (
-    <>
-      <Fullscreen>
-        <BackgroundImage src="/Background.jpg" />
-        <StyledButtonLink to="/sessions">Login</StyledButtonLink>
-      </Fullscreen>
-    </>
+    <Layout>
+      <StyledButtonLink to="/sessions">Login</StyledButtonLink>
+    </Layout>
   );
 }
 

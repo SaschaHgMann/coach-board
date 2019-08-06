@@ -9,6 +9,7 @@ const StyledHeader = styled.div`
   position: fixed;
   top: 0px;
   background: #292929;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,7 +31,10 @@ function Header({ title, ...props }) {
         showNavMenu={showNavMenu}
         setShowNavMenu={setShowNavMenu}
       />
-      <NavMenu showNavMenu={showNavMenu} />
+      <NavMenu
+        showNavMenu={showNavMenu}
+        onNavClick={() => setShowNavMenu(false)}
+      />
       <StyledHeadline size="Header">{title}</StyledHeadline>
     </StyledHeader>
   );

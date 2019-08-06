@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { fadeInNav } from "../utils/animations";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const NavBackground = styled.div`
   position: relative;
@@ -16,9 +16,14 @@ const NavContainer = styled.div`
   left: 0;
   z-index: 3;
   width: 250px;
+  display: flex;
+  flex-direction: column;
 
-  display: ${props => (props.showNavMenu ? "block" : "none")};
-  animation: ${fadeInNav} 0.8s;
+  transform: translate3d(${props => (props.showNavMenu ? 0 : -250)}px, 0, 0);
+  transition: all 0.7s;
+
+  /* display: ${props => (props.showNavMenu ? "block" : "none")};
+  animation: ${fadeInNav} 0.8s; */
 `;
 
 const NavHeader = styled.img`
@@ -29,11 +34,11 @@ const NavHeader = styled.img`
   object-fit: cover;
 `;
 
-const NavItem = styled.button`
+const NavItem = styled(NavLink)`
   text-align: left;
   margin: 0;
   width: 100%;
-  padding: 5px;
+  padding: 10px;
   background-color: rgba(41, 41, 41, 0.9);
   color: #fff8f0;
   font-size: 28px;
@@ -41,26 +46,25 @@ const NavItem = styled.button`
   border: none;
 `;
 
-function NavLink({ children, to, ...other }) {
-  return (
-    <Link to={to}>
-      <NavItem {...other}>{children}</NavItem>
-    </Link>
-  );
-}
-
-function NavMenu({ showNavMenu }) {
+function NavMenu({ showNavMenu, onNavClick }) {
+  const navItems = [
+    { to: "/sessions", label: "Sessions" },
+    { to: "/createsession", label: "New Session" },
+    { to: "/groups", label: "Groups" },
+    { to: "/members", label: "Members" },
+    { to: "/settings", label: "Settings" },
+    { to: "/", label: "Logout" }
+  ];
   return (
     <>
       <NavBackground />
       <NavContainer showNavMenu={showNavMenu}>
         <NavHeader src="/NavHeader.jpg" />
-        <NavLink to="/sessions">Sessions</NavLink>
-        <NavLink to="/createsession">New Session</NavLink>
-        <NavLink to="/groups">Groups</NavLink>
-        <NavLink to="/members">Members</NavLink>
-        <NavLink to="/settings">Settings</NavLink>
-        <NavLink to="/">Logout</NavLink>
+        {navItems.map(item => (
+          <NavItem to={item.to} onClick={onNavClick}>
+            {item.label}
+          </NavItem>
+        ))}
       </NavContainer>
     </>
   );

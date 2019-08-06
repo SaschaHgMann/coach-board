@@ -9,6 +9,7 @@ import Fullscreen from "../components/Fullscreen";
 import BackgroundImage from "../components/BackgroundImage";
 import Container from "../components/Container";
 import ButtonContainer from "../components/ButtonContainer";
+import Layout from "../components/Layout";
 
 const FilterButton = styled.button`
   height: 28px;
@@ -63,29 +64,26 @@ function Sessions({ sessionCards }) {
     setSelectedGroup(event.target.name);
   }
   return (
-    <>
-      <Fullscreen>
-        <BackgroundImage src="/Background.jpg" />
-        <Header title="Sessions" />
-        <Container>
-          {selectedGroup === "All"
-            ? sessionCards.map((sessionCard, index) =>
+    <Layout>
+      <Header title="Sessions" />
+      <Container>
+        {selectedGroup === "All"
+          ? sessionCards.map((sessionCard, index) =>
+              renderSessionCard(sessionCard, index)
+            )
+          : sessionCards
+              .filter(sessionCard => sessionCard.group === selectedGroup)
+              .map((sessionCard, index) =>
                 renderSessionCard(sessionCard, index)
-              )
-            : sessionCards
-                .filter(sessionCard => sessionCard.group === selectedGroup)
-                .map((sessionCard, index) =>
-                  renderSessionCard(sessionCard, index)
-                )}
-          <ButtonContainer>
-            {trainingGroups.map(group => renderFilterButtons(group))}
-            <StyledButtonLink to="/createsession">
-              <i className="fas fa-plus-circle" />
-            </StyledButtonLink>
-          </ButtonContainer>
-        </Container>
-      </Fullscreen>
-    </>
+              )}
+        <ButtonContainer>
+          {trainingGroups.map(group => renderFilterButtons(group))}
+          <StyledButtonLink to="/createsession">
+            <i className="fas fa-plus-circle" />
+          </StyledButtonLink>
+        </ButtonContainer>
+      </Container>
+    </Layout>
   );
 }
 
