@@ -1,15 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-//import Button from "../components/Button";
 import ButtonLink from "../components/ButtonLink";
 import Header from "../components/Header";
 import SessionCard from "../components/SessionCard";
 import groups from "./group-data";
-import Fullscreen from "../components/Fullscreen";
-import BackgroundImage from "../components/BackgroundImage";
 import Container from "../components/Container";
 import ButtonContainer from "../components/ButtonContainer";
-import Layout from "../components/Layout";
 
 const FilterButton = styled.button`
   height: 28px;
@@ -64,7 +60,7 @@ function Sessions({ sessionCards }) {
     setSelectedGroup(event.target.name);
   }
   return (
-    <Layout>
+    <>
       <Header title="Sessions" />
       <Container>
         {selectedGroup === "All"
@@ -83,7 +79,7 @@ function Sessions({ sessionCards }) {
           </StyledButtonLink>
         </ButtonContainer>
       </Container>
-    </Layout>
+    </>
   );
 }
 

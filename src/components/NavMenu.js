@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { fadeInNav } from "../utils/animations";
+
 import { NavLink } from "react-router-dom";
 
 const NavBackground = styled.div`
@@ -21,9 +21,6 @@ const NavContainer = styled.div`
 
   transform: translate3d(${props => (props.showNavMenu ? 0 : -250)}px, 0, 0);
   transition: all 0.7s;
-
-  /* display: ${props => (props.showNavMenu ? "block" : "none")};
-  animation: ${fadeInNav} 0.8s; */
 `;
 
 const NavHeader = styled.img`
@@ -61,7 +58,7 @@ function NavMenu({ showNavMenu, onNavClick }) {
       <NavContainer showNavMenu={showNavMenu}>
         <NavHeader src="/NavHeader.jpg" />
         {navItems.map(item => (
-          <NavItem to={item.to} onClick={onNavClick}>
+          <NavItem key={item.label} to={item.to} onClick={onNavClick}>
             {item.label}
           </NavItem>
         ))}

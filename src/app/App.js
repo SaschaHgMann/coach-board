@@ -9,6 +9,7 @@ import Settings from "../pages/Settings";
 import mockData from "../pages/__mock__/sessions.json";
 import { getFromLocal, setToLocal } from "../services/localStorage";
 import GlobalStyles from "./GlobalStyles";
+import Layout from "../components/Layout";
 
 function App() {
   const [sessionCards, setSessionCards] = React.useState(
@@ -27,27 +28,32 @@ function App() {
     <>
       <Router>
         <GlobalStyles />
-        <Switch>
-          <Route exact path="/" component={Landing} />
-          )} />
-          <Route
-            exact
-            path="/sessions"
-            render={props => (
-              <Sessions sessionCards={sessionCards} {...props} />
-            )}
-          />
-          <Route
-            exact
-            path="/createsession"
-            render={props => (
-              <CreateSession onCreateSession={handleCreateSession} {...props} />
-            )}
-          />
-          <Route exact path="/groups" component={Groups} />
-          <Route exact path="/members" component={Members} />
-          <Route exact path="/settings" component={Settings} />
-        </Switch>
+        <Layout>
+          <Switch>
+            <Route exact path="/" component={Landing} />
+            )} />
+            <Route
+              exact
+              path="/sessions"
+              render={props => (
+                <Sessions sessionCards={sessionCards} {...props} />
+              )}
+            />
+            <Route
+              exact
+              path="/createsession"
+              render={props => (
+                <CreateSession
+                  onCreateSession={handleCreateSession}
+                  {...props}
+                />
+              )}
+            />
+            <Route exact path="/groups" component={Groups} />
+            <Route exact path="/members" component={Members} />
+            <Route exact path="/settings" component={Settings} />
+          </Switch>
+        </Layout>
       </Router>
     </>
   );
