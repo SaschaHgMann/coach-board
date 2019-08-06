@@ -83,7 +83,7 @@ function CreateSession({ history, onCreateSession }) {
     <>
       <Fullscreen>
         <BackgroundImage src="/Background.jpg" />
-        <Header title="Add Session" />
+        <Header title="New Session" />
         <Container>
           <Form onSubmit={handleSubmit}>
             <ContentHeader title="Add a new Training Session" />

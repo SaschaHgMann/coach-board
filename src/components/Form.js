@@ -4,7 +4,8 @@ const Form = styled.form`
   margin: 20px;
   border: solid 2px #292929;
   border-radius: 10px;
-  background-color: #cecccc;
+  /* background-color: #cecccc; */
+  background-image: linear-gradient(#cecccc, #292929 50%, #cecccc);
 `;
 
 export default Form;
