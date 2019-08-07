@@ -53,6 +53,7 @@ function App() {
               render={props => (
                 <CreateSession
                   groups={groups}
+                  members={memberCards}
                   onCreateSession={handleCreateSession}
                   {...props}
                 />

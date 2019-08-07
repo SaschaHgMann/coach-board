@@ -17,6 +17,7 @@ import Input from "../components/Input";
 import Tag from "../components/Tag";
 import Textarea from "../components/Textarea";
 import categories from "./category-data";
+import MemberCard from "../components/MemberCard";
 
 const StyledContentBody = styled(ContentBody)`
   width: 100%;
@@ -40,14 +41,24 @@ const GroupOption = styled.option`
   background: pink;
 `;
 
-function CreateSession({ history, onCreateSession, groups }) {
+function CreateSession({ history, onCreateSession, groups, members }) {
   const [selectedCategories, setSelectedCategories] = React.useState([]);
   const groupOptions = ["Select Group", "---", ...groups];
+
+  console.log(members);
+
   function renderGroups(group) {
     return (
       <GroupOption key={group} value="{group}">
         {group}
       </GroupOption>
+    );
+  }
+  function renderGroupMembers(member) {
+    return (
+      <MemberCard key={member} name={member.name} group={member.group}>
+        {member}
+      </MemberCard>
     );
   }
 
@@ -102,11 +113,9 @@ function CreateSession({ history, onCreateSession, groups }) {
               {groupOptions.map(group => renderGroups(group))}
             </DropDown>
             <InfoLine>Set Students</InfoLine>
-            <DropDown name="students">
-              {" "}
-              {/* placeholder*/}
-              <option value="memberArray">Students</option>
-            </DropDown>
+
+            {members.map(member => renderGroupMembers(member))}
+
             <InfoLine>Topic</InfoLine>
             <Input name="topic" placeholder="Insert Topic" />
             <InfoLine>Details</InfoLine>
