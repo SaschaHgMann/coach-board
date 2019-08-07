@@ -42,9 +42,7 @@ function CreateSession({ history, onCreateSession, groups, members }) {
   const groupOptions = ["Select Group", "---", ...groups];
   const [selectedGroup, setSelectedGroup] = React.useState("");
 
-  console.log(selectedGroup);
-
-  function renderGroups(group) {
+  function renderGroupOptions(group) {
     return <option key={group}>{group}</option>;
   }
   function renderGroupMembers(member, index) {
@@ -54,10 +52,15 @@ function CreateSession({ history, onCreateSession, groups, members }) {
         name={member.name}
         group={member.group}
         age={member.age}
+        onClick={handleAttendance}
       >
         {member}
       </MemberCard>
     );
+  }
+
+  function handleAttendance() {
+    return;
   }
 
   function handleFilterMembers(event) {
@@ -115,7 +118,7 @@ function CreateSession({ history, onCreateSession, groups, members }) {
               name="group"
               onChange={event => handleFilterMembers(event)}
             >
-              {groupOptions.map(group => renderGroups(group))}
+              {groupOptions.map(group => renderGroupOptions(group))}
             </DropDown>
             <InfoLine>Set Students</InfoLine>
             {selectedGroup !== "Select Group" && selectedGroup !== "---"
