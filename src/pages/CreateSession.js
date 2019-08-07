@@ -121,7 +121,6 @@ function CreateSession({ history, onCreateSession }) {
 
           <ContentFooter>author date</ContentFooter>
         </Form>
-        <></>
       </Container>
     </>
   );

@@ -21,7 +21,7 @@ const StyledButtonLink = styled(ButtonLink)`
   box-shadow: 3px 2px 4px rgba(255, 248, 240, 0.5);
 `;
 
-function Sessions({ sessionCards }) {
+function Sessions({ sessions }) {
   const trainingGroups = ["All", ...groups];
   const [selectedGroup, setSelectedGroup] = React.useState("All");
 
@@ -64,10 +64,10 @@ function Sessions({ sessionCards }) {
       <Header title="Sessions" />
       <Container>
         {selectedGroup === "All"
-          ? sessionCards.map((sessionCard, index) =>
+          ? sessions.map((sessionCard, index) =>
               renderSessionCard(sessionCard, index)
             )
-          : sessionCards
+          : sessions
               .filter(sessionCard => sessionCard.group === selectedGroup)
               .map((sessionCard, index) =>
                 renderSessionCard(sessionCard, index)

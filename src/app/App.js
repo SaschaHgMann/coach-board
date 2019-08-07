@@ -6,19 +6,24 @@ import Sessions from "../pages/Sessions";
 import Groups from "../pages/Groups";
 import Members from "../pages/Members";
 import Settings from "../pages/Settings";
-import mockData from "../pages/__mock__/sessions.json";
+import sessionsData from "../pages/__mock__/sessions.json";
 import { getFromLocal, setToLocal } from "../services/localStorage";
 import GlobalStyles from "./GlobalStyles";
 import Layout from "../components/Layout";
+import memberData from "../pages/__mock__/members";
 
 function App() {
   const [sessionCards, setSessionCards] = React.useState(
-    getFromLocal("sessionCards") || mockData
+    getFromLocal("sessionCards") || sessionsData
+  );
+  const [memberCards] = React.useState(
+    getFromLocal("memberCards") || memberData
   );
 
   React.useEffect(() => setToLocal("sessionCards", sessionCards), [
     sessionCards
   ]);
+  React.useEffect(() => setToLocal("memberCards", memberCards), [memberCards]);
 
   function handleCreateSession(sessionCard) {
     setSessionCards([sessionCard, ...sessionCards]);
@@ -35,9 +40,7 @@ function App() {
             <Route
               exact
               path="/sessions"
-              render={props => (
-                <Sessions sessionCards={sessionCards} {...props} />
-              )}
+              render={props => <Sessions sessions={sessionCards} {...props} />}
             />
             <Route
               exact
@@ -50,7 +53,11 @@ function App() {
               )}
             />
             <Route exact path="/groups" component={Groups} />
-            <Route exact path="/members" component={Members} />
+            <Route
+              exact
+              path="/members"
+              render={props => <Members members={memberCards} {...props} />}
+            />
             <Route exact path="/settings" component={Settings} />
           </Switch>
         </Layout>
