@@ -36,8 +36,20 @@ const FormButtons = styled.div`
   padding: 5px;
 `;
 
-function CreateSession({ history, onCreateSession }) {
+const GroupOption = styled.option`
+  background: pink;
+`;
+
+function CreateSession({ history, onCreateSession, groups }) {
   const [selectedCategories, setSelectedCategories] = React.useState([]);
+  const groupOptions = ["Select Group", "---", ...groups];
+  function renderGroups(group) {
+    return (
+      <GroupOption key={group} value="{group}">
+        {group}
+      </GroupOption>
+    );
+  }
 
   function renderCategory(category) {
     return (
@@ -87,12 +99,7 @@ function CreateSession({ history, onCreateSession }) {
             <Devider />
             <InfoLine>Choose Group</InfoLine>
             <DropDown name="group">
-              <option value="">Select Group</option>
-              <option value="">---</option>
-              <option value="Bonsais">Bonsais</option>
-              <option value="Kids">Kids</option>
-              <option value="Youth">Youth</option>
-              <option value="Seniors">Seniors</option>
+              {groupOptions.map(group => renderGroups(group))}
             </DropDown>
             <InfoLine>Set Students</InfoLine>
             <DropDown name="students">

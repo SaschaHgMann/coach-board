@@ -11,6 +11,7 @@ import { getFromLocal, setToLocal } from "../services/localStorage";
 import GlobalStyles from "./GlobalStyles";
 import Layout from "../components/Layout";
 import memberData from "../pages/__mock__/members";
+import groupData from "../pages/group-data";
 
 function App() {
   const [sessionCards, setSessionCards] = React.useState(
@@ -19,11 +20,13 @@ function App() {
   const [memberCards] = React.useState(
     getFromLocal("memberCards") || memberData
   );
+  const [groups] = React.useState(getFromLocal("groups") || groupData);
 
   React.useEffect(() => setToLocal("sessionCards", sessionCards), [
     sessionCards
   ]);
   React.useEffect(() => setToLocal("memberCards", memberCards), [memberCards]);
+  React.useEffect(() => setToLocal("groups", groups), [groups]);
 
   function handleCreateSession(sessionCard) {
     setSessionCards([sessionCard, ...sessionCards]);
@@ -40,13 +43,16 @@ function App() {
             <Route
               exact
               path="/sessions"
-              render={props => <Sessions sessions={sessionCards} {...props} />}
+              render={props => (
+                <Sessions groups={groups} sessions={sessionCards} {...props} />
+              )}
             />
             <Route
               exact
               path="/createsession"
               render={props => (
                 <CreateSession
+                  groups={groups}
                   onCreateSession={handleCreateSession}
                   {...props}
                 />

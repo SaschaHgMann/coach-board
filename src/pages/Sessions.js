@@ -3,7 +3,6 @@ import styled from "styled-components";
 import ButtonLink from "../components/ButtonLink";
 import Header from "../components/Header";
 import SessionCard from "../components/SessionCard";
-import groups from "./group-data";
 import Container from "../components/Container";
 import ButtonContainer from "../components/ButtonContainer";
 
@@ -21,7 +20,7 @@ const StyledButtonLink = styled(ButtonLink)`
   box-shadow: 3px 2px 4px rgba(255, 248, 240, 0.5);
 `;
 
-function Sessions({ sessions }) {
+function Sessions({ sessions, groups }) {
   const trainingGroups = ["All", ...groups];
   const [selectedGroup, setSelectedGroup] = React.useState("All");
 
