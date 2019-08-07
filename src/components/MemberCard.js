@@ -4,11 +4,13 @@ import PropTypes from "prop-types";
 import Headline from "./Headline";
 import Content from "./Content";
 
-function MemberCard({ name, group }) {
+function MemberCard({ name, group, age }) {
   return (
     <Card>
       <Headline size="Sub">{name}</Headline>
-      <Content>{group}</Content>
+      <Content>
+        {group}, {age}
+      </Content>
     </Card>
   );
 }

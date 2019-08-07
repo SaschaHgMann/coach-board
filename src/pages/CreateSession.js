@@ -37,29 +37,31 @@ const FormButtons = styled.div`
   padding: 5px;
 `;
 
-const GroupOption = styled.option`
-  background: pink;
-`;
-
 function CreateSession({ history, onCreateSession, groups, members }) {
   const [selectedCategories, setSelectedCategories] = React.useState([]);
   const groupOptions = ["Select Group", "---", ...groups];
+  const [selectedGroup, setSelectedGroup] = React.useState("");
 
-  console.log(members);
+  console.log(selectedGroup);
 
   function renderGroups(group) {
-    return (
-      <GroupOption key={group} value="{group}">
-        {group}
-      </GroupOption>
-    );
+    return <option key={group}>{group}</option>;
   }
-  function renderGroupMembers(member) {
+  function renderGroupMembers(member, index) {
     return (
-      <MemberCard key={member} name={member.name} group={member.group}>
+      <MemberCard
+        key={index}
+        name={member.name}
+        group={member.group}
+        age={member.age}
+      >
         {member}
       </MemberCard>
     );
+  }
+
+  function handleFilterMembers(event) {
+    setSelectedGroup(event.target.value);
   }
 
   function renderCategory(category) {
@@ -109,13 +111,18 @@ function CreateSession({ history, onCreateSession, groups, members }) {
             <Headline size="Sub">Please fill in Details</Headline>
             <Devider />
             <InfoLine>Choose Group</InfoLine>
-            <DropDown name="group">
+            <DropDown
+              name="group"
+              onChange={event => handleFilterMembers(event)}
+            >
               {groupOptions.map(group => renderGroups(group))}
             </DropDown>
             <InfoLine>Set Students</InfoLine>
-
-            {members.map(member => renderGroupMembers(member))}
-
+            {selectedGroup !== "Select Group" && selectedGroup !== "---"
+              ? members
+                  .filter(member => member.group === selectedGroup)
+                  .map((member, index) => renderGroupMembers(member, index))
+              : ""}
             <InfoLine>Topic</InfoLine>
             <Input name="topic" placeholder="Insert Topic" />
             <InfoLine>Details</InfoLine>
