@@ -9,13 +9,22 @@ import Content from "./Content";
 import ContentHeader from "./ContentHeader";
 import ContentBody from "./ContentBody";
 import ContentFooter from "./ContentFooter";
+import MemberCard from "./MemberCard";
 
 const TagList = styled.div`
   display: flex;
   margin: 5px 0;
 `;
 
-function SessionCard({ group, topic, content, categories }) {
+const Members = styled.div`
+  margin: 0;
+`;
+
+function SessionCard({ group, topic, content, categories, attendes }) {
+  function renderAttendes(member) {
+    return <MemberCard key={member}>{member}</MemberCard>;
+  }
+
   function renderTag(category) {
     return (
       <Tag key={category} active={true}>
@@ -30,10 +39,8 @@ function SessionCard({ group, topic, content, categories }) {
       <ContentBody>
         <Headline size="Sub">{topic}</Headline>
         <Devider />
-        <TagList>
-          {categories && categories.map(renderTag)}
-          <button>Teilnehmer: 12/15</button> {/* placeholder*/}
-        </TagList>
+        <TagList>{categories && categories.map(renderTag)}</TagList>
+        <Members>{attendes && attendes.map(renderAttendes)}</Members>
         <Content>{content}</Content>
       </ContentBody>
       <ContentFooter>author date</ContentFooter>

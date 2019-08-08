@@ -37,30 +37,46 @@ const FormButtons = styled.div`
   padding: 5px;
 `;
 
+const Members = styled.div`
+  margin: 0;
+`;
+
 function CreateSession({ history, onCreateSession, groups, members }) {
   const [selectedCategories, setSelectedCategories] = React.useState([]);
   const groupOptions = ["Select Group", "---", ...groups];
   const [selectedGroup, setSelectedGroup] = React.useState("");
+  const [sessionMembers, setSessionMembers] = React.useState(
+    members.map(member => ({ ...member, attendet: false }))
+  );
 
   function renderGroupOptions(group) {
     return <option key={group}>{group}</option>;
   }
-  function renderGroupMembers(member, index) {
+
+  function renderGroupMember(member, index) {
     return (
       <MemberCard
         key={index}
         name={member.name}
         group={member.group}
         age={member.age}
-        onClick={handleAttendance}
-      >
-        {member}
-      </MemberCard>
+        status={member.attendet}
+        onClick={() => handleAttendance(member)}
+      />
     );
   }
 
-  function handleAttendance() {
-    return;
+  function handleAttendance(member) {
+    const index = sessionMembers.findIndex(item => item._id === member._id);
+    const newSessionMembers = sessionMembers.slice();
+    const sessionMember = sessionMembers[index];
+
+    newSessionMembers[index] = {
+      ...sessionMember,
+      attendet: !sessionMember.attendet
+    };
+
+    setSessionMembers(newSessionMembers);
   }
 
   function handleFilterMembers(event) {
@@ -97,7 +113,8 @@ function CreateSession({ history, onCreateSession, groups, members }) {
       group: form.group.value,
       topic: form.topic.value,
       content: form.content.value,
-      categories: selectedCategories
+      categories: selectedCategories,
+      attendes: sessionMembers
     };
 
     onCreateSession(sessionCard);
@@ -120,12 +137,14 @@ function CreateSession({ history, onCreateSession, groups, members }) {
             >
               {groupOptions.map(group => renderGroupOptions(group))}
             </DropDown>
-            <InfoLine>Set Students</InfoLine>
-            {selectedGroup !== "Select Group" && selectedGroup !== "---"
-              ? members
-                  .filter(member => member.group === selectedGroup)
-                  .map((member, index) => renderGroupMembers(member, index))
-              : ""}
+            <InfoLine>Set Members</InfoLine>
+            <Members name="attendes">
+              {selectedGroup !== "Select Group" && selectedGroup !== "---"
+                ? sessionMembers
+                    .filter(member => member.group === selectedGroup)
+                    .map((member, index) => renderGroupMember(member, index))
+                : ""}
+            </Members>
             <InfoLine>Topic</InfoLine>
             <Input name="topic" placeholder="Insert Topic" />
             <InfoLine>Details</InfoLine>
@@ -159,7 +178,7 @@ CreateSession.propTypes = {
   tags: PropTypes.arrayOf(PropTypes.string),
   author: PropTypes.func,
   date: PropTypes.func,
-  students: PropTypes.func
+  attendes: PropTypes.func
 };
 
 export default CreateSession;
