@@ -43,7 +43,7 @@ const Members = styled.div`
 
 function CreateSession({ history, onCreateSession, groups, members }) {
   const [session, setSession] = React.useState({
-    attendes: [],
+    attendees: [],
     topic: "",
     content: "",
     categories: []
@@ -85,7 +85,7 @@ function CreateSession({ history, onCreateSession, groups, members }) {
   }
 
   function handleMemberChange() {
-    setSession({ ...session, attendes: attendetSessionMember });
+    setSession({ ...session, attendees: attendetSessionMember });
   }
 
   React.useEffect(() => {
@@ -93,7 +93,7 @@ function CreateSession({ history, onCreateSession, groups, members }) {
   }, [selectedCategories]);
 
   React.useEffect(() => {
-    setSession({ ...session, attendes: attendetSessionMember });
+    setSession({ ...session, attendees: attendetSessionMember });
   }, [attendetSessionMember]);
 
   function renderGroupOptions(group) {
@@ -166,7 +166,7 @@ function CreateSession({ history, onCreateSession, groups, members }) {
               {groupOptions.map(group => renderGroupOptions(group))}
             </DropDown>
             <InfoLine>Set Members</InfoLine>
-            <Members name="attendes" onChange={handleMemberChange}>
+            <Members name="attendees" onChange={handleMemberChange}>
               {selectedGroup !== "Select Group" && selectedGroup !== "---"
                 ? sessionMembers
                     .filter(member => member.group === selectedGroup)
@@ -214,7 +214,7 @@ CreateSession.propTypes = {
   tags: PropTypes.arrayOf(PropTypes.string),
   author: PropTypes.func,
   date: PropTypes.func,
-  attendes: PropTypes.array
+  attendees: PropTypes.array
 };
 
 export default CreateSession;

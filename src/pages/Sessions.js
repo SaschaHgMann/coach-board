@@ -35,7 +35,7 @@ function Sessions({ sessions, groups }) {
         topic={sessionCard.topic}
         content={sessionCard.content}
         categories={sessionCard.categories}
-        attendes={sessionCard.attendes}
+        attendees={sessionCard.attendees}
       />
     );
   }

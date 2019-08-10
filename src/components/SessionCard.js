@@ -16,12 +16,20 @@ const TagList = styled.div`
   margin: 5px 0;
 `;
 
-const Members = styled.div`
+const Attendees = styled.div`
+  margin: 0;
+  transform: translate3d(${props => (props.showAttendees ? 0 : -450)}px, 0, 0);
+  transition: all 0.7s;
+`;
+
+const AttendButton = styled.button`
   margin: 0;
 `;
 
-function SessionCard({ group, topic, content, categories, attendes }) {
-  function renderAttendes(member, index) {
+function SessionCard({ group, topic, content, categories, attendees }) {
+  const [showAttendees, setShowAttendees] = React.useState(false);
+
+  function renderAttendees(member, index) {
     return (
       <MemberCard
         key={(member, index)}
@@ -51,7 +59,12 @@ function SessionCard({ group, topic, content, categories, attendes }) {
         <Devider />
         <TagList>{categories && categories.map(renderTag)}</TagList>
         <Content>{content}</Content>
-        <Members>{attendes && attendes.map(renderAttendes)}</Members>
+        <AttendButton onClick={() => setShowAttendees(!showAttendees)}>
+          Attendees
+        </AttendButton>
+        <Attendees showAttendees={showAttendees}>
+          {attendees && attendees.map(renderAttendees)}
+        </Attendees>
       </ContentBody>
       <ContentFooter>author date</ContentFooter>
     </Card>
@@ -65,7 +78,7 @@ SessionCard.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.string),
   author: PropTypes.func,
   date: PropTypes.func,
-  students: PropTypes.func
+  attendees: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 export default SessionCard;
