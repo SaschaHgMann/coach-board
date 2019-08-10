@@ -17,6 +17,7 @@ function App() {
   const [sessionCards, setSessionCards] = React.useState(
     getFromLocal("sessionCards") || sessionsData
   );
+
   const [memberCards] = React.useState(
     getFromLocal("memberCards") || memberData
   );
@@ -28,8 +29,9 @@ function App() {
   React.useEffect(() => setToLocal("memberCards", memberCards), [memberCards]);
   React.useEffect(() => setToLocal("groups", groups), [groups]);
 
-  function handleCreateSession(sessionCard) {
-    setSessionCards([sessionCard, ...sessionCards]);
+  function handleCreateSession(session) {
+    //console.log(session);
+    setSessionCards([session, ...sessionCards]);
   }
 
   return (

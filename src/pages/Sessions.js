@@ -21,6 +21,7 @@ const StyledButtonLink = styled(ButtonLink)`
 `;
 
 function Sessions({ sessions, groups }) {
+  console.log(sessions);
   const trainingGroups = ["All", ...groups];
   const [selectedGroup, setSelectedGroup] = React.useState("All");
 
@@ -34,7 +35,7 @@ function Sessions({ sessions, groups }) {
         topic={sessionCard.topic}
         content={sessionCard.content}
         categories={sessionCard.categories}
-        // attendes={sessionCard.attendes}
+        attendes={sessionCard.attendes}
       />
     );
   }

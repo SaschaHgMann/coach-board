@@ -42,15 +42,66 @@ const Members = styled.div`
 `;
 
 function CreateSession({ history, onCreateSession, groups, members }) {
-  const [selectedCategories, setSelectedCategories] = React.useState([]);
+  const [session, setSession] = React.useState({
+    attendes: [],
+    topic: "",
+    content: "",
+    categories: []
+  });
+
   const groupOptions = ["Select Group", "---", ...groups];
   const [selectedGroup, setSelectedGroup] = React.useState("");
+  const [selectedCategories, setSelectedCategories] = React.useState([]);
   const [sessionMembers, setSessionMembers] = React.useState(
     members.map(member => ({ ...member, attendet: false }))
   );
 
+  const [attendetSessionMember, setAttendetSessionMember] = React.useState([]);
+
+  function handleAttendance(member) {
+    const indexSelected = sessionMembers.findIndex(
+      item => item._id === member._id
+    );
+    const newSessionMembers = sessionMembers.slice();
+    const sessionMember = newSessionMembers[indexSelected];
+
+    newSessionMembers[indexSelected] = {
+      ...sessionMember,
+      attendet: !sessionMember.attendet
+    };
+
+    setAttendetSessionMember([sessionMember, ...attendetSessionMember]);
+    console.log(attendetSessionMember);
+
+    setSessionMembers(newSessionMembers);
+  }
+
+  function handleChange(event) {
+    setSession({ ...session, [event.target.name]: event.target.value });
+  }
+
+  function handleCategoryChange() {
+    setSession({ ...session, categories: selectedCategories });
+  }
+
+  function handleMemberChange() {
+    setSession({ ...session, attendes: attendetSessionMember });
+  }
+
+  React.useEffect(() => {
+    setSession({ ...session, categories: selectedCategories });
+  }, [selectedCategories]);
+
+  React.useEffect(() => {
+    setSession({ ...session, attendes: attendetSessionMember });
+  }, [attendetSessionMember]);
+
   function renderGroupOptions(group) {
     return <option key={group}>{group}</option>;
+  }
+
+  function handleFilterMembers(event) {
+    setSelectedGroup(event.target.value);
   }
 
   function renderGroupMember(member, index) {
@@ -64,23 +115,6 @@ function CreateSession({ history, onCreateSession, groups, members }) {
         onClick={() => handleAttendance(member)}
       />
     );
-  }
-
-  function handleAttendance(member) {
-    const index = sessionMembers.findIndex(item => item._id === member._id);
-    const newSessionMembers = sessionMembers.slice();
-    const sessionMember = sessionMembers[index];
-
-    newSessionMembers[index] = {
-      ...sessionMember,
-      attendet: !sessionMember.attendet
-    };
-
-    setSessionMembers(newSessionMembers);
-  }
-
-  function handleFilterMembers(event) {
-    setSelectedGroup(event.target.value);
   }
 
   function renderCategory(category) {
@@ -107,17 +141,11 @@ function CreateSession({ history, onCreateSession, groups, members }) {
 
   function handleSubmit(event) {
     event.preventDefault();
+    session.group = selectedGroup;
 
-    const form = event.target;
-    const sessionCard = {
-      group: form.group.value,
-      topic: form.topic.value,
-      content: form.content.value,
-      categories: selectedCategories,
-      attendes: sessionMembers
-    };
+    //console.log(session);
 
-    onCreateSession(sessionCard);
+    onCreateSession(session);
     history.replace("/sessions");
   }
 
@@ -138,7 +166,7 @@ function CreateSession({ history, onCreateSession, groups, members }) {
               {groupOptions.map(group => renderGroupOptions(group))}
             </DropDown>
             <InfoLine>Set Members</InfoLine>
-            <Members name="attendes">
+            <Members name="attendes" onChange={handleMemberChange}>
               {selectedGroup !== "Select Group" && selectedGroup !== "---"
                 ? sessionMembers
                     .filter(member => member.group === selectedGroup)
@@ -146,11 +174,19 @@ function CreateSession({ history, onCreateSession, groups, members }) {
                 : ""}
             </Members>
             <InfoLine>Topic</InfoLine>
-            <Input name="topic" placeholder="Insert Topic" />
+            <Input
+              name="topic"
+              onChange={handleChange}
+              placeholder="Insert Topic"
+            />
             <InfoLine>Details</InfoLine>
-            <Textarea name="content" placeholder="Insert Details" />
+            <Textarea
+              name="content"
+              onChange={handleChange}
+              placeholder="Insert Details"
+            />
             <InfoLine>Choose Kathegories</InfoLine>
-            <TagList name="categories">
+            <TagList name="categories" onChange={handleCategoryChange}>
               {categories.map(category => renderCategory(category))}
             </TagList>
             <Devider />
@@ -178,7 +214,7 @@ CreateSession.propTypes = {
   tags: PropTypes.arrayOf(PropTypes.string),
   author: PropTypes.func,
   date: PropTypes.func,
-  attendes: PropTypes.func
+  attendes: PropTypes.array
 };
 
 export default CreateSession;

@@ -21,8 +21,18 @@ const Members = styled.div`
 `;
 
 function SessionCard({ group, topic, content, categories, attendes }) {
-  function renderAttendes(member) {
-    return <MemberCard key={member}>{member}</MemberCard>;
+  function renderAttendes(member, index) {
+    return (
+      <MemberCard
+        key={(member, index)}
+        name={member.name}
+        group={member.group}
+        age={member.age}
+        status={(member.attendet = true)}
+      >
+        {member}
+      </MemberCard>
+    );
   }
 
   function renderTag(category) {
@@ -40,8 +50,8 @@ function SessionCard({ group, topic, content, categories, attendes }) {
         <Headline size="Sub">{topic}</Headline>
         <Devider />
         <TagList>{categories && categories.map(renderTag)}</TagList>
-        <Members>{attendes && attendes.map(renderAttendes)}</Members>
         <Content>{content}</Content>
+        <Members>{attendes && attendes.map(renderAttendes)}</Members>
       </ContentBody>
       <ContentFooter>author date</ContentFooter>
     </Card>
@@ -50,8 +60,8 @@ function SessionCard({ group, topic, content, categories, attendes }) {
 
 SessionCard.propTypes = {
   group: PropTypes.string.isRequired,
-  topic: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
+  topic: PropTypes.string,
+  content: PropTypes.string,
   categories: PropTypes.arrayOf(PropTypes.string),
   author: PropTypes.func,
   date: PropTypes.func,
