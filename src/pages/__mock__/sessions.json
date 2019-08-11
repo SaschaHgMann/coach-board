@@ -6,7 +6,49 @@
     "content": "Lorem",
     "categories": ["Koordination"],
     "author": "Claudia",
-    "date": "Montag, 01.07.2019"
+    "date": "Montag, 01.07.2019",
+    "attendees": [
+      {
+        "_id": "5d497329db99f772a6dc535b",
+        "index": 2,
+        "name": "Katharina Reyes",
+        "avatar": "http://placehold.it/32x32",
+        "age": 6,
+        "group": "Bonsais",
+        "rank": "white",
+        "date": "Okt 2017"
+      },
+      {
+        "_id": "5d4973295ce0cca9105ff520",
+        "index": 3,
+        "name": "Francis Walter",
+        "avatar": "http://placehold.it/32x32",
+        "age": 7,
+        "group": "Bonsais",
+        "rank": "orange",
+        "date": "Feb 2019"
+      },
+      {
+        "_id": "5d4973290ddab48245f41897",
+        "index": 5,
+        "name": "Wladi Barnes",
+        "avatar": "http://placehold.it/32x32",
+        "age": 8,
+        "group": "Bonsais",
+        "rank": "blue",
+        "date": "Okt 2018"
+      },
+      {
+        "_id": "5d4973296d727ec14ea69c6f",
+        "index": 6,
+        "name": "Dennis Vogel",
+        "avatar": "http://placehold.it/32x32",
+        "age": 9,
+        "group": "Bonsais",
+        "rank": "orange",
+        "date": "Okt 2017"
+      }
+    ]
   },
   {
     "_id": 2,
@@ -15,7 +57,49 @@
     "content": "Larum",
     "categories": ["Kondition", "Kumite"],
     "author": "Sascha",
-    "date": "Dienstag, 02.07.2019"
+    "date": "Dienstag, 02.07.2019",
+    "attendees": [
+      {
+        "_id": "5d49732955aa26cc891f96bb",
+        "index": 7,
+        "name": "Sandra Hogan",
+        "avatar": "http://placehold.it/32x32",
+        "age": 16,
+        "group": "Youth",
+        "rank": "brown",
+        "date": "Okt 2018"
+      },
+      {
+        "_id": "5d497329cf138476c1b1b46f",
+        "index": 15,
+        "name": "Steffan Schroeder",
+        "avatar": "http://placehold.it/32x32",
+        "age": 17,
+        "group": "Youth",
+        "rank": "brown",
+        "date": "Feb 2019"
+      },
+      {
+        "_id": "5d4973293ab1b3fbec2b9695",
+        "index": 16,
+        "name": "Bryan Owens",
+        "avatar": "http://placehold.it/32x32",
+        "age": 8,
+        "group": "Youth",
+        "rank": "blue",
+        "date": "Feb 2019"
+      },
+      {
+        "_id": "5d4973297c57b63970dccab2",
+        "index": 17,
+        "name": "Laila Hartmann",
+        "avatar": "http://placehold.it/32x32",
+        "age": 14,
+        "group": "Youth",
+        "rank": "orange",
+        "date": "Okt 2018"
+      }
+    ]
   },
   {
     "_id": 3,
@@ -24,6 +108,58 @@
     "content": "Ipsum",
     "categories": ["Kumite", "Kihon"],
     "author": "Dennis",
-    "date": "Mittwoch, 03.07.2019"
+    "date": "Mittwoch, 03.07.2019",
+    "attendees": [
+      {
+        "_id": "5d497329f27ec6d207529eaa",
+        "index": 18,
+        "name": "Cecilia Meier",
+        "avatar": "http://placehold.it/32x32",
+        "age": 10,
+        "group": "Kids",
+        "rank": "blue",
+        "date": "Feb 2019"
+      },
+      {
+        "_id": "5d497329a9918f1b9c081224",
+        "index": 20,
+        "name": "Maja Peters",
+        "avatar": "http://placehold.it/32x32",
+        "age": 14,
+        "group": "Kids",
+        "rank": "yellow",
+        "date": "Okt 2018"
+      },
+      {
+        "_id": "5d4973290ee189a886de206f",
+        "index": 23,
+        "name": "Manuela König",
+        "avatar": "http://placehold.it/32x32",
+        "age": 9,
+        "group": "Kids",
+        "rank": "orange",
+        "date": "Jul 2019"
+      },
+      {
+        "_id": "5d497329bb6f79be512cd8dd",
+        "index": 25,
+        "name": "Justine Schmidt",
+        "avatar": "http://placehold.it/32x32",
+        "age": 9,
+        "group": "Kids",
+        "rank": "white",
+        "date": "Feb 2019"
+      },
+      {
+        "_id": "5d4973290bf595a70049073d",
+        "index": 29,
+        "name": "Alia Pfund",
+        "avatar": "http://placehold.it/32x32",
+        "age": 12,
+        "group": "Kids",
+        "rank": "green",
+        "date": "Okt 2018"
+      }
+    ]
   }
 ]

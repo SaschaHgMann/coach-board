@@ -13,7 +13,7 @@ export default createGlobalStyle`
         margin: 0;
     }
     ::placeholder {
-       
+       color: #cecccc;
         font-size: 16px;
 
 }

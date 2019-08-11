@@ -112,6 +112,7 @@ function CreateSession({ history, onCreateSession, groups, members }) {
         group={member.group}
         age={member.age}
         rank={member.rank}
+        date={member.date}
         status={member.attendet}
         onClick={() => handleAttendance(member)}
       />
@@ -146,15 +147,12 @@ function CreateSession({ history, onCreateSession, groups, members }) {
     if (session.topic === "") {
       errors.topic = "Enter a session topic plase!";
     }
-
     if (session.content === "") {
       errors.content = "Leave informations for coaches please!";
     }
-
     if (session.group === "") {
       errors.group = "Select correct group please!";
     }
-
     return Object.keys(errors).length === 0 ? null : errors;
   }
 
