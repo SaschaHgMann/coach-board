@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Devider = styled.hr`
-  margin: 0;
+  margin-bottom: 10;
   width: 100%;
   color: #cecccc;
 `;

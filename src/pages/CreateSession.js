@@ -27,11 +27,12 @@ const StyledContentBody = styled(ContentBody)`
 
 const TagList = styled.div`
   display: flex;
+  flex-wrap: wrap;
   padding-left: 10px;
   margin-bottom: 10px;
 `;
 
-const FormButtons = styled.div`
+const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 5px;
@@ -39,6 +40,7 @@ const FormButtons = styled.div`
 
 const Members = styled.div`
   margin: 0;
+  padding: 10px;
 `;
 
 function CreateSession({ history, onCreateSession, groups, members }) {
@@ -55,7 +57,6 @@ function CreateSession({ history, onCreateSession, groups, members }) {
   const [sessionMembers, setSessionMembers] = React.useState(
     members.map(member => ({ ...member, attendet: false }))
   );
-
   const [attendetSessionMember, setAttendetSessionMember] = React.useState([]);
 
   function handleAttendance(member) {
@@ -69,11 +70,8 @@ function CreateSession({ history, onCreateSession, groups, members }) {
       ...sessionMember,
       attendet: !sessionMember.attendet
     };
-
-    setAttendetSessionMember([sessionMember, ...attendetSessionMember]);
-    console.log(attendetSessionMember);
-
     setSessionMembers(newSessionMembers);
+    setAttendetSessionMember([sessionMember, ...attendetSessionMember]);
   }
 
   function handleChange(event) {
@@ -157,14 +155,15 @@ function CreateSession({ history, onCreateSession, groups, members }) {
           <StyledContentBody>
             <Headline size="Sub">Please fill in Details</Headline>
             <Devider />
-            <InfoLine>Choose Group</InfoLine>
             <DropDown
               name="group"
               onChange={event => handleFilterMembers(event)}
             >
               {groupOptions.map(group => renderGroupOptions(group))}
             </DropDown>
-            <InfoLine>Set Members</InfoLine>
+            <InfoLine>
+              Check attendance <i className="fas fa-user-check" />
+            </InfoLine>
             <Members name="attendees" onChange={handleMemberChange}>
               {selectedGroup !== "Select Group" && selectedGroup !== "---"
                 ? sessionMembers
@@ -172,34 +171,34 @@ function CreateSession({ history, onCreateSession, groups, members }) {
                     .map((member, index) => renderGroupMember(member, index))
                 : ""}
             </Members>
-            <InfoLine>Topic</InfoLine>
+            {/* <InfoLine>Topic</InfoLine> */}
             <Input
               name="topic"
               onChange={handleChange}
-              placeholder="Insert Topic"
+              placeholder="Topic of session"
             />
-            <InfoLine>Details</InfoLine>
+            {/* <InfoLine>Details</InfoLine> */}
             <Textarea
               name="content"
               onChange={handleChange}
-              placeholder="Insert Details"
+              placeholder="Exercises, incidents & general informations"
             />
             <InfoLine>Choose Kathegories</InfoLine>
             <TagList name="categories" onChange={handleCategoryChange}>
               {categories.map(category => renderCategory(category))}
             </TagList>
             <Devider />
-            <FormButtons>
+            <ButtonContainer>
               <ButtonLink to="/Sessions">
                 <i className="fas fa-ban" />
               </ButtonLink>
               <Button>
                 <i className="fas fa-plus-circle" />
               </Button>
-            </FormButtons>
+            </ButtonContainer>
           </StyledContentBody>
 
-          <ContentFooter>author date</ContentFooter>
+          <ContentFooter>author, date</ContentFooter>
         </Form>
       </Container>
     </>

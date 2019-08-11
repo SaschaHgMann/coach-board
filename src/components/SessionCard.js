@@ -13,13 +13,13 @@ import MemberCard from "./MemberCard";
 
 const TagList = styled.div`
   display: flex;
+  flex-wrap: wrap;
   margin: 5px 0;
 `;
 
 const Attendees = styled.div`
   margin: 0;
   display: ${props => (props.aktiv ? "block" : "none")};
-  /* height: ${props => (props.aktiv ? "auto" : 0)}; */
 `;
 
 const AttendButton = styled.button`
@@ -65,13 +65,12 @@ function SessionCard({ group, topic, content, categories, attendees }) {
             onClick={() => setShowAttendees(!showAttendees)}
             aktiv={showAttendees}
           >
-            <i class="fas fa-user-check" />
+            <i className="fas fa-user-check" />
           </AttendButton>
         </Headline>
         <Devider />
         <TagList>{categories && categories.map(renderTag)}</TagList>
         <Content>{content}</Content>
-
         <Attendees aktiv={showAttendees}>
           {attendees && attendees.map(renderAttendees)}
         </Attendees>
@@ -83,12 +82,12 @@ function SessionCard({ group, topic, content, categories, attendees }) {
 
 SessionCard.propTypes = {
   group: PropTypes.string.isRequired,
-  topic: PropTypes.string,
+  topic: PropTypes.string.isRequired,
   content: PropTypes.string,
   categories: PropTypes.arrayOf(PropTypes.string),
-  author: PropTypes.func,
-  date: PropTypes.func,
-  attendees: PropTypes.arrayOf(PropTypes.object).isRequired
+  author: PropTypes.string,
+  date: PropTypes.string,
+  attendees: PropTypes.arrayOf(PropTypes.object)
 };
 
 export default SessionCard;

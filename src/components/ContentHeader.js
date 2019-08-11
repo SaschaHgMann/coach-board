@@ -8,6 +8,8 @@ const StyledHeader = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 5px;
+  border-radius: 10px 10px 0 0;
+  background-image: linear-gradient(#cecccc, #292929 130%);
 `;
 
 function ContentHeader({ title, ...props }) {

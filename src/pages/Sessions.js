@@ -8,7 +8,11 @@ import ButtonContainer from "../components/ButtonContainer";
 
 const FilterButton = styled.button`
   height: 28px;
-  background: #fff8f0;
+  padding: 2px 5px;
+  /* background: #fff8f0; */
+  background: ${props => (props.aktive ? "lightgreen" : "#fff8f0")};
+  font-family: "Ubuntu", sans-serif;
+  font-size: 14px;
   border: none;
   border-radius: 10px;
   box-shadow: 2px 2px 4px rgba(255, 248, 240, 0.5);
@@ -21,7 +25,6 @@ const StyledButtonLink = styled(ButtonLink)`
 `;
 
 function Sessions({ sessions, groups }) {
-  console.log(sessions);
   const trainingGroups = ["All", ...groups];
   const [selectedGroup, setSelectedGroup] = React.useState("All");
 
@@ -41,15 +44,11 @@ function Sessions({ sessions, groups }) {
   }
 
   function renderFilterButtons(group) {
-    // function showActive(Button) {
-    //   setButtonActive(Button.active === true);
-    // }
-
     return (
       <FilterButton
         key={group}
         name={group}
-        // active={showActive}
+        // active={}
         onClick={event => handleFilterGroups(event)}
       >
         {group}

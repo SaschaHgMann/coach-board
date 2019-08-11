@@ -19,6 +19,7 @@ const StyledHeader = styled.div`
 
 const StyledHeadline = styled(Headline)`
   color: #fff8f0;
+  text-shadow: 1px 1px 2px black, 0 0 5px #fff8f0;
 `;
 
 function Header({ title, ...props }) {
