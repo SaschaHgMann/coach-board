@@ -111,6 +111,7 @@ function CreateSession({ history, onCreateSession, groups, members }) {
         name={member.name}
         group={member.group}
         age={member.age}
+        rank={member.rank}
         status={member.attendet}
         onClick={() => handleAttendance(member)}
       />
@@ -142,8 +143,6 @@ function CreateSession({ history, onCreateSession, groups, members }) {
   function handleSubmit(event) {
     event.preventDefault();
     session.group = selectedGroup;
-
-    //console.log(session);
 
     onCreateSession(session);
     history.replace("/sessions");

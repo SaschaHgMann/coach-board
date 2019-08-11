@@ -10,17 +10,18 @@ const getColor = props => {
 };
 
 const StyledCard = styled(Card)`
-  margin: 10px;
+  margin: 10px 0;
+
   padding-left: 5px;
   background-image: linear-gradient(to top, #292929 -35%, ${getColor});
 `;
 
-function MemberCard({ name, group, age, status, onClick }) {
+function MemberCard({ name, group, age, status, rank, date, onClick }) {
   return (
     <StyledCard status={status} onClick={onClick}>
       <Headline size="Sub">{name}</Headline>
       <Content>
-        {group}, {age}
+        {group}, {age}, {rank}, {date}
       </Content>
     </StyledCard>
   );

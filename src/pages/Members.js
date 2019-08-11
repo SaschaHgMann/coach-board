@@ -5,7 +5,7 @@ import Container from "../components/Container";
 import styled from "styled-components";
 
 const StyledContainer = styled(Container)`
-  padding: 60px 10px 10px 10px;
+  padding: 60px 20px 10px 20px;
 `;
 
 function Members({ members }) {
@@ -16,6 +16,8 @@ function Members({ members }) {
         name={memberCard.name}
         group={memberCard.group}
         age={memberCard.age}
+        rank={memberCard.rank}
+        date={memberCard.date}
       />
     );
   }

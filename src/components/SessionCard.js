@@ -18,12 +18,14 @@ const TagList = styled.div`
 
 const Attendees = styled.div`
   margin: 0;
-  transform: translate3d(${props => (props.showAttendees ? 0 : -450)}px, 0, 0);
-  transition: all 0.7s;
+  display: ${props => (props.aktiv ? "block" : "none")};
+  /* height: ${props => (props.aktiv ? "auto" : 0)}; */
 `;
 
 const AttendButton = styled.button`
   margin: 0;
+  font-size: 24px;
+  text-shadow: ${props => (props.aktiv ? "0px 0px 5px lightgreen" : "none")};
 `;
 
 function SessionCard({ group, topic, content, categories, attendees }) {
@@ -37,6 +39,8 @@ function SessionCard({ group, topic, content, categories, attendees }) {
         group={member.group}
         age={member.age}
         status={(member.attendet = true)}
+        rank={member.rank}
+        date={member.date}
       >
         {member}
       </MemberCard>
@@ -55,14 +59,20 @@ function SessionCard({ group, topic, content, categories, attendees }) {
     <Card>
       <ContentHeader title={group} />
       <ContentBody>
-        <Headline size="Sub">{topic}</Headline>
+        <Headline size="Sub">
+          {topic}
+          <AttendButton
+            onClick={() => setShowAttendees(!showAttendees)}
+            aktiv={showAttendees}
+          >
+            <i class="fas fa-user-check" />
+          </AttendButton>
+        </Headline>
         <Devider />
         <TagList>{categories && categories.map(renderTag)}</TagList>
         <Content>{content}</Content>
-        <AttendButton onClick={() => setShowAttendees(!showAttendees)}>
-          Attendees
-        </AttendButton>
-        <Attendees showAttendees={showAttendees}>
+
+        <Attendees aktiv={showAttendees}>
           {attendees && attendees.map(renderAttendees)}
         </Attendees>
       </ContentBody>
