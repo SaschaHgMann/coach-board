@@ -1,15 +1,36 @@
 import React from "react";
-import Fullscreen from "../components/Fullscreen";
-import BackgroundImage from "../components/BackgroundImage";
 import Header from "../components/Header";
+import MemberCard from "../components/MemberCard";
+import Container from "../components/Container";
+import styled from "styled-components";
 
-function Members({ memberCards }) {
+const StyledContainer = styled(Container)`
+  padding: 60px 20px 10px 20px;
+`;
+
+function Members({ members }) {
+  function renderMemberCard(memberCard, index) {
+    return (
+      <MemberCard
+        key={index}
+        name={memberCard.name}
+        group={memberCard.group}
+        age={memberCard.age}
+        rank={memberCard.rank}
+        date={memberCard.date}
+      />
+    );
+  }
+
   return (
-    <Fullscreen>
-      <BackgroundImage src="/Background.jpg" />
+    <>
       <Header title="Members" />
-    </Fullscreen>
+      <StyledContainer>
+        {members.map((memberCard, index) =>
+          renderMemberCard(memberCard, index)
+        )}
+      </StyledContainer>
+    </>
   );
 }
-
 export default Members;

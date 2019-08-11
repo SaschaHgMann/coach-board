@@ -5,7 +5,7 @@ import React from "react";
 const sizes = {
   Header: "36px",
   Main: "28px",
-  Sub: "22px"
+  Sub: "24px"
 };
 
 function getSize(size) {
@@ -14,6 +14,8 @@ function getSize(size) {
 
 const StyledHeadline = styled.h1`
   margin: 0;
+  display: flex;
+  justify-content: space-between;
   font-size: ${props => getSize(props.size)};
 `;
 

@@ -9,7 +9,6 @@ const StyledHeader = styled.div`
   position: fixed;
   top: 0px;
   background: #292929;
-
   display: flex;
   align-items: center;
   justify-content: center;

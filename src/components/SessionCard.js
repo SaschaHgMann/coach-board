@@ -9,13 +9,44 @@ import Content from "./Content";
 import ContentHeader from "./ContentHeader";
 import ContentBody from "./ContentBody";
 import ContentFooter from "./ContentFooter";
+import MemberCard from "./MemberCard";
 
 const TagList = styled.div`
   display: flex;
   margin: 5px 0;
 `;
 
-function SessionCard({ group, topic, content, categories }) {
+const Attendees = styled.div`
+  margin: 0;
+  display: ${props => (props.aktiv ? "block" : "none")};
+  /* height: ${props => (props.aktiv ? "auto" : 0)}; */
+`;
+
+const AttendButton = styled.button`
+  margin: 0;
+  font-size: 24px;
+  text-shadow: ${props => (props.aktiv ? "0px 0px 5px lightgreen" : "none")};
+`;
+
+function SessionCard({ group, topic, content, categories, attendees }) {
+  const [showAttendees, setShowAttendees] = React.useState(false);
+
+  function renderAttendees(member, index) {
+    return (
+      <MemberCard
+        key={(member, index)}
+        name={member.name}
+        group={member.group}
+        age={member.age}
+        status={(member.attendet = true)}
+        rank={member.rank}
+        date={member.date}
+      >
+        {member}
+      </MemberCard>
+    );
+  }
+
   function renderTag(category) {
     return (
       <Tag key={category} active={true}>
@@ -28,13 +59,22 @@ function SessionCard({ group, topic, content, categories }) {
     <Card>
       <ContentHeader title={group} />
       <ContentBody>
-        <Headline size="Sub">{topic}</Headline>
+        <Headline size="Sub">
+          {topic}
+          <AttendButton
+            onClick={() => setShowAttendees(!showAttendees)}
+            aktiv={showAttendees}
+          >
+            <i class="fas fa-user-check" />
+          </AttendButton>
+        </Headline>
         <Devider />
-        <TagList>
-          {categories && categories.map(renderTag)}
-          <button>Teilnehmer: 12/15</button> {/* placeholder*/}
-        </TagList>
+        <TagList>{categories && categories.map(renderTag)}</TagList>
         <Content>{content}</Content>
+
+        <Attendees aktiv={showAttendees}>
+          {attendees && attendees.map(renderAttendees)}
+        </Attendees>
       </ContentBody>
       <ContentFooter>author date</ContentFooter>
     </Card>
@@ -43,12 +83,12 @@ function SessionCard({ group, topic, content, categories }) {
 
 SessionCard.propTypes = {
   group: PropTypes.string.isRequired,
-  topic: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
+  topic: PropTypes.string,
+  content: PropTypes.string,
   categories: PropTypes.arrayOf(PropTypes.string),
   author: PropTypes.func,
   date: PropTypes.func,
-  students: PropTypes.func
+  attendees: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 export default SessionCard;

@@ -8,6 +8,7 @@ export default createGlobalStyle`
     body {
         color: #292929;
         font-family: 'Bahianita', 'cursive';
+        font-size: 18px;
         background-color: fff8f0;
         margin: 0;
     }

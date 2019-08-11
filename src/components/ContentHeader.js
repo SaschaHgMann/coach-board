@@ -10,12 +10,10 @@ const StyledHeader = styled.div`
   padding: 5px;
 `;
 
-const StyledHeadline = styled(Headline)``;
-
 function ContentHeader({ title, ...props }) {
   return (
     <StyledHeader {...props}>
-      <StyledHeadline size="Main">{title}</StyledHeadline>
+      <Headline size="Main">{title}</Headline>
     </StyledHeader>
   );
 }

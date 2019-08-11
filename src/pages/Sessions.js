@@ -1,15 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-//import Button from "../components/Button";
 import ButtonLink from "../components/ButtonLink";
 import Header from "../components/Header";
 import SessionCard from "../components/SessionCard";
-import groups from "./group-data";
-import Fullscreen from "../components/Fullscreen";
-import BackgroundImage from "../components/BackgroundImage";
 import Container from "../components/Container";
 import ButtonContainer from "../components/ButtonContainer";
-import Layout from "../components/Layout";
 
 const FilterButton = styled.button`
   height: 28px;
@@ -25,7 +20,8 @@ const StyledButtonLink = styled(ButtonLink)`
   box-shadow: 3px 2px 4px rgba(255, 248, 240, 0.5);
 `;
 
-function Sessions({ sessionCards }) {
+function Sessions({ sessions, groups }) {
+  console.log(sessions);
   const trainingGroups = ["All", ...groups];
   const [selectedGroup, setSelectedGroup] = React.useState("All");
 
@@ -39,6 +35,7 @@ function Sessions({ sessionCards }) {
         topic={sessionCard.topic}
         content={sessionCard.content}
         categories={sessionCard.categories}
+        attendees={sessionCard.attendees}
       />
     );
   }
@@ -64,14 +61,14 @@ function Sessions({ sessionCards }) {
     setSelectedGroup(event.target.name);
   }
   return (
-    <Layout>
+    <>
       <Header title="Sessions" />
       <Container>
         {selectedGroup === "All"
-          ? sessionCards.map((sessionCard, index) =>
+          ? sessions.map((sessionCard, index) =>
               renderSessionCard(sessionCard, index)
             )
-          : sessionCards
+          : sessions
               .filter(sessionCard => sessionCard.group === selectedGroup)
               .map((sessionCard, index) =>
                 renderSessionCard(sessionCard, index)
@@ -83,7 +80,7 @@ function Sessions({ sessionCards }) {
           </StyledButtonLink>
         </ButtonContainer>
       </Container>
-    </Layout>
+    </>
   );
 }
 
