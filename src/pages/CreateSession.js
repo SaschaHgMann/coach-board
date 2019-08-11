@@ -18,6 +18,7 @@ import Tag from "../components/Tag";
 import Textarea from "../components/Textarea";
 import categories from "./category-data";
 import MemberCard from "../components/MemberCard";
+import StyledError from "../components/StyledError";
 
 const StyledContentBody = styled(ContentBody)`
   width: 100%;
@@ -51,13 +52,14 @@ function CreateSession({ history, onCreateSession, groups, members }) {
     categories: []
   });
 
-  const groupOptions = ["Select Group", "---", ...groups];
+  const groupOptions = ["Select Group", ...groups];
   const [selectedGroup, setSelectedGroup] = React.useState("");
   const [selectedCategories, setSelectedCategories] = React.useState([]);
   const [sessionMembers, setSessionMembers] = React.useState(
     members.map(member => ({ ...member, attendet: false }))
   );
   const [attendetSessionMember, setAttendetSessionMember] = React.useState([]);
+  const [errors, setErrors] = React.useState({});
 
   function handleAttendance(member) {
     const indexSelected = sessionMembers.findIndex(
@@ -138,9 +140,34 @@ function CreateSession({ history, onCreateSession, groups, members }) {
     }
   }
 
+  function validate() {
+    const errors = {};
+
+    if (session.topic === "") {
+      errors.topic = "Enter a session topic plase!";
+    }
+
+    if (session.content === "") {
+      errors.content = "Leave informations for coaches please!";
+    }
+
+    if (session.group === "") {
+      errors.group = "Select correct group please!";
+    }
+
+    return Object.keys(errors).length === 0 ? null : errors;
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
     session.group = selectedGroup;
+
+    const errors = validate();
+
+    if (errors) {
+      setErrors(errors);
+      return;
+    }
 
     onCreateSession(session);
     history.replace("/sessions");
@@ -161,6 +188,7 @@ function CreateSession({ history, onCreateSession, groups, members }) {
             >
               {groupOptions.map(group => renderGroupOptions(group))}
             </DropDown>
+            {errors.group && <StyledError>{errors.group}</StyledError>}
             <InfoLine>
               Check attendance <i className="fas fa-user-check" />
             </InfoLine>
@@ -177,13 +205,15 @@ function CreateSession({ history, onCreateSession, groups, members }) {
               onChange={handleChange}
               placeholder="Topic of session"
             />
+            {errors.topic && <StyledError>{errors.topic}</StyledError>}
             {/* <InfoLine>Details</InfoLine> */}
             <Textarea
               name="content"
               onChange={handleChange}
-              placeholder="Exercises, incidents & general informations"
+              placeholder="Exercises, incidents & general informations for other coaches"
             />
-            <InfoLine>Choose Kathegories</InfoLine>
+            {errors.content && <StyledError>{errors.content}</StyledError>}
+            <InfoLine>Choose Cathegories</InfoLine>
             <TagList name="categories" onChange={handleCategoryChange}>
               {categories.map(category => renderCategory(category))}
             </TagList>

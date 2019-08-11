@@ -75,7 +75,7 @@ function SessionCard({ group, topic, content, categories, attendees }) {
           {attendees && attendees.map(renderAttendees)}
         </Attendees>
       </ContentBody>
-      <ContentFooter>author date</ContentFooter>
+      <ContentFooter>author, date</ContentFooter>
     </Card>
   );
 }
