@@ -10,15 +10,18 @@ import ContentHeader from "./ContentHeader";
 import ContentBody from "./ContentBody";
 import ContentFooter from "./ContentFooter";
 import MemberCard from "./MemberCard";
+import moment from "moment";
 
 const TagList = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin: 5px 0;
+  padding: 5px;
 `;
 
 const Attendees = styled.div`
   margin: 0;
+  padding: 5px;
   display: ${props => (props.aktiv ? "block" : "none")};
 `;
 
@@ -28,7 +31,7 @@ const AttendButton = styled.button`
   text-shadow: ${props => (props.aktiv ? "0px 0px 5px lightgreen" : "none")};
 `;
 
-function SessionCard({ group, topic, content, categories, attendees }) {
+function SessionCard({ group, topic, content, categories, attendees, date }) {
   const [showAttendees, setShowAttendees] = React.useState(false);
 
   function renderAttendees(member, index) {
@@ -57,10 +60,14 @@ function SessionCard({ group, topic, content, categories, attendees }) {
 
   return (
     <Card>
-      <ContentHeader title={group} />
+      <ContentHeader
+        title={group}
+        date={moment(date).format("dddd, DD. MMMM YYYY")}
+      />
       <ContentBody>
         <Headline size="Sub">
           {topic}
+
           <AttendButton
             onClick={() => setShowAttendees(!showAttendees)}
             aktiv={showAttendees}

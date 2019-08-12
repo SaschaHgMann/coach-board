@@ -49,7 +49,8 @@ function CreateSession({ history, onCreateSession, groups, members }) {
     attendees: [],
     topic: "",
     content: "",
-    categories: []
+    categories: [],
+    date: ""
   });
 
   const groupOptions = ["Select Group", ...groups];
@@ -144,13 +145,16 @@ function CreateSession({ history, onCreateSession, groups, members }) {
   function validate() {
     const errors = {};
 
+    if (session.date === "") {
+      errors.date = "Enter a session date please!";
+    }
     if (session.topic === "") {
-      errors.topic = "Enter a session topic plase!";
+      errors.topic = "Enter a session topic please!";
     }
     if (session.content === "") {
       errors.content = "Leave informations for coaches please!";
     }
-    if (session.group === "") {
+    if (selectedGroup === "" || selectedGroup === "Select Group") {
       errors.group = "Select correct group please!";
     }
     return Object.keys(errors).length === 0 ? null : errors;
@@ -180,6 +184,14 @@ function CreateSession({ history, onCreateSession, groups, members }) {
           <StyledContentBody>
             <Headline size="Sub">Please fill in Details</Headline>
             <Devider />
+            <InfoLine>Select date</InfoLine>
+            <Input
+              type="date"
+              name="date"
+              onChange={handleChange}
+              placeholder="Select Date"
+            />
+            {errors.date && <StyledError>{errors.date}</StyledError>}
             <DropDown
               name="group"
               onChange={event => handleFilterMembers(event)}
@@ -197,14 +209,12 @@ function CreateSession({ history, onCreateSession, groups, members }) {
                     .map((member, index) => renderGroupMember(member, index))
                 : ""}
             </Members>
-            {/* <InfoLine>Topic</InfoLine> */}
             <Input
               name="topic"
               onChange={handleChange}
               placeholder="Topic of session"
             />
             {errors.topic && <StyledError>{errors.topic}</StyledError>}
-            {/* <InfoLine>Details</InfoLine> */}
             <Textarea
               name="content"
               onChange={handleChange}
