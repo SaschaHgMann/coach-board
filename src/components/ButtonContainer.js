@@ -5,7 +5,6 @@ const ButtonContainer = styled.div`
   position: fixed;
   bottom: 0px;
   background: #292929;
-  /* opacity: 0.7; */
   padding: 5px;
   width: 100%;
   display: flex;

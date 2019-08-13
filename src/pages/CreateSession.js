@@ -18,6 +18,7 @@ import Tag from "../components/Tag";
 import Textarea from "../components/Textarea";
 import categories from "./category-data";
 import MemberCard from "../components/MemberCard";
+import StyledError from "../components/StyledError";
 
 const StyledContentBody = styled(ContentBody)`
   width: 100%;
@@ -27,11 +28,12 @@ const StyledContentBody = styled(ContentBody)`
 
 const TagList = styled.div`
   display: flex;
+  flex-wrap: wrap;
   padding-left: 10px;
   margin-bottom: 10px;
 `;
 
-const FormButtons = styled.div`
+const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 5px;
@@ -39,6 +41,7 @@ const FormButtons = styled.div`
 
 const Members = styled.div`
   margin: 0;
+  padding: 10px;
 `;
 
 function CreateSession({ history, onCreateSession, groups, members }) {
@@ -46,17 +49,18 @@ function CreateSession({ history, onCreateSession, groups, members }) {
     attendees: [],
     topic: "",
     content: "",
-    categories: []
+    categories: [],
+    date: ""
   });
 
-  const groupOptions = ["Select Group", "---", ...groups];
+  const groupOptions = ["Select Group", ...groups];
   const [selectedGroup, setSelectedGroup] = React.useState("");
   const [selectedCategories, setSelectedCategories] = React.useState([]);
   const [sessionMembers, setSessionMembers] = React.useState(
     members.map(member => ({ ...member, attendet: false }))
   );
-
   const [attendetSessionMember, setAttendetSessionMember] = React.useState([]);
+  const [errors, setErrors] = React.useState({});
 
   function handleAttendance(member) {
     const indexSelected = sessionMembers.findIndex(
@@ -69,11 +73,8 @@ function CreateSession({ history, onCreateSession, groups, members }) {
       ...sessionMember,
       attendet: !sessionMember.attendet
     };
-
-    setAttendetSessionMember([sessionMember, ...attendetSessionMember]);
-    console.log(attendetSessionMember);
-
     setSessionMembers(newSessionMembers);
+    setAttendetSessionMember([sessionMember, ...attendetSessionMember]);
   }
 
   function handleChange(event) {
@@ -112,6 +113,7 @@ function CreateSession({ history, onCreateSession, groups, members }) {
         group={member.group}
         age={member.age}
         rank={member.rank}
+        date={member.date}
         status={member.attendet}
         onClick={() => handleAttendance(member)}
       />
@@ -140,9 +142,34 @@ function CreateSession({ history, onCreateSession, groups, members }) {
     }
   }
 
+  function validate() {
+    const errors = {};
+
+    if (session.date === "") {
+      errors.date = "Enter a session date please!";
+    }
+    if (session.topic === "") {
+      errors.topic = "Enter a session topic please!";
+    }
+    if (session.content === "") {
+      errors.content = "Leave informations for coaches please!";
+    }
+    if (selectedGroup === "" || selectedGroup === "Select Group") {
+      errors.group = "Select correct group please!";
+    }
+    return Object.keys(errors).length === 0 ? null : errors;
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
     session.group = selectedGroup;
+
+    const errors = validate();
+
+    if (errors) {
+      setErrors(errors);
+      return;
+    }
 
     onCreateSession(session);
     history.replace("/sessions");
@@ -157,14 +184,24 @@ function CreateSession({ history, onCreateSession, groups, members }) {
           <StyledContentBody>
             <Headline size="Sub">Please fill in Details</Headline>
             <Devider />
-            <InfoLine>Choose Group</InfoLine>
+            <InfoLine>Select date</InfoLine>
+            <Input
+              type="date"
+              name="date"
+              onChange={handleChange}
+              placeholder="Select Date"
+            />
+            {errors.date && <StyledError>{errors.date}</StyledError>}
             <DropDown
               name="group"
               onChange={event => handleFilterMembers(event)}
             >
               {groupOptions.map(group => renderGroupOptions(group))}
             </DropDown>
-            <InfoLine>Set Members</InfoLine>
+            {errors.group && <StyledError>{errors.group}</StyledError>}
+            <InfoLine>
+              Check attendance <i className="fas fa-user-check" />
+            </InfoLine>
             <Members name="attendees" onChange={handleMemberChange}>
               {selectedGroup !== "Select Group" && selectedGroup !== "---"
                 ? sessionMembers
@@ -172,34 +209,34 @@ function CreateSession({ history, onCreateSession, groups, members }) {
                     .map((member, index) => renderGroupMember(member, index))
                 : ""}
             </Members>
-            <InfoLine>Topic</InfoLine>
             <Input
               name="topic"
               onChange={handleChange}
-              placeholder="Insert Topic"
+              placeholder="Topic of session"
             />
-            <InfoLine>Details</InfoLine>
+            {errors.topic && <StyledError>{errors.topic}</StyledError>}
             <Textarea
               name="content"
               onChange={handleChange}
-              placeholder="Insert Details"
+              placeholder="Exercises, incidents & general informations for other coaches"
             />
-            <InfoLine>Choose Kathegories</InfoLine>
+            {errors.content && <StyledError>{errors.content}</StyledError>}
+            <InfoLine>Choose Cathegories</InfoLine>
             <TagList name="categories" onChange={handleCategoryChange}>
               {categories.map(category => renderCategory(category))}
             </TagList>
             <Devider />
-            <FormButtons>
+            <ButtonContainer>
               <ButtonLink to="/Sessions">
                 <i className="fas fa-ban" />
               </ButtonLink>
               <Button>
                 <i className="fas fa-plus-circle" />
               </Button>
-            </FormButtons>
+            </ButtonContainer>
           </StyledContentBody>
 
-          <ContentFooter>author date</ContentFooter>
+          <ContentFooter>author, date</ContentFooter>
         </Form>
       </Container>
     </>

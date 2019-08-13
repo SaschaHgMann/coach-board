@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-//import NavMenu from "./NavMenu";
 
 const NavButton = styled.button`
   position: absolute;

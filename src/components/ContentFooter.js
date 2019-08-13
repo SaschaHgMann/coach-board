@@ -2,10 +2,12 @@ import styled from "styled-components";
 
 const ContentFooter = styled.div`
   margin: 0;
-  padding-right: 5px;
+  padding: 5px;
   display: flex;
   justify-content: flex-end;
   color: #fff8f0;
+  border-radius: 0 0 10px 10px;
+  background-image: linear-gradient(#cecccc, #292929 130%);
 `;
 
 export default ContentFooter;

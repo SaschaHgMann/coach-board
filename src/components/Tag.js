@@ -7,7 +7,7 @@ const Tag = styled.span`
   border: 2px solid ${colors.grayDark};
   border-radius: 3px;
   padding: 3px;
-  margin-right: 5px;
+  margin: 5px 5px 0 0;
 `;
 
 export default Tag;

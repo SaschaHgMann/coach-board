@@ -30,7 +30,6 @@ function App() {
   React.useEffect(() => setToLocal("groups", groups), [groups]);
 
   function handleCreateSession(session) {
-    //console.log(session);
     setSessionCards([session, ...sessionCards]);
   }
 

@@ -10,16 +10,19 @@ import ContentHeader from "./ContentHeader";
 import ContentBody from "./ContentBody";
 import ContentFooter from "./ContentFooter";
 import MemberCard from "./MemberCard";
+import moment from "moment";
 
 const TagList = styled.div`
   display: flex;
+  flex-wrap: wrap;
   margin: 5px 0;
+  padding: 5px;
 `;
 
 const Attendees = styled.div`
   margin: 0;
+  padding: 5px;
   display: ${props => (props.aktiv ? "block" : "none")};
-  /* height: ${props => (props.aktiv ? "auto" : 0)}; */
 `;
 
 const AttendButton = styled.button`
@@ -28,7 +31,7 @@ const AttendButton = styled.button`
   text-shadow: ${props => (props.aktiv ? "0px 0px 5px lightgreen" : "none")};
 `;
 
-function SessionCard({ group, topic, content, categories, attendees }) {
+function SessionCard({ group, topic, content, categories, attendees, date }) {
   const [showAttendees, setShowAttendees] = React.useState(false);
 
   function renderAttendees(member, index) {
@@ -57,38 +60,41 @@ function SessionCard({ group, topic, content, categories, attendees }) {
 
   return (
     <Card>
-      <ContentHeader title={group} />
+      <ContentHeader
+        title={group}
+        date={moment(date).format("dddd, DD. MMMM YYYY")}
+      />
       <ContentBody>
         <Headline size="Sub">
           {topic}
+
           <AttendButton
             onClick={() => setShowAttendees(!showAttendees)}
             aktiv={showAttendees}
           >
-            <i class="fas fa-user-check" />
+            <i className="fas fa-user-check" />
           </AttendButton>
         </Headline>
         <Devider />
         <TagList>{categories && categories.map(renderTag)}</TagList>
         <Content>{content}</Content>
-
         <Attendees aktiv={showAttendees}>
           {attendees && attendees.map(renderAttendees)}
         </Attendees>
       </ContentBody>
-      <ContentFooter>author date</ContentFooter>
+      <ContentFooter>author, date</ContentFooter>
     </Card>
   );
 }
 
 SessionCard.propTypes = {
   group: PropTypes.string.isRequired,
-  topic: PropTypes.string,
+  topic: PropTypes.string.isRequired,
   content: PropTypes.string,
   categories: PropTypes.arrayOf(PropTypes.string),
-  author: PropTypes.func,
-  date: PropTypes.func,
-  attendees: PropTypes.arrayOf(PropTypes.object).isRequired
+  author: PropTypes.string,
+  date: PropTypes.string,
+  attendees: PropTypes.arrayOf(PropTypes.object)
 };
 
 export default SessionCard;
