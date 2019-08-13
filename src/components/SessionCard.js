@@ -58,6 +58,10 @@ function SessionCard({ group, topic, content, categories, attendees, date }) {
     );
   }
 
+  function handleDelete(index) {
+    return;
+  }
+
   return (
     <Card>
       <ContentHeader

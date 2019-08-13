@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import Headline from "./Headline";
 import NavMenuButton from "./NavMenuButton";
 import NavMenu from "./NavMenu";
+import SearchButton from "./SearchButton";
 
 const StyledHeader = styled.div`
   position: fixed;
@@ -36,6 +37,7 @@ function Header({ title, ...props }) {
         onNavClick={() => setShowNavMenu(false)}
       />
       <StyledHeadline size="Header">{title}</StyledHeadline>
+      <SearchButton />
     </StyledHeader>
   );
 }

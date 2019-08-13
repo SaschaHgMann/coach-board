@@ -12,6 +12,7 @@ import GlobalStyles from "./GlobalStyles";
 import Layout from "../components/Layout";
 import memberData from "../pages/__mock__/members";
 import groupData from "../pages/group-data";
+import Search from "../pages/Search";
 
 function App() {
   const [sessionCards, setSessionCards] = React.useState(
@@ -67,6 +68,17 @@ function App() {
               render={props => <Members members={memberCards} {...props} />}
             />
             <Route exact path="/settings" component={Settings} />
+            <Route
+              exact
+              path="/search"
+              render={props => (
+                <Search
+                  sessions={sessionCards}
+                  members={memberCards}
+                  {...props}
+                />
+              )}
+            />
           </Switch>
         </Layout>
       </Router>

@@ -8,6 +8,7 @@ const Input = styled.input`
   padding: 3px;
   font-size: 16px;
   font-family: "Ubuntu", sans-serif;
+  overflow-x: auto;
 `;
 
 export default Input;
