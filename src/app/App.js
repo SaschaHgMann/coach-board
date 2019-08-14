@@ -12,6 +12,7 @@ import GlobalStyles from "./GlobalStyles";
 import Layout from "../components/Layout";
 import memberData from "../pages/__mock__/members";
 import groupData from "../pages/group-data";
+import Search from "../pages/Search";
 
 function App() {
   const [sessionCards, setSessionCards] = React.useState(
@@ -33,6 +34,19 @@ function App() {
     setSessionCards([session, ...sessionCards]);
   }
 
+  function handleDeleteSession(index) {
+    const SessionIndex = sessionCards.findIndex(
+      sessionCard => sessionCard.index === index
+    );
+    const Delete = prompt("Sure to delete? Confirm (yes)");
+    if (Delete === "yes") {
+      setSessionCards([
+        ...sessionCards.slice(0, SessionIndex),
+        ...sessionCards.slice(SessionIndex + 1)
+      ]);
+    }
+  }
+
   return (
     <>
       <Router>
@@ -45,7 +59,12 @@ function App() {
               exact
               path="/sessions"
               render={props => (
-                <Sessions groups={groups} sessions={sessionCards} {...props} />
+                <Sessions
+                  groups={groups}
+                  sessions={sessionCards}
+                  onDeleteSession={handleDeleteSession}
+                  {...props}
+                />
               )}
             />
             <Route
@@ -67,6 +86,17 @@ function App() {
               render={props => <Members members={memberCards} {...props} />}
             />
             <Route exact path="/settings" component={Settings} />
+            <Route
+              exact
+              path="/search"
+              render={props => (
+                <Search
+                  sessions={sessionCards}
+                  members={memberCards}
+                  {...props}
+                />
+              )}
+            />
           </Switch>
         </Layout>
       </Router>
