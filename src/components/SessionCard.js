@@ -27,7 +27,10 @@ const Attendees = styled.div`
 
 const AttendButton = styled.button`
   margin: 0;
-  font-size: 24px;
+  font-size: 20px;
+  border: solid 1px;
+  border-radius: 10px;
+  background: #fff8f0;
   text-shadow: ${props => (props.aktiv ? "0px 0px 5px lightgreen" : "none")};
 `;
 
@@ -83,12 +86,11 @@ function SessionCard({
         <Headline size="Sub">
           {topic}
           <div>
-            {attendees.length}
             <AttendButton
               onClick={() => setShowAttendees(!showAttendees)}
               aktiv={showAttendees}
             >
-              <i className="fas fa-user-check" />
+              <i className="fas fa-user-check" /> {attendees.length}
             </AttendButton>
           </div>
         </Headline>
