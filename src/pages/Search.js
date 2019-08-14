@@ -16,10 +16,11 @@ const SearchInput = styled(Input)`
 `;
 
 const StyledContainer = styled(Container)`
-  margin-top: 70px;
+  margin-top: 140px;
+  padding: 0;
 `;
 
-function Search({ sessions, members }) {
+function Search({ sessions }) {
   const [input, setInput] = React.useState("");
   function handleChange(event) {
     const value = event.target.value;
@@ -32,12 +33,10 @@ function Search({ sessions, members }) {
     distance: 100,
     maxPatternLength: 32,
     minMatchCharLength: 1,
-    keys: ["group", "topic", "content", "categories"]
+    keys: ["group", "topic", "content", "date", "categories"]
   };
   const fuse = new Fuse(sessions, options);
   const result = fuse.search(input);
-
-  console.log(result);
 
   return (
     <>

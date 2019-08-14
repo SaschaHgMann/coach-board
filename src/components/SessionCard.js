@@ -31,7 +31,22 @@ const AttendButton = styled.button`
   text-shadow: ${props => (props.aktiv ? "0px 0px 5px lightgreen" : "none")};
 `;
 
-function SessionCard({ group, topic, content, categories, attendees, date }) {
+const FeatureButton = styled.button`
+  background: darkgray;
+  color: #fff8f0;
+  border-radius: 10px;
+  font-size: 20px;
+`;
+
+function SessionCard({
+  group,
+  topic,
+  content,
+  categories,
+  attendees,
+  date,
+  onDeleteSession
+}) {
   const [showAttendees, setShowAttendees] = React.useState(false);
 
   function renderAttendees(member, index) {
@@ -58,10 +73,6 @@ function SessionCard({ group, topic, content, categories, attendees, date }) {
     );
   }
 
-  function handleDelete(index) {
-    return;
-  }
-
   return (
     <Card>
       <ContentHeader
@@ -71,13 +82,15 @@ function SessionCard({ group, topic, content, categories, attendees, date }) {
       <ContentBody>
         <Headline size="Sub">
           {topic}
-
-          <AttendButton
-            onClick={() => setShowAttendees(!showAttendees)}
-            aktiv={showAttendees}
-          >
-            <i className="fas fa-user-check" />
-          </AttendButton>
+          <div>
+            {attendees.length}
+            <AttendButton
+              onClick={() => setShowAttendees(!showAttendees)}
+              aktiv={showAttendees}
+            >
+              <i className="fas fa-user-check" />
+            </AttendButton>
+          </div>
         </Headline>
         <Devider />
         <TagList>{categories && categories.map(renderTag)}</TagList>
@@ -86,7 +99,15 @@ function SessionCard({ group, topic, content, categories, attendees, date }) {
           {attendees && attendees.map(renderAttendees)}
         </Attendees>
       </ContentBody>
-      <ContentFooter>author, date</ContentFooter>
+      <ContentFooter>
+        <FeatureButton onClick={onDeleteSession}>
+          <i className="fas fa-trash" />
+        </FeatureButton>
+        author
+        <FeatureButton>
+          <i className="fas fa-edit" />
+        </FeatureButton>
+      </ContentFooter>
     </Card>
   );
 }

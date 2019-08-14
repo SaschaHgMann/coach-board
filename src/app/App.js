@@ -34,6 +34,19 @@ function App() {
     setSessionCards([session, ...sessionCards]);
   }
 
+  function handleDeleteSession(index) {
+    const SessionIndex = sessionCards.findIndex(
+      sessionCard => sessionCard.index === index
+    );
+    const Delete = prompt("Sure to delete? Confirm (yes)");
+    if (Delete === "yes") {
+      setSessionCards([
+        ...sessionCards.slice(0, SessionIndex),
+        ...sessionCards.slice(SessionIndex + 1)
+      ]);
+    }
+  }
+
   return (
     <>
       <Router>
@@ -46,7 +59,12 @@ function App() {
               exact
               path="/sessions"
               render={props => (
-                <Sessions groups={groups} sessions={sessionCards} {...props} />
+                <Sessions
+                  groups={groups}
+                  sessions={sessionCards}
+                  onDeleteSession={handleDeleteSession}
+                  {...props}
+                />
               )}
             />
             <Route
