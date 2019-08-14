@@ -47,6 +47,13 @@ function App() {
     }
   }
 
+  // function handleEditSession(index){
+  //   const SessionIndex = sessionCards.findIndex(
+  //     sessionCard => sessionCard.index === index
+  //   );
+
+  // }
+
   return (
     <>
       <Router>
@@ -63,6 +70,7 @@ function App() {
                   groups={groups}
                   sessions={sessionCards}
                   onDeleteSession={handleDeleteSession}
+                  // onEditSession={handleEditSession}
                   {...props}
                 />
               )}
@@ -93,6 +101,8 @@ function App() {
                 <Search
                   sessions={sessionCards}
                   members={memberCards}
+                  onDeleteSession={handleDeleteSession}
+                  // onEditSession={handleEditSession}
                   {...props}
                 />
               )}

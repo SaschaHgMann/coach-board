@@ -48,7 +48,8 @@ function SessionCard({
   categories,
   attendees,
   date,
-  onDeleteSession
+  onDeleteSession,
+  onEditSession
 }) {
   const [showAttendees, setShowAttendees] = React.useState(false);
 
@@ -107,7 +108,7 @@ function SessionCard({
         </FeatureButton>
         author
         <FeatureButton>
-          <i className="fas fa-edit" />
+          <i className="fas fa-edit" onClick={onEditSession} />
         </FeatureButton>
       </ContentFooter>
     </Card>
