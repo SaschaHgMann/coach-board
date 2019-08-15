@@ -44,7 +44,13 @@ const Members = styled.div`
   padding: 10px;
 `;
 
-function CreateSession({ history, onCreateSession, groups, members }) {
+function CreateSession({
+  history,
+  onCreateSession,
+  groups,
+  members,
+  activeCoach
+}) {
   const [session, setSession] = React.useState({
     attendees: [],
     topic: "",
@@ -163,6 +169,7 @@ function CreateSession({ history, onCreateSession, groups, members }) {
   function handleSubmit(event) {
     event.preventDefault();
     session.group = selectedGroup;
+    session.author = activeCoach;
 
     const errors = validate();
 
@@ -236,7 +243,7 @@ function CreateSession({ history, onCreateSession, groups, members }) {
             </ButtonContainer>
           </StyledContentBody>
 
-          <ContentFooter>author, date</ContentFooter>
+          <ContentFooter>author</ContentFooter>
         </Form>
       </Container>
     </>

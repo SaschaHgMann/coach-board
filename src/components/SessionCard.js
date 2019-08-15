@@ -48,6 +48,7 @@ function SessionCard({
   categories,
   attendees,
   date,
+  author,
   onDeleteSession,
   onEditSession
 }) {
@@ -106,7 +107,7 @@ function SessionCard({
         <FeatureButton onClick={onDeleteSession}>
           <i className="fas fa-trash" />
         </FeatureButton>
-        author
+        Coach: {author}
         <FeatureButton>
           <i className="fas fa-edit" onClick={onEditSession} />
         </FeatureButton>

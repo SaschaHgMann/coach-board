@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Landing from "../pages/Landing";
+import Login from "../pages/Login";
 import CreateSession from "../pages/CreateSession";
 import Sessions from "../pages/Sessions";
 import Groups from "../pages/Groups";
@@ -13,6 +13,7 @@ import Layout from "../components/Layout";
 import memberData from "../pages/__mock__/members";
 import groupData from "../pages/group-data";
 import Search from "../pages/Search";
+import coaches from "../pages/__mock__/coaches";
 
 function App() {
   const [sessionCards, setSessionCards] = React.useState(
@@ -23,6 +24,7 @@ function App() {
     getFromLocal("memberCards") || memberData
   );
   const [groups] = React.useState(getFromLocal("groups") || groupData);
+  const [activeCoach, setActiveCoach] = React.useState([coaches]);
 
   React.useEffect(() => setToLocal("sessionCards", sessionCards), [
     sessionCards
@@ -47,12 +49,16 @@ function App() {
     }
   }
 
-  // function handleEditSession(index){
+  // function handleEditSession(index) {
   //   const SessionIndex = sessionCards.findIndex(
   //     sessionCard => sessionCard.index === index
   //   );
-
+  //   console.log(SessionIndex);
   // }
+
+  function handleLogin() {
+    return;
+  }
 
   return (
     <>
@@ -60,7 +66,13 @@ function App() {
         <GlobalStyles />
         <Layout>
           <Switch>
-            <Route exact path="/" component={Landing} />
+            <Route
+              exact
+              path="/"
+              component={Login}
+              onLogin={handleLogin}
+              coaches={coaches}
+            />
             )} />
             <Route
               exact
