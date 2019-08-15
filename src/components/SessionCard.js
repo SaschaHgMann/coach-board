@@ -42,6 +42,7 @@ const FeatureButton = styled.button`
 `;
 
 function SessionCard({
+  id,
   group,
   topic,
   content,

@@ -19,6 +19,7 @@ import Textarea from "../components/Textarea";
 import categories from "./category-data";
 import MemberCard from "../components/MemberCard";
 import StyledError from "../components/StyledError";
+import uuidv1 from "uuid/v1";
 
 const StyledContentBody = styled(ContentBody)`
   width: 100%;
@@ -56,9 +57,11 @@ function CreateSession({
     topic: "",
     content: "",
     categories: [],
-    date: ""
+    date: "",
+    _id: uuidv1()
   });
 
+  console.log(uuidv1());
   const groupOptions = ["Select Group", ...groups];
   const [selectedGroup, setSelectedGroup] = React.useState("");
   const [selectedCategories, setSelectedCategories] = React.useState([]);
@@ -180,6 +183,7 @@ function CreateSession({
 
     onCreateSession(session);
     history.replace("/sessions");
+    console.log(session);
   }
 
   return (

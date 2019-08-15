@@ -36,15 +36,15 @@ function App() {
     setSessionCards([session, ...sessionCards]);
   }
 
-  function handleDeleteSession(index) {
+  function handleDeleteSession(_id) {
     const SessionIndex = sessionCards.findIndex(
-      sessionCard => sessionCard.index === index
+      sessionCard => sessionCard._id === _id
     );
     const Delete = prompt("Sure to delete? Confirm (yes)");
     if (Delete === "yes") {
       setSessionCards([
-        ...sessionCards.slice(0, SessionIndex),
-        ...sessionCards.slice(SessionIndex + 1)
+        ...sessionCards.splice(0, SessionIndex),
+        ...sessionCards.splice(SessionIndex + 1)
       ]);
     }
   }
