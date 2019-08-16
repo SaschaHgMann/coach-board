@@ -47,10 +47,9 @@ function App() {
   }
 
   function handleDeleteSession(_id) {
-    const SessionIndex =
-      // sessionCards &&
-      sessionCards.findIndex(sessionCard => sessionCard._id === _id);
-    console.log(_id);
+    const SessionIndex = sessionCards.findIndex(
+      sessionCard => sessionCard._id === _id
+    );
     const Confirm = prompt("Sure to delete? Confirm (yes)");
     if (Confirm === "yes") {
       setSessionCards([
@@ -76,7 +75,7 @@ function App() {
                   subTitle="Correct details of your session"
                   groups={groups}
                   members={memberCards}
-                  onCreateSession={handleEditSession}
+                  onPasteSession={handleEditSession}
                   sessions={sessionCards}
                   {...props}
                 />
@@ -89,10 +88,10 @@ function App() {
                 <CreateSession
                   headTitle="New session"
                   formTitle="Add your session"
-                  subTitle="Fill in details"
+                  subTitle="Fill in details & check attendees"
                   groups={groups}
                   members={memberCards}
-                  onCreateSession={handleCreateSession}
+                  onPasteSession={handleCreateSession}
                   {...props}
                 />
               )}
@@ -132,7 +131,7 @@ function App() {
                   sessions={sessionCards}
                   members={memberCards}
                   onDeleteSession={handleDeleteSession}
-                  // onEditSession={handleEditSession}
+                  onEditSession={handleEditSession}
                   {...props}
                 />
               )}

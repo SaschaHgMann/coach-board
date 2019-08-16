@@ -24,14 +24,7 @@ const StyledButtonLink = styled(ButtonLink)`
   background-image: linear-gradient(to top, #292929 -45%, #fff8f0);
 `;
 
-function Sessions({
-  sessions,
-  groups,
-  onDeleteSession,
-  coach,
-  history,
-  match
-}) {
+function Sessions({ sessions, groups, onDeleteSession, coach, history }) {
   const trainingGroups = ["All", ...groups];
   const [selectedGroup, setSelectedGroup] = React.useState("All");
 
@@ -47,7 +40,6 @@ function Sessions({
         date={sessionCard.date}
         author={sessionCard.author}
         onDeleteSession={() => onDeleteSession(sessionCard._id)}
-        //onEditSession={handleEditSession}
         id={sessionCard._id}
         sessions={sessionCard}
         history={history}

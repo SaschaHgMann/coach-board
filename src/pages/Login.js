@@ -28,7 +28,6 @@ const StyledInput = styled(Input)`
 `;
 
 function Login(history, onLogin, coaches) {
-  console.log(coaches);
   const [coach, setCoach] = React.useState({
     name: "",
     pw: ""

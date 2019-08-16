@@ -47,7 +47,7 @@ const Members = styled.div`
 
 function CreateSession({
   history,
-  onCreateSession,
+  onPasteSession,
   groups,
   members,
   activeCoach,
@@ -191,9 +191,8 @@ function CreateSession({
       return;
     }
 
-    onCreateSession(session);
+    onPasteSession(session);
     history.replace("/sessions");
-    console.log(session._id);
   }
 
   return (
@@ -226,7 +225,7 @@ function CreateSession({
               Check attendance <i className="fas fa-user-check" />
             </InfoLine>
             <Members name="attendees" onChange={handleMemberChange}>
-              {selectedGroup !== "Select Group" && selectedGroup !== "---"
+              {selectedGroup !== "Select Group"
                 ? sessionMembers
                     .filter(member => member.group === selectedGroup)
                     .map((member, index) => renderGroupMember(member, index))
