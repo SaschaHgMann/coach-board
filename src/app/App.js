@@ -71,6 +71,9 @@ function App() {
               path="/createsession/edit/:id"
               render={props => (
                 <CreateSession
+                  headTitle="Edit session"
+                  formTitle="Edit your session"
+                  subTitle="Correct details of your session"
                   groups={groups}
                   members={memberCards}
                   onCreateSession={handleEditSession}
@@ -84,6 +87,9 @@ function App() {
               path="/createsession"
               render={props => (
                 <CreateSession
+                  headTitle="New session"
+                  formTitle="Add your session"
+                  subTitle="Fill in details"
                   groups={groups}
                   members={memberCards}
                   onCreateSession={handleCreateSession}

@@ -52,7 +52,10 @@ function CreateSession({
   members,
   activeCoach,
   match,
-  sessions
+  sessions,
+  headTitle,
+  formTitle,
+  subTitle
 }) {
   const editSession =
     sessions &&
@@ -195,12 +198,12 @@ function CreateSession({
 
   return (
     <>
-      <Header title="New Session" />
+      <Header title={headTitle} />
       <Container>
         <Form onSubmit={handleSubmit}>
-          <ContentHeader title="Add a new Training Session" />
+          <ContentHeader title={formTitle} />
           <StyledContentBody>
-            <Headline size="Sub">Please fill in Details</Headline>
+            <Headline size="Sub">{subTitle}</Headline>
             <Devider />
             <InfoLine>Select date</InfoLine>
             <Input
