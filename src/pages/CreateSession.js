@@ -50,18 +50,25 @@ function CreateSession({
   onCreateSession,
   groups,
   members,
-  activeCoach
+  activeCoach,
+  match,
+  sessions
 }) {
+  const editSession =
+    sessions &&
+    match.params.id &&
+    sessions.find(session => session._id === match.params.id);
+
   const [session, setSession] = React.useState({
-    attendees: [],
-    topic: "",
-    content: "",
-    categories: [],
-    date: "",
-    _id: uuidv1()
+    _id: (editSession && editSession._id) || uuidv1(),
+    date: (editSession && editSession.date) || "",
+    // group: (editSession && editSession.group) || "",
+    topic: (editSession && editSession.topic) || "",
+    content: (editSession && editSession.content) || "",
+    attendees: (editSession && editSession.attendees) || [],
+    categories: (editSession && editSession.categories) || []
   });
 
-  console.log(uuidv1());
   const groupOptions = ["Select Group", ...groups];
   const [selectedGroup, setSelectedGroup] = React.useState("");
   const [selectedCategories, setSelectedCategories] = React.useState([]);
@@ -183,7 +190,7 @@ function CreateSession({
 
     onCreateSession(session);
     history.replace("/sessions");
-    console.log(session);
+    console.log(session._id);
   }
 
   return (
@@ -199,12 +206,14 @@ function CreateSession({
             <Input
               type="date"
               name="date"
+              value={session.date}
               onChange={handleChange}
               placeholder="Select Date"
             />
             {errors.date && <StyledError>{errors.date}</StyledError>}
             <DropDown
               name="group"
+              value={session.group}
               onChange={event => handleFilterMembers(event)}
             >
               {groupOptions.map(group => renderGroupOptions(group))}
@@ -222,12 +231,14 @@ function CreateSession({
             </Members>
             <Input
               name="topic"
+              value={session.topic}
               onChange={handleChange}
               placeholder="Topic of session"
             />
             {errors.topic && <StyledError>{errors.topic}</StyledError>}
             <Textarea
               name="content"
+              value={session.content}
               onChange={handleChange}
               placeholder="Exercises, incidents & general informations for other coaches"
             />

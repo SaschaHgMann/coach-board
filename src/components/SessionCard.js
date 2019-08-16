@@ -42,7 +42,6 @@ const FeatureButton = styled.button`
 `;
 
 function SessionCard({
-  id,
   group,
   topic,
   content,
@@ -51,7 +50,8 @@ function SessionCard({
   date,
   author,
   onDeleteSession,
-  onEditSession
+  history,
+  id
 }) {
   const [showAttendees, setShowAttendees] = React.useState(false);
 
@@ -77,6 +77,10 @@ function SessionCard({
         {category}
       </Tag>
     );
+  }
+
+  function handleEditSession() {
+    history.push(`/createsession/edit/${id}`);
   }
 
   return (
@@ -109,8 +113,8 @@ function SessionCard({
           <i className="fas fa-trash" />
         </FeatureButton>
         Coach: {author}
-        <FeatureButton>
-          <i className="fas fa-edit" onClick={onEditSession} />
+        <FeatureButton onClick={handleEditSession}>
+          <i className="fas fa-edit" />
         </FeatureButton>
       </ContentFooter>
     </Card>

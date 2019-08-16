@@ -24,7 +24,7 @@ function App() {
     getFromLocal("memberCards") || memberData
   );
   const [groups] = React.useState(getFromLocal("groups") || groupData);
-  const [activeCoach, setActiveCoach] = React.useState([coaches]);
+  //const [activeCoach, setActiveCoach] = React.useState([coaches]);
 
   React.useEffect(() => setToLocal("sessionCards", sessionCards), [
     sessionCards
@@ -36,28 +36,28 @@ function App() {
     setSessionCards([session, ...sessionCards]);
   }
 
-  function handleDeleteSession(_id) {
-    const SessionIndex = sessionCards.findIndex(
-      sessionCard => sessionCard._id === _id
-    );
-    const Delete = prompt("Sure to delete? Confirm (yes)");
-    if (Delete === "yes") {
-      setSessionCards([
-        ...sessionCards.splice(0, SessionIndex),
-        ...sessionCards.splice(SessionIndex + 1)
-      ]);
-    }
+  function handleEditSession(session) {
+    const sessionEdited = sessionCards.map(elem => {
+      if (elem._id === session._id) {
+        elem = session;
+      }
+      return elem;
+    });
+    setSessionCards(sessionEdited);
   }
 
-  // function handleEditSession(index) {
-  //   const SessionIndex = sessionCards.findIndex(
-  //     sessionCard => sessionCard.index === index
-  //   );
-  //   console.log(SessionIndex);
-  // }
-
-  function handleLogin() {
-    return;
+  function handleDeleteSession(_id) {
+    const SessionIndex =
+      // sessionCards &&
+      sessionCards.findIndex(sessionCard => sessionCard._id === _id);
+    console.log(_id);
+    const Confirm = prompt("Sure to delete? Confirm (yes)");
+    if (Confirm === "yes") {
+      setSessionCards([
+        ...sessionCards.slice(0, SessionIndex),
+        ...sessionCards.slice(SessionIndex + 1)
+      ]);
+    }
   }
 
   return (
@@ -68,21 +68,13 @@ function App() {
           <Switch>
             <Route
               exact
-              path="/"
-              component={Login}
-              onLogin={handleLogin}
-              coaches={coaches}
-            />
-            )} />
-            <Route
-              exact
-              path="/sessions"
+              path="/createsession/edit/:id"
               render={props => (
-                <Sessions
+                <CreateSession
                   groups={groups}
+                  members={memberCards}
+                  onCreateSession={handleEditSession}
                   sessions={sessionCards}
-                  onDeleteSession={handleDeleteSession}
-                  // onEditSession={handleEditSession}
                   {...props}
                 />
               )}
@@ -95,6 +87,26 @@ function App() {
                   groups={groups}
                   members={memberCards}
                   onCreateSession={handleCreateSession}
+                  {...props}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/"
+              component={Login}
+              // onLogin={handleLogin}
+              coaches={coaches}
+            />
+            )} />
+            <Route
+              exact
+              path="/sessions"
+              render={props => (
+                <Sessions
+                  groups={groups}
+                  sessions={sessionCards}
+                  onDeleteSession={handleDeleteSession}
                   {...props}
                 />
               )}
