@@ -19,6 +19,7 @@ import Textarea from "../components/Textarea";
 import categories from "./category-data";
 import MemberCard from "../components/MemberCard";
 import StyledError from "../components/StyledError";
+import uuidv1 from "uuid/v1";
 
 const StyledContentBody = styled(ContentBody)`
   width: 100%;
@@ -44,13 +45,31 @@ const Members = styled.div`
   padding: 10px;
 `;
 
-function CreateSession({ history, onCreateSession, groups, members }) {
+function CreateSession({
+  history,
+  onPasteSession,
+  groups,
+  members,
+  activeCoach,
+  match,
+  sessions,
+  headTitle,
+  formTitle,
+  subTitle
+}) {
+  const editSession =
+    sessions &&
+    match.params.id &&
+    sessions.find(session => session._id === match.params.id);
+
   const [session, setSession] = React.useState({
-    attendees: [],
-    topic: "",
-    content: "",
-    categories: [],
-    date: ""
+    _id: (editSession && editSession._id) || uuidv1(),
+    date: (editSession && editSession.date) || "",
+    // group: (editSession && editSession.group) || "",
+    topic: (editSession && editSession.topic) || "",
+    content: (editSession && editSession.content) || "",
+    attendees: (editSession && editSession.attendees) || [],
+    categories: (editSession && editSession.categories) || []
   });
 
   const groupOptions = ["Select Group", ...groups];
@@ -163,6 +182,7 @@ function CreateSession({ history, onCreateSession, groups, members }) {
   function handleSubmit(event) {
     event.preventDefault();
     session.group = selectedGroup;
+    session.author = activeCoach;
 
     const errors = validate();
 
@@ -171,29 +191,31 @@ function CreateSession({ history, onCreateSession, groups, members }) {
       return;
     }
 
-    onCreateSession(session);
+    onPasteSession(session);
     history.replace("/sessions");
   }
 
   return (
     <>
-      <Header title="New Session" />
+      <Header title={headTitle} />
       <Container>
         <Form onSubmit={handleSubmit}>
-          <ContentHeader title="Add a new Training Session" />
+          <ContentHeader title={formTitle} />
           <StyledContentBody>
-            <Headline size="Sub">Please fill in Details</Headline>
+            <Headline size="Sub">{subTitle}</Headline>
             <Devider />
             <InfoLine>Select date</InfoLine>
             <Input
               type="date"
               name="date"
+              value={session.date}
               onChange={handleChange}
               placeholder="Select Date"
             />
             {errors.date && <StyledError>{errors.date}</StyledError>}
             <DropDown
               name="group"
+              value={session.group}
               onChange={event => handleFilterMembers(event)}
             >
               {groupOptions.map(group => renderGroupOptions(group))}
@@ -203,7 +225,7 @@ function CreateSession({ history, onCreateSession, groups, members }) {
               Check attendance <i className="fas fa-user-check" />
             </InfoLine>
             <Members name="attendees" onChange={handleMemberChange}>
-              {selectedGroup !== "Select Group" && selectedGroup !== "---"
+              {selectedGroup !== "Select Group"
                 ? sessionMembers
                     .filter(member => member.group === selectedGroup)
                     .map((member, index) => renderGroupMember(member, index))
@@ -211,12 +233,14 @@ function CreateSession({ history, onCreateSession, groups, members }) {
             </Members>
             <Input
               name="topic"
+              value={session.topic}
               onChange={handleChange}
               placeholder="Topic of session"
             />
             {errors.topic && <StyledError>{errors.topic}</StyledError>}
             <Textarea
               name="content"
+              value={session.content}
               onChange={handleChange}
               placeholder="Exercises, incidents & general informations for other coaches"
             />
@@ -236,7 +260,7 @@ function CreateSession({ history, onCreateSession, groups, members }) {
             </ButtonContainer>
           </StyledContentBody>
 
-          <ContentFooter>author, date</ContentFooter>
+          <ContentFooter>author</ContentFooter>
         </Form>
       </Container>
     </>

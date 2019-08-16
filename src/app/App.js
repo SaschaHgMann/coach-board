@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Landing from "../pages/Landing";
+import Login from "../pages/Login";
 import CreateSession from "../pages/CreateSession";
 import Sessions from "../pages/Sessions";
 import Groups from "../pages/Groups";
@@ -13,6 +13,7 @@ import Layout from "../components/Layout";
 import memberData from "../pages/__mock__/members";
 import groupData from "../pages/group-data";
 import Search from "../pages/Search";
+import coaches from "../pages/__mock__/coaches";
 
 function App() {
   const [sessionCards, setSessionCards] = React.useState(
@@ -23,6 +24,7 @@ function App() {
     getFromLocal("memberCards") || memberData
   );
   const [groups] = React.useState(getFromLocal("groups") || groupData);
+  //const [activeCoach, setActiveCoach] = React.useState([coaches]);
 
   React.useEffect(() => setToLocal("sessionCards", sessionCards), [
     sessionCards
@@ -34,12 +36,22 @@ function App() {
     setSessionCards([session, ...sessionCards]);
   }
 
-  function handleDeleteSession(index) {
+  function handleEditSession(session) {
+    const sessionEdited = sessionCards.map(elem => {
+      if (elem._id === session._id) {
+        elem = session;
+      }
+      return elem;
+    });
+    setSessionCards(sessionEdited);
+  }
+
+  function handleDeleteSession(_id) {
     const SessionIndex = sessionCards.findIndex(
-      sessionCard => sessionCard.index === index
+      sessionCard => sessionCard._id === _id
     );
-    const Delete = prompt("Sure to delete? Confirm (yes)");
-    if (Delete === "yes") {
+    const Confirm = prompt("Sure to delete? Confirm (yes)");
+    if (Confirm === "yes") {
       setSessionCards([
         ...sessionCards.slice(0, SessionIndex),
         ...sessionCards.slice(SessionIndex + 1)
@@ -53,16 +65,18 @@ function App() {
         <GlobalStyles />
         <Layout>
           <Switch>
-            <Route exact path="/" component={Landing} />
-            )} />
             <Route
               exact
-              path="/sessions"
+              path="/createsession/edit/:id"
               render={props => (
-                <Sessions
+                <CreateSession
+                  headTitle="Edit session"
+                  formTitle="Edit your session"
+                  subTitle="Correct details of your session"
                   groups={groups}
+                  members={memberCards}
+                  onPasteSession={handleEditSession}
                   sessions={sessionCards}
-                  onDeleteSession={handleDeleteSession}
                   {...props}
                 />
               )}
@@ -72,9 +86,32 @@ function App() {
               path="/createsession"
               render={props => (
                 <CreateSession
+                  headTitle="New session"
+                  formTitle="Add your session"
+                  subTitle="Fill in details & check attendees"
                   groups={groups}
                   members={memberCards}
-                  onCreateSession={handleCreateSession}
+                  onPasteSession={handleCreateSession}
+                  {...props}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/"
+              component={Login}
+              // onLogin={handleLogin}
+              coaches={coaches}
+            />
+            )} />
+            <Route
+              exact
+              path="/sessions"
+              render={props => (
+                <Sessions
+                  groups={groups}
+                  sessions={sessionCards}
+                  onDeleteSession={handleDeleteSession}
                   {...props}
                 />
               )}
@@ -93,6 +130,8 @@ function App() {
                 <Search
                   sessions={sessionCards}
                   members={memberCards}
+                  onDeleteSession={handleDeleteSession}
+                  onEditSession={handleEditSession}
                   {...props}
                 />
               )}

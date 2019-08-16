@@ -48,7 +48,10 @@ function SessionCard({
   categories,
   attendees,
   date,
-  onDeleteSession
+  author,
+  onDeleteSession,
+  history,
+  id
 }) {
   const [showAttendees, setShowAttendees] = React.useState(false);
 
@@ -74,6 +77,10 @@ function SessionCard({
         {category}
       </Tag>
     );
+  }
+
+  function handleEditSession() {
+    history.push(`/createsession/edit/${id}`);
   }
 
   return (
@@ -105,8 +112,8 @@ function SessionCard({
         <FeatureButton onClick={onDeleteSession}>
           <i className="fas fa-trash" />
         </FeatureButton>
-        author
-        <FeatureButton>
+        Coach: {author}
+        <FeatureButton onClick={handleEditSession}>
           <i className="fas fa-edit" />
         </FeatureButton>
       </ContentFooter>

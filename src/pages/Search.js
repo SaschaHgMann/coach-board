@@ -20,7 +20,7 @@ const StyledContainer = styled(Container)`
   padding: 0;
 `;
 
-function Search({ sessions }) {
+function Search({ sessions, onDeleteSession, onEditSession, history }) {
   const [input, setInput] = React.useState("");
   function handleChange(event) {
     const value = event.target.value;
@@ -33,7 +33,7 @@ function Search({ sessions }) {
     distance: 100,
     maxPatternLength: 32,
     minMatchCharLength: 1,
-    keys: ["group", "topic", "content", "date", "categories"]
+    keys: ["group", "topic", "content", "categories"] //date??!!??
   };
   const fuse = new Fuse(sessions, options);
   const result = fuse.search(input);
@@ -50,12 +50,15 @@ function Search({ sessions }) {
         {result.map((sessionCard, index) => (
           <SessionCard
             key={index}
+            id={sessionCard._id}
             group={sessionCard.group}
             topic={sessionCard.topic}
             content={sessionCard.content}
             categories={sessionCard.categories}
             attendees={sessionCard.attendees}
             date={sessionCard.date}
+            onDeleteSession={() => onDeleteSession(sessionCard._id)}
+            history={history}
           />
         ))}
       </StyledContainer>
