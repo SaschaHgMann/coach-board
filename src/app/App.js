@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect
+} from "react-router-dom";
 import Login from "../pages/Login";
 import CreateSession from "../pages/CreateSession";
 import Sessions from "../pages/Sessions";
@@ -13,7 +18,7 @@ import Layout from "../components/Layout";
 import memberData from "../pages/__mock__/members";
 import groupData from "../pages/group-data";
 import Search from "../pages/Search";
-import coaches from "../pages/__mock__/coaches";
+import coachData from "../pages/__mock__/coaches";
 
 function App() {
   const [sessionCards, setSessionCards] = React.useState(
@@ -24,13 +29,24 @@ function App() {
     getFromLocal("memberCards") || memberData
   );
   const [groups] = React.useState(getFromLocal("groups") || groupData);
-  //const [activeCoach, setActiveCoach] = React.useState([coaches]);
+
+  const [coaches] = React.useState(getFromLocal("coaches") || coachData);
+
+  const [activeCoach, setActiveCoach] = React.useState(
+    getFromLocal("activeCoach") || {}
+  );
 
   React.useEffect(() => setToLocal("sessionCards", sessionCards), [
     sessionCards
   ]);
-  React.useEffect(() => setToLocal("memberCards", memberCards), [memberCards]);
-  React.useEffect(() => setToLocal("groups", groups), [groups]);
+
+  React.useEffect(() => {
+    setToLocal("activeCoach", activeCoach);
+  }, [activeCoach]);
+
+  // React.useEffect(() => setToLocal("memberCards", memberCards), [memberCards]);
+  // React.useEffect(() => setToLocal("groups", groups), [groups]);
+  // React.useEffect(() => setToLocal("coaches", coaches), [coaches]);
 
   function handleCreateSession(session) {
     setSessionCards([session, ...sessionCards]);
@@ -59,6 +75,15 @@ function App() {
     }
   }
 
+  function handleLogin(username) {
+    const index = coaches.findIndex(coach => coach.username === username);
+    const coach = coaches[index];
+    setActiveCoach(coach);
+  }
+  // function handleLogout() {
+  //   setActiveCoach({});
+  // }
+
   return (
     <>
       <Router>
@@ -68,53 +93,69 @@ function App() {
             <Route
               exact
               path="/createsession/edit/:id"
-              render={props => (
-                <CreateSession
-                  headTitle="Edit session"
-                  formTitle="Edit your session"
-                  subTitle="Correct details of your session"
-                  groups={groups}
-                  members={memberCards}
-                  onPasteSession={handleEditSession}
-                  sessions={sessionCards}
-                  {...props}
-                />
-              )}
+              render={props =>
+                activeCoach.username ? (
+                  <CreateSession
+                    headTitle="Edit session"
+                    formTitle="Edit your session"
+                    subTitle="Correct details of your session"
+                    groups={groups}
+                    members={memberCards}
+                    onPasteSession={handleEditSession}
+                    sessions={sessionCards}
+                    {...props}
+                  />
+                ) : (
+                  <Redirect to="/" />
+                )
+              }
             />
             <Route
               exact
               path="/createsession"
-              render={props => (
-                <CreateSession
-                  headTitle="New session"
-                  formTitle="Add your session"
-                  subTitle="Fill in details & check attendees"
-                  groups={groups}
-                  members={memberCards}
-                  onPasteSession={handleCreateSession}
-                  {...props}
-                />
-              )}
+              render={props =>
+                activeCoach.username ? (
+                  <CreateSession
+                    headTitle="New session"
+                    formTitle="Add your session"
+                    subTitle="Fill in details & check attendees"
+                    groups={groups}
+                    members={memberCards}
+                    onPasteSession={handleCreateSession}
+                    activeCoach={activeCoach}
+                    {...props}
+                  />
+                ) : (
+                  <Redirect to="/" />
+                )
+              }
             />
             <Route
               exact
               path="/"
-              component={Login}
-              // onLogin={handleLogin}
-              coaches={coaches}
-            />
-            )} />
-            <Route
-              exact
-              path="/sessions"
               render={props => (
-                <Sessions
-                  groups={groups}
-                  sessions={sessionCards}
-                  onDeleteSession={handleDeleteSession}
+                <Login
+                  onLogin={handleLogin}
+                  activeCoach={activeCoach}
                   {...props}
                 />
               )}
+            />
+            <Route
+              exact
+              path="/sessions"
+              render={props =>
+                activeCoach.username ? (
+                  <Sessions
+                    groups={groups}
+                    sessions={sessionCards}
+                    onDeleteSession={handleDeleteSession}
+                    {...props}
+                  />
+                ) : (
+                  <Redirect to="/" />
+                )
+              }
             />
             <Route exact path="/groups" component={Groups} />
             <Route
@@ -126,15 +167,19 @@ function App() {
             <Route
               exact
               path="/search"
-              render={props => (
-                <Search
-                  sessions={sessionCards}
-                  members={memberCards}
-                  onDeleteSession={handleDeleteSession}
-                  onEditSession={handleEditSession}
-                  {...props}
-                />
-              )}
+              render={props =>
+                activeCoach.username ? (
+                  <Search
+                    sessions={sessionCards}
+                    members={memberCards}
+                    onDeleteSession={handleDeleteSession}
+                    onEditSession={handleEditSession}
+                    {...props}
+                  />
+                ) : (
+                  <Redirect to="/" />
+                )
+              }
             />
           </Switch>
         </Layout>

@@ -1,18 +1,28 @@
 import React from "react";
 import styled from "styled-components";
 import Layout from "../components/Layout";
-import ButtonLink from "../components/ButtonLink";
+import Button from "../components/Button";
 import Input from "../components/Input";
+import StyledError from "../components/StyledError";
 
-const StyledButtonLink = styled(ButtonLink)`
-  margin: 20px;
+const Logo = styled.div`
+  font-family: "Bahianita", "cursive";
+  font-size: 60px;
+  color: #fff8f0;
+  text-shadow: 1px 1px 2px black, 0 0 5px #fff8f0;
+  height: 80px;
+  margin-top: 50px;
+`;
+
+const StyledButton = styled(Button)`
+  margin: 10px;
   width: 90px;
   background-color: #fff8f0;
   box-shadow: 3px 2px 4px rgba(255, 248, 240, 0.5);
 `;
 
 const Form = styled.form`
-  margin-top: 450px;
+  margin-top: 350px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,46 +37,88 @@ const StyledInput = styled(Input)`
   border-radius: 20px;
 `;
 
-function Login(history, onLogin, coaches) {
-  const [coach, setCoach] = React.useState({
-    name: "",
-    pw: ""
-  });
+function Login({ onLogin, history, activeCoach, ...props }) {
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [errors, setErrors] = React.useState({});
 
-  function handleChange(event) {
-    setCoach({ ...coach, [event.target.name]: event.target.value });
-    console.log(coach);
+  console.log(activeCoach);
+
+  //setActiveCoach({});
+
+  function handleUsernameChange(event) {
+    const value = event.target.value;
+    setUsername(value);
+  }
+
+  function handlePasswordChange(event) {
+    const value = event.target.value;
+    setPassword(value);
+  }
+
+  function validate() {
+    const errors = {};
+
+    if (username.trim() === "") {
+      errors.username = "Please put in a valid username";
+    }
+    if (password.length === 0) {
+      errors.password = "Please put in a valid password";
+    }
+    return Object.keys(errors).length === 0 ? null : errors;
   }
 
   function handleSubmit(event) {
     event.preventDefault();
 
-    // if (coach.name === coaches.name) {
-    //   if (coach.pw === coaches.pw) {
-    //     return;
-    //   }
-    // }
+    const errors = validate();
 
-    onLogin(coach);
-    history.replace("/sessions");
+    if (errors) {
+      setErrors(errors);
+      return;
+    }
+    try {
+      if (
+        activeCoach.username === username &&
+        activeCoach.password === password
+      ) {
+        history.replace("/sessions");
+      } else {
+        alert("wrong password");
+      }
+    } catch (e) {
+      console.log(e);
+    }
+    // onLogin(username);
   }
 
   return (
     <Layout>
+      <Logo>Coach Board</Logo>
       <Form onSubmit={handleSubmit}>
         <StyledInput
-          name="name"
+          name="username"
+          value={username}
           placeholder="Name of coach"
           type="text"
-          onChange={handleChange}
+          onChange={handleUsernameChange}
         />
+        {errors.username && <StyledError>{errors.username}</StyledError>}
         <StyledInput
           name="pw"
-          placeholder="Enter password please"
+          value={password}
+          placeholder="Enter your password"
           //type="password"
-          onChange={handleChange}
+          onChange={handlePasswordChange}
         />
-        <StyledButtonLink to="/sessions">Login</StyledButtonLink>
+        {errors.password && <StyledError>{errors.password}</StyledError>}
+        <StyledButton
+          // to="/sessions"
+          type="submit"
+          onClick={() => onLogin(username)}
+        >
+          Login
+        </StyledButton>
       </Form>
     </Layout>
   );

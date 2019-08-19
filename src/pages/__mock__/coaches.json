@@ -1,17 +1,17 @@
 [
   {
     "_id": 1.0,
-    "name": "Sascha",
-    "pw": "1234"
+    "username": "Sascha",
+    "password": "1234"
   },
   {
     "_id": 2.0,
-    "name": "Claudia",
-    "pw": "2345"
+    "username": "Claudia",
+    "password": "2345"
   },
   {
     "_id": 3.0,
-    "name": "Dennis",
-    "pw": "3456"
+    "username": "Dennis",
+    "password": "3456"
   }
 ]

@@ -41,6 +41,10 @@ const NavItem = styled(NavLink)`
   border: none;
 `;
 
+const Button = styled.button`
+  background: black;
+  color: white;
+`;
 function NavMenu({ showNavMenu, onNavClick }) {
   const navItems = [
     { to: "/sessions", label: "Sessions" },
@@ -60,6 +64,11 @@ function NavMenu({ showNavMenu, onNavClick }) {
             {item.label}
           </NavItem>
         ))}
+        <Button
+        // onClick={handleClick}
+        >
+          LOGOUT
+        </Button>
       </NavContainer>
     </>
   );

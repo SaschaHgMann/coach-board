@@ -1,5 +1,9 @@
 export function getFromLocal(name) {
-  return JSON.parse(localStorage.getItem(name));
+  try {
+    return JSON.parse(localStorage.getItem(name));
+  } catch (error) {
+    return [];
+  }
 }
 
 export function setToLocal(name, data) {
