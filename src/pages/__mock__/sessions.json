@@ -1,12 +1,124 @@
 [
   {
+    "_id": 2,
+    "group": "Youth",
+    "topic": "Einführung High-Kick",
+    "content": "Übungsreihenaufbau von (A) Low-Kick über (B) Front-Kick zu (C) High-Kick.",
+    "categories": ["Kondition", "Kihon", "Kumite"],
+    "author": "Sascha",
+    "date": "Dienstag, 07.02.2019",
+    "attendees": [
+      {
+        "_id": "5d49732955aa26cc891f96bb",
+        "index": 7,
+        "name": "Sandra Hogan",
+        "avatar": "http://placehold.it/32x32",
+        "age": 16,
+        "group": "Youth",
+        "rank": "brown",
+        "date": "Okt 2018"
+      },
+      {
+        "_id": "5d497329cf138476c1b1b46f",
+        "index": 15,
+        "name": "Steffan Schroeder",
+        "avatar": "http://placehold.it/32x32",
+        "age": 17,
+        "group": "Youth",
+        "rank": "brown",
+        "date": "Feb 2019"
+      },
+      {
+        "_id": "5d4973293ab1b3fbec2b9695",
+        "index": 16,
+        "name": "Bryan Owens",
+        "avatar": "http://placehold.it/32x32",
+        "age": 8,
+        "group": "Youth",
+        "rank": "blue",
+        "date": "Feb 2019"
+      },
+      {
+        "_id": "5d4973297c57b63970dccab2",
+        "index": 17,
+        "name": "Laila Hartmann",
+        "avatar": "http://placehold.it/32x32",
+        "age": 14,
+        "group": "Youth",
+        "rank": "orange",
+        "date": "Okt 2018"
+      }
+    ]
+  },
+  {
+    "_id": 4,
+    "group": "Seniors",
+    "topic": "Wiederholung Front Kick",
+    "content": "Aufbau Übungsreihe (Übung A, Übung B, Übung C). Zuänachst einzeln (Standübung), dann mit Partner (dynamisch.",
+    "categories": ["Koordination", "Kumite", "Kondition"],
+    "author": "Dennis",
+    "date": "Dienstag, 07.02.2019",
+    "attendees": [
+      {
+        "_id": "5d497329210d69a80a3813df",
+        "index": 8,
+        "name": "Espinoza Sanchezz",
+        "avatar": "http://placehold.it/32x32",
+        "age": 29,
+        "group": "Seniors",
+        "rank": "green",
+        "date": "Okt 2018"
+      },
+      {
+        "_id": "5d4973298d0b68a408fed5ed",
+        "index": 9,
+        "name": "Jeanine Garza",
+        "avatar": "http://placehold.it/32x32",
+        "age": 24,
+        "group": "Seniors",
+        "rank": "orange",
+        "date": "Okt 2017"
+      },
+      {
+        "_id": "5d497329230faa0eebb15ba1",
+        "index": 13,
+        "name": "Petra Swanson",
+        "avatar": "http://placehold.it/32x32",
+        "age": 37,
+        "group": "Seniors",
+        "rank": "black",
+        "date": "Okt 2017"
+      },
+      {
+        "_id": "5d497329e208c63a5f1a7853",
+        "index": 27,
+        "name": "Sven Schütt",
+        "avatar": "http://placehold.it/32x32",
+        "age": 36,
+        "group": "Seniors",
+        "rank": "black",
+        "date": "Okt 2017"
+      },
+      {
+        "_id": "5d49732977ce52ecb76d19f3",
+        "index": 28,
+        "name": "Claudia Trsenjak",
+        "avatar": "http://placehold.it/32x32",
+        "age": 29,
+        "group": "Seniors",
+        "rank": "black",
+        "date": "Feb 2019"
+      }
+    ]
+  },
+  {
     "_id": 1,
     "group": "Bonsais",
     "topic": "Einführung Grundtechniken",
-    "content": "Lorem",
+    "content": "Theoretische Erklärung der neuen Techniken (Technik A, Technik B). Viel Vorzeigen, dann nachmachen und üben lassen. Zuänachst einzeln, dann mmit Partner.",
     "categories": ["Koordination"],
     "author": "Claudia",
-    "date": "Montag, 01.07.2019",
+    "date": "Montag, 07.03.2019",
     "attendees": [
       {
         "_id": "5d497329db99f772a6dc535b",
@@ -54,10 +166,10 @@
     "_id": 2,
     "group": "Youth",
     "topic": "Wettkampf Vorbereitung",
-    "content": "Larum",
+    "content": "Konditionsteil zur Erwärmung (Übung A, Übung B, Übung C). Dann verschiedene Techniken am Partner üben und präferierte Kombinationen perfektionieren. Hohe Intensität!",
     "categories": ["Kondition", "Kumite"],
     "author": "Sascha",
-    "date": "Dienstag, 02.07.2019",
+    "date": "Dienstag, 07.02.2019",
     "attendees": [
       {
         "_id": "5d49732955aa26cc891f96bb",
@@ -105,10 +217,10 @@
     "_id": 3,
     "group": "Kids",
     "topic": "Einführung neuer Tritt",
-    "content": "Ipsum",
+    "content": "Vorübungen im Stand... Erst einzeln, dann am Partner. Später frontaler Tritt in Vorwärtsbewegng.",
     "categories": ["Kumite", "Kihon"],
     "author": "Dennis",
-    "date": "Mittwoch, 03.07.2019",
+    "date": "Mittwoch, 07.01.2019",
     "attendees": [
       {
         "_id": "5d497329f27ec6d207529eaa",

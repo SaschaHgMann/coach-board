@@ -21,10 +21,9 @@ const FilterButton = styled.button`
 
 const StyledButtonLink = styled(ButtonLink)`
   margin-left: 10px;
-  background-image: linear-gradient(to top, #292929 -45%, #fff8f0);
 `;
 
-function Sessions({ sessions, groups, onDeleteSession, coach, history }) {
+function Sessions({ sessions, groups, onDeleteSession, activeCoach, history }) {
   const trainingGroups = ["All", ...groups];
   const [selectedGroup, setSelectedGroup] = React.useState("All");
 

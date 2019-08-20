@@ -7,7 +7,7 @@ const Button = styled.button`
   border: none;
   border-radius: 50%;
   box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.5);
-  color: #292929;
+  background-image: linear-gradient(to top, #292929 -45%, #fff8f0);
   font-size: 24px;
 `;
 

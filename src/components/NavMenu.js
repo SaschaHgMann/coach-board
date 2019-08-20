@@ -18,7 +18,7 @@ const NavContainer = styled.div`
   display: flex;
   flex-direction: column;
   transform: translate3d(${props => (props.showNavMenu ? 0 : -250)}px, 0, 0);
-  transition: all 0.7s;
+  transition: all 0.4s;
 `;
 
 const NavHeader = styled.img`
