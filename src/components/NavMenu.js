@@ -18,7 +18,7 @@ const NavContainer = styled.div`
   display: flex;
   flex-direction: column;
   transform: translate3d(${props => (props.showNavMenu ? 0 : -250)}px, 0, 0);
-  transition: all 0.7s;
+  transition: all 0.4s;
 `;
 
 const NavHeader = styled.img`
@@ -41,10 +41,6 @@ const NavItem = styled(NavLink)`
   border: none;
 `;
 
-const Button = styled.button`
-  background: black;
-  color: white;
-`;
 function NavMenu({ showNavMenu, onNavClick }) {
   const navItems = [
     { to: "/sessions", label: "Sessions" },
@@ -64,11 +60,6 @@ function NavMenu({ showNavMenu, onNavClick }) {
             {item.label}
           </NavItem>
         ))}
-        <Button
-        // onClick={handleClick}
-        >
-          LOGOUT
-        </Button>
       </NavContainer>
     </>
   );

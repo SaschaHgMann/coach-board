@@ -20,7 +20,7 @@ const StyledContainer = styled(Container)`
   padding: 0;
 `;
 
-function Search({ sessions, onDeleteSession, onEditSession, history }) {
+function Search({ sessions, onDeleteSession, history }) {
   const [input, setInput] = React.useState("");
   function handleChange(event) {
     const value = event.target.value;
@@ -57,6 +57,7 @@ function Search({ sessions, onDeleteSession, onEditSession, history }) {
             categories={sessionCard.categories}
             attendees={sessionCard.attendees}
             date={sessionCard.date}
+            author={sessionCard.author}
             onDeleteSession={() => onDeleteSession(sessionCard._id)}
             history={history}
           />

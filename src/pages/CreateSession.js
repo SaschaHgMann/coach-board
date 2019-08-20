@@ -182,7 +182,7 @@ function CreateSession({
   function handleSubmit(event) {
     event.preventDefault();
     session.group = selectedGroup;
-    session.author = activeCoach;
+    session.author = activeCoach.username;
 
     const errors = validate();
 
@@ -260,7 +260,9 @@ function CreateSession({
             </ButtonContainer>
           </StyledContentBody>
 
-          <ContentFooter>author</ContentFooter>
+          <ContentFooter>
+            Thanks for teaching: {activeCoach.username}
+          </ContentFooter>
         </Form>
       </Container>
     </>
@@ -272,7 +274,7 @@ CreateSession.propTypes = {
   topic: PropTypes.string,
   content: PropTypes.string,
   tags: PropTypes.arrayOf(PropTypes.string),
-  author: PropTypes.func,
+  author: PropTypes.string,
   date: PropTypes.func,
   attendees: PropTypes.array
 };

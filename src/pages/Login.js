@@ -11,27 +11,38 @@ const Logo = styled.div`
   color: #fff8f0;
   text-shadow: 1px 1px 2px black, 0 0 5px #fff8f0;
   height: 80px;
-  margin-top: 50px;
+  margin-top: 20px;
+  padding-right: 12%;
+`;
+
+const LogoSVG = styled.img`
+  height: 60px;
+  color: #fff8f0;
+  text-shadow: 1px 1px 2px black, 0 0 5px #fff8f0;
 `;
 
 const StyledButton = styled(Button)`
-  margin: 10px;
+  margin: 5px;
   width: 90px;
+  height: 40px;
+  border-radius: 20px;
   background-color: #fff8f0;
+  font-size: 20px;
+  font-weight: bold;
   box-shadow: 3px 2px 4px rgba(255, 248, 240, 0.5);
+  background-image: linear-gradient(to top, #292929 -45%, #fff8f0);
 `;
 
 const Form = styled.form`
-  margin-top: 350px;
+  margin-top: 380px;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  /* border: solid 2px #fff8f0; */
 `;
 
 const StyledInput = styled(Input)`
-  margin: 10px;
+  margin: 5px;
   padding: 10px;
   width: 80%;
   border-radius: 20px;
@@ -89,17 +100,19 @@ function Login({ onLogin, history, activeCoach, ...props }) {
     } catch (e) {
       console.log(e);
     }
-    // onLogin(username);
   }
 
   return (
     <Layout>
-      <Logo>Coach Board</Logo>
+      <Logo>
+        <LogoSVG src="/Board_Logo.svg" />
+        Coach Board
+      </Logo>
       <Form onSubmit={handleSubmit}>
         <StyledInput
           name="username"
           value={username}
-          placeholder="Name of coach"
+          placeholder="Coach Login"
           type="text"
           onChange={handleUsernameChange}
         />
@@ -108,15 +121,11 @@ function Login({ onLogin, history, activeCoach, ...props }) {
           name="pw"
           value={password}
           placeholder="Enter your password"
-          //type="password"
+          type="password"
           onChange={handlePasswordChange}
         />
         {errors.password && <StyledError>{errors.password}</StyledError>}
-        <StyledButton
-          // to="/sessions"
-          type="submit"
-          onClick={() => onLogin(username)}
-        >
+        <StyledButton type="submit" onClick={() => onLogin(username)}>
           Login
         </StyledButton>
       </Form>

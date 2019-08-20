@@ -15,6 +15,7 @@ import sessionsData from "../pages/__mock__/sessions.json";
 import { getFromLocal, setToLocal } from "../services/localStorage";
 import GlobalStyles from "./GlobalStyles";
 import Layout from "../components/Layout";
+// import Header from "../components/Header";
 import memberData from "../pages/__mock__/members";
 import groupData from "../pages/group-data";
 import Search from "../pages/Search";
@@ -89,6 +90,10 @@ function App() {
       <Router>
         <GlobalStyles />
         <Layout>
+          {/* {window.location.pathname !== "/" ? (
+            <Header title={headTitle} />
+          ) : null} */}
+
           <Switch>
             <Route
               exact
@@ -103,6 +108,7 @@ function App() {
                     members={memberCards}
                     onPasteSession={handleEditSession}
                     sessions={sessionCards}
+                    activeCoach={activeCoach}
                     {...props}
                   />
                 ) : (
@@ -151,6 +157,7 @@ function App() {
                     sessions={sessionCards}
                     onDeleteSession={handleDeleteSession}
                     {...props}
+                    activeCoach={activeCoach}
                   />
                 ) : (
                   <Redirect to="/" />
@@ -161,7 +168,13 @@ function App() {
             <Route
               exact
               path="/members"
-              render={props => <Members members={memberCards} {...props} />}
+              render={props =>
+                activeCoach.username ? (
+                  <Members members={memberCards} {...props} />
+                ) : (
+                  <Redirect to="/" />
+                )
+              }
             />
             <Route exact path="/settings" component={Settings} />
             <Route

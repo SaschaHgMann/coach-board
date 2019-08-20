@@ -11,6 +11,7 @@ import ContentBody from "./ContentBody";
 import ContentFooter from "./ContentFooter";
 import MemberCard from "./MemberCard";
 import moment from "moment";
+import { getFromLocal } from "../services/localStorage";
 
 const TagList = styled.div`
   display: flex;
@@ -31,6 +32,7 @@ const AttendButton = styled.button`
   border: solid 1px;
   border-radius: 10px;
   background: #fff8f0;
+  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.5);
   text-shadow: ${props => (props.aktiv ? "0px 0px 5px lightgreen" : "none")};
 `;
 
@@ -39,6 +41,12 @@ const FeatureButton = styled.button`
   color: #fff8f0;
   border-radius: 10px;
   font-size: 20px;
+`;
+
+const Coach = styled.div`
+  display: flex;
+  align-self: center;
+  align-items: center;
 `;
 
 function SessionCard({
@@ -53,6 +61,8 @@ function SessionCard({
   history,
   id
 }) {
+  const [activeCoach] = React.useState(getFromLocal("activeCoach") || {});
+
   const [showAttendees, setShowAttendees] = React.useState(false);
 
   function renderAttendees(member, index) {
@@ -82,12 +92,16 @@ function SessionCard({
   function handleEditSession() {
     history.push(`/createsession/edit/${id}`);
   }
-
+  // console.log(new Date(date).getFullYear());
+  // console.log(new Date(date).getFullYear());
+  // console.log(new Date(date).getMonth());
+  // console.log(new Date(date).toLocaleDateString("de-de"));
   return (
     <Card>
       <ContentHeader
         title={group}
-        date={moment(date).format("dddd, DD. MMMM YYYY")}
+        //date={date}
+        date={moment(date).format("dddd, DD. MMM YYYY")}
       />
       <ContentBody>
         <Headline size="Sub">
@@ -109,13 +123,17 @@ function SessionCard({
         </Attendees>
       </ContentBody>
       <ContentFooter>
-        <FeatureButton onClick={onDeleteSession}>
-          <i className="fas fa-trash" />
-        </FeatureButton>
-        Coach: {author}
-        <FeatureButton onClick={handleEditSession}>
-          <i className="fas fa-edit" />
-        </FeatureButton>
+        {activeCoach.username === author ? (
+          <FeatureButton onClick={onDeleteSession}>
+            <i className="fas fa-trash" />
+          </FeatureButton>
+        ) : null}
+        <Coach>Coach: {author}</Coach>
+        {activeCoach.username === author ? (
+          <FeatureButton onClick={handleEditSession}>
+            <i className="fas fa-edit" />
+          </FeatureButton>
+        ) : null}
       </ContentFooter>
     </Card>
   );
