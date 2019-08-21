@@ -7,7 +7,7 @@ const sessionCardSchema = new mongoose.Schema({
   topic: String,
   content: String,
   tags: [String],
-  attendees: Object,
+  attendees: [Object],
   author: String
 });
 

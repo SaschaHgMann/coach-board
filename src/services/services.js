@@ -10,8 +10,13 @@ export function patchSessionCard(data, id) {
   return fetchSessionCard("PATCH", data, id);
 }
 
-export function deleteSessionCard(data, id) {
-  return fetchSessionCard("DELETE", data, id);
+export function deleteSessionCard(id) {
+  return fetch("/api/sessions/" + id, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }).then(res => res.json());
 }
 
 function fetchSessionCard(method, data, id = "") {

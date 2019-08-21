@@ -27,29 +27,16 @@ function App() {
   const [sessionCards, setSessionCards] = React.useState(
     getFromLocal("sessionCards") || sessionsData
   );
-
-  const [memberCards] = React.useState(
-    getFromLocal("memberCards") || memberData
-  );
-  const [groups] = React.useState(getFromLocal("groups") || groupData);
-
-  const [coaches] = React.useState(getFromLocal("coaches") || coachData);
-
-  const [activeCoach, setActiveCoach] = React.useState(
-    getFromLocal("activeCoach") || {}
-  );
-
   React.useEffect(() => setToLocal("sessionCards", sessionCards), [
     sessionCards
   ]);
 
+  const [activeCoach, setActiveCoach] = React.useState(
+    getFromLocal("activeCoach") || {}
+  );
   React.useEffect(() => {
     setToLocal("activeCoach", activeCoach);
   }, [activeCoach]);
-
-  // React.useEffect(() => setToLocal("memberCards", memberCards), [memberCards]);
-  // React.useEffect(() => setToLocal("groups", groups), [groups]);
-  // React.useEffect(() => setToLocal("coaches", coaches), [coaches]);
 
   function handleCreateSession(session) {
     setSessionCards([session, ...sessionCards]);
@@ -79,8 +66,8 @@ function App() {
   }
 
   function handleLogin(username) {
-    const index = coaches.findIndex(coach => coach.username === username);
-    const coach = coaches[index];
+    const index = coachData.findIndex(coach => coach.username === username);
+    const coach = coachData[index];
     setActiveCoach(coach);
   }
   // function handleLogout() {
@@ -106,8 +93,8 @@ function App() {
                     headTitle="Edit session"
                     formTitle="Edit your session"
                     subTitle="Correct details of your session"
-                    groups={groups}
-                    members={memberCards}
+                    groups={groupData}
+                    members={memberData}
                     onPasteSession={handleEditSession}
                     sessions={sessionCards}
                     activeCoach={activeCoach}
@@ -127,8 +114,8 @@ function App() {
                     headTitle="New session"
                     formTitle="Add your session"
                     subTitle="Fill in details & check attendees"
-                    groups={groups}
-                    members={memberCards}
+                    groups={groupData}
+                    members={memberData}
                     onPasteSession={handleCreateSession}
                     activeCoach={activeCoach}
                     {...props}
@@ -155,7 +142,7 @@ function App() {
               render={props =>
                 activeCoach.username ? (
                   <Sessions
-                    groups={groups}
+                    groups={groupData}
                     sessions={sessionCards}
                     onDeleteSession={handleDeleteSession}
                     {...props}
@@ -172,7 +159,7 @@ function App() {
               path="/members"
               render={props =>
                 activeCoach.username ? (
-                  <Members members={memberCards} {...props} />
+                  <Members members={memberData} {...props} />
                 ) : (
                   <Redirect to="/" />
                 )
@@ -186,7 +173,7 @@ function App() {
                 activeCoach.username ? (
                   <Search
                     sessions={sessionCards}
-                    members={memberCards}
+                    members={memberData}
                     onDeleteSession={handleDeleteSession}
                     onEditSession={handleEditSession}
                     {...props}

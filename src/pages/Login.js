@@ -53,7 +53,7 @@ function Login({ onLogin, history, activeCoach, ...props }) {
   const [password, setPassword] = React.useState("");
   const [errors, setErrors] = React.useState({});
 
-  console.log(activeCoach);
+  //console.log(activeCoach);
 
   //setActiveCoach({});
 
@@ -81,6 +81,7 @@ function Login({ onLogin, history, activeCoach, ...props }) {
 
   function handleSubmit(event) {
     event.preventDefault();
+    console.log(activeCoach);
 
     const errors = validate();
 

@@ -1,5 +1,4 @@
 const express = require("express");
-
 const SessionCard = require("../models/SessionCard");
 const router = express.Router();
 
@@ -22,6 +21,11 @@ router.patch("/:id", (req, res) => {
     .catch(err => res.json(err));
 });
 
-// router.delete...
+router.delete("/:id", (req, res) => {
+  const { id } = req.params;
+  SessionCard.findByIdAndRemove(id, { new: true })
+    .then(session => res.json(session))
+    .catch(err => res.json(err));
+});
 
 module.exports = router;
