@@ -23,7 +23,7 @@ const StyledButtonLink = styled(ButtonLink)`
   margin-left: 10px;
 `;
 
-function Sessions({ sessions, groups, onDeleteSession, activeCoach, history }) {
+function Sessions({ sessions, groups, onDeleteSession, history }) {
   const trainingGroups = ["All", ...groups];
   const [selectedGroup, setSelectedGroup] = React.useState("All");
 

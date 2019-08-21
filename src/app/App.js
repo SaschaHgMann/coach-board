@@ -21,6 +21,8 @@ import groupData from "../pages/group-data";
 import Search from "../pages/Search";
 import coachData from "../pages/__mock__/coaches";
 
+import { getSessionCards, postSessionCard } from "../services/services";
+
 function App() {
   const [sessionCards, setSessionCards] = React.useState(
     getFromLocal("sessionCards") || sessionsData

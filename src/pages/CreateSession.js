@@ -20,6 +20,7 @@ import categories from "./category-data";
 import MemberCard from "../components/MemberCard";
 import StyledError from "../components/StyledError";
 import uuidv1 from "uuid/v1";
+import { postSessionCard } from "../services/services";
 
 const StyledContentBody = styled(ContentBody)`
   width: 100%;
