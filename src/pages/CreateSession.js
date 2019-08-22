@@ -62,8 +62,10 @@ function CreateSession({
     match.params.id &&
     sessions.find(session => session._id === match.params.id);
 
+  console.log(match.params.id);
+
   const [session, setSession] = React.useState({
-    //id: (editSession && editSession.id) || "",
+    // id: (editSession && editSession.id) || "",
     date: (editSession && editSession.date) || "",
     // group: (editSession && editSession.group) || "",
     topic: (editSession && editSession.topic) || "",
@@ -183,6 +185,9 @@ function CreateSession({
     event.preventDefault();
     session.group = selectedGroup;
     session.author = activeCoach.username;
+    if (editSession) {
+      session._id = editSession._id;
+    }
 
     const errors = validate();
 

@@ -18,7 +18,12 @@ import memberData from "../pages/__mock__/members";
 import groupData from "../pages/group-data";
 import Search from "../pages/Search";
 import coachData from "../pages/__mock__/coaches";
-import { getSessionCards, postSessionCards } from "../services/services";
+import {
+  getSessionCards,
+  postSessionCards,
+  patchSessionCards,
+  deleteSessionCards
+} from "../services/services";
 
 function App() {
   const [sessionCards, setSessionCards] = React.useState([]);
@@ -40,28 +45,48 @@ function App() {
     );
   }
 
-  function handleEditSession(session) {
-    const sessionEdited = sessionCards.map(elem => {
-      if (elem._id === session._id) {
-        elem = session;
-      }
-      return elem;
-    });
-    setSessionCards(sessionEdited);
+  function updateSessionEdited(data) {
+    const index = sessionCards.findIndex(session => session._id === data._id);
+    setSessionCards([
+      ...sessionCards.slice(0, index),
+      data,
+      ...sessionCards.slice(index + 1)
+    ]);
+  }
+
+  function handleEdit(session) {
+    patchSessionCards(session, session._id).then(result =>
+      updateSessionEdited(result)
+    );
   }
 
   function handleDeleteSession(_id) {
-    const SessionIndex = sessionCards.findIndex(
-      sessionCard => sessionCard._id === _id
-    );
-    const Confirm = prompt("Sure to delete? Confirm (yes)");
-    if (Confirm === "yes") {
-      setSessionCards([
-        ...sessionCards.slice(0, SessionIndex),
-        ...sessionCards.slice(SessionIndex + 1)
-      ]);
-    }
+    deleteSessionCards(_id).then(result => {
+      const SessionIndex = sessionCards.findIndex(
+        sessionCard => sessionCard._id === _id
+      );
+      const Confirm = prompt("Sure to delete? Confirm (yes)");
+      if (Confirm === "yes") {
+        setSessionCards([
+          ...sessionCards.slice(0, SessionIndex),
+          ...sessionCards.slice(SessionIndex + 1)
+        ]);
+      }
+    });
   }
+  //////
+  // function handleDeleteSession(_id) {
+  //   const SessionIndex = sessionCards.findIndex(
+  //     sessionCard => sessionCard._id === _id
+  //   );
+  //   const Confirm = prompt("Sure to delete? Confirm (yes)");
+  //   if (Confirm === "yes") {
+  //     setSessionCards([
+  //       ...sessionCards.slice(0, SessionIndex),
+  //       ...sessionCards.slice(SessionIndex + 1)
+  //     ]);
+  //   }
+  // }
 
   function handleLogin(username) {
     const index = coachData.findIndex(coach => coach.username === username);
@@ -93,7 +118,7 @@ function App() {
                     subTitle="Correct details of your session"
                     groups={groupData}
                     members={memberData}
-                    onPasteSession={handleEditSession}
+                    onPasteSession={handleEdit}
                     sessions={sessionCards}
                     activeCoach={activeCoach}
                     {...props}
@@ -173,7 +198,7 @@ function App() {
                     sessions={sessionCards}
                     members={memberData}
                     onDeleteSession={handleDeleteSession}
-                    onEditSession={handleEditSession}
+                    onEditSession={handleEdit}
                     {...props}
                   />
                 ) : (
