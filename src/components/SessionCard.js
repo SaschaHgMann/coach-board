@@ -69,12 +69,8 @@ function SessionCard({
     return (
       <MemberCard
         key={(member, index)}
-        name={member.name}
-        group={member.group}
-        age={member.age}
-        status={(member.attendet = true)}
-        rank={member.rank}
-        date={member.date}
+        {...member}
+        attendet={(member.attendet = true)}
       >
         {member}
       </MemberCard>

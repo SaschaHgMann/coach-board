@@ -59,34 +59,29 @@ function App() {
       updateSessionEdited(result)
     );
   }
+  /////
+  // function handleDelete(id) {
+  //   deleteProject(id).then(result => {
+  //     const index = projects.findIndex(project => project._id === id);
+  //     setProjects([...projects.slice(0, index), ...projects.slice(index + 1)]);
+  //   });
+  // }
+  /////
+  function handleDeleteSession(id) {
+    console.log(id);
 
-  function handleDeleteSession(_id) {
-    deleteSessionCards(_id).then(result => {
-      const SessionIndex = sessionCards.findIndex(
-        sessionCard => sessionCard._id === _id
-      );
+    deleteSessionCards(id).then(() => {
+      const Index = sessionCards.findIndex(session => session._id === id);
+
       const Confirm = prompt("Sure to delete? Confirm (yes)");
       if (Confirm === "yes") {
         setSessionCards([
-          ...sessionCards.slice(0, SessionIndex),
-          ...sessionCards.slice(SessionIndex + 1)
+          ...sessionCards.splice(0, Index),
+          ...sessionCards.splice(Index + 1)
         ]);
       }
     });
   }
-  //////
-  // function handleDeleteSession(_id) {
-  //   const SessionIndex = sessionCards.findIndex(
-  //     sessionCard => sessionCard._id === _id
-  //   );
-  //   const Confirm = prompt("Sure to delete? Confirm (yes)");
-  //   if (Confirm === "yes") {
-  //     setSessionCards([
-  //       ...sessionCards.slice(0, SessionIndex),
-  //       ...sessionCards.slice(SessionIndex + 1)
-  //     ]);
-  //   }
-  // }
 
   function handleLogin(username) {
     const index = coachData.findIndex(coach => coach.username === username);

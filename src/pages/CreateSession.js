@@ -19,7 +19,6 @@ import Textarea from "../components/Textarea";
 import categories from "./category-data";
 import MemberCard from "../components/MemberCard";
 import StyledError from "../components/StyledError";
-import uuidv1 from "uuid/v1";
 
 const StyledContentBody = styled(ContentBody)`
   width: 100%;
@@ -62,12 +61,8 @@ function CreateSession({
     match.params.id &&
     sessions.find(session => session._id === match.params.id);
 
-  console.log(match.params.id);
-
   const [session, setSession] = React.useState({
-    // id: (editSession && editSession.id) || "",
     date: (editSession && editSession.date) || "",
-    // group: (editSession && editSession.group) || "",
     topic: (editSession && editSession.topic) || "",
     content: (editSession && editSession.content) || "",
     attendees: (editSession && editSession.attendees) || [],
@@ -130,12 +125,8 @@ function CreateSession({
     return (
       <MemberCard
         key={index}
-        name={member.name}
-        group={member.group}
-        age={member.age}
-        rank={member.rank}
-        date={member.date}
-        status={member.attendet}
+        {...member}
+        attendet={member.attendet}
         onClick={() => handleAttendance(member)}
       />
     );

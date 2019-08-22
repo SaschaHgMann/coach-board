@@ -31,7 +31,7 @@ function Sessions({ sessions, groups, onDeleteSession, history }) {
     return (
       <SessionCard
         key={index}
-        group={sessionCard.group}
+        group={sessionCard.group} // {...sessionCard}
         topic={sessionCard.topic}
         content={sessionCard.content}
         categories={sessionCard.categories}

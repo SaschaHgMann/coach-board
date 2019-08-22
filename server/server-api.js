@@ -9,7 +9,6 @@ module.exports = function(app) {
   });
 
   app.post("/api/sessions", (req, res) => {
-    console.log(req.body);
     SessionCard.create(req.body)
       .then(session => res.json(session))
       .catch(err => console.log(err));
@@ -24,8 +23,9 @@ module.exports = function(app) {
 
   app.delete("/api/sessions/:id", (req, res) => {
     const { id } = req.params;
-    SessionCard.findByIdAndRemove(id, { new: true })
-      .then(session => res.json(session))
+    console.log(id);
+    SessionCard.findByIdAndRemove(id)
+      .then(session => res.json({ success: true }))
       .catch(err => res.json(err));
   });
 };

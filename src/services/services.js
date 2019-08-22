@@ -11,12 +11,7 @@ export function patchSessionCards(data, id) {
 }
 
 export function deleteSessionCards(id) {
-  return fetch("/api/sessions/" + id, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json"
-    }
-  }).then(res => res.json());
+  return fetchSessionCards("DELETE", null, id);
 }
 
 function fetchSessionCards(method, data, id = "") {
