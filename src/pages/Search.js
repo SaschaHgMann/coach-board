@@ -33,7 +33,7 @@ function Search({ sessions, onDeleteSession, history }) {
     distance: 100,
     maxPatternLength: 32,
     minMatchCharLength: 1,
-    keys: ["group", "topic", "content", "categories"] //date??!!??
+    keys: ["group", "topic", "content", "categories", "author"] //date??!!??
   };
   const fuse = new Fuse(sessions, options);
   const result = fuse.search(input);
@@ -51,13 +51,7 @@ function Search({ sessions, onDeleteSession, history }) {
           <SessionCard
             key={index}
             id={sessionCard._id}
-            group={sessionCard.group}
-            topic={sessionCard.topic}
-            content={sessionCard.content}
-            categories={sessionCard.categories}
-            attendees={sessionCard.attendees}
-            date={sessionCard.date}
-            author={sessionCard.author}
+            {...sessionCard}
             onDeleteSession={() => onDeleteSession(sessionCard._id)}
             history={history}
           />

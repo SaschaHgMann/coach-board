@@ -13,20 +13,20 @@ import MemberCard from "./MemberCard";
 import moment from "moment";
 import { getFromLocal } from "../services/localStorage";
 
-const TagList = styled.div`
+const CategoryContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin: 5px 0;
   padding: 5px;
 `;
 
-const Attendees = styled.div`
+const AttendeeContainer = styled.div`
   margin: 0;
   padding: 5px;
   display: ${props => (props.aktiv ? "block" : "none")};
 `;
 
-const AttendButton = styled.button`
+const AttendeeButton = styled.button`
   margin: 0;
   font-size: 20px;
   border: solid 1px;
@@ -77,7 +77,7 @@ function SessionCard({
     );
   }
 
-  function renderTag(category) {
+  function renderCategory(category) {
     return (
       <Tag key={category} active={true}>
         {category}
@@ -99,20 +99,22 @@ function SessionCard({
         <Headline size="Sub">
           {topic}
           <div>
-            <AttendButton
+            <AttendeeButton
               onClick={() => setShowAttendees(!showAttendees)}
               aktiv={showAttendees}
             >
               <i className="fas fa-user-check" /> {attendees.length}
-            </AttendButton>
+            </AttendeeButton>
           </div>
         </Headline>
         <Devider />
-        <TagList>{categories && categories.map(renderTag)}</TagList>
+        <CategoryContainer>
+          {categories && categories.map(renderCategory)}
+        </CategoryContainer>
         <Content>{content}</Content>
-        <Attendees aktiv={showAttendees}>
+        <AttendeeContainer aktiv={showAttendees}>
           {attendees && attendees.map(renderAttendees)}
-        </Attendees>
+        </AttendeeContainer>
       </ContentBody>
       <ContentFooter>
         {activeCoach.username === author ? (

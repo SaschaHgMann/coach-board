@@ -16,7 +16,7 @@ import InfoLine from "../components/InfoLine";
 import Input from "../components/Input";
 import Tag from "../components/Tag";
 import Textarea from "../components/Textarea";
-import categories from "./category-data";
+import categoryData from "../pages/mock/categories";
 import MemberCard from "../components/MemberCard";
 import StyledError from "../components/StyledError";
 
@@ -26,7 +26,7 @@ const StyledContentBody = styled(ContentBody)`
   flex-direction: column;
 `;
 
-const TagList = styled.div`
+const CategoryContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   padding-left: 10px;
@@ -39,7 +39,7 @@ const ButtonContainer = styled.div`
   padding: 5px;
 `;
 
-const Members = styled.div`
+const MembersContainer = styled.div`
   margin: 0;
   padding: 10px;
 `;
@@ -79,13 +79,11 @@ function CreateSession({
   const [errors, setErrors] = React.useState({});
 
   function handleAttendance(member) {
-    const indexSelected = sessionMembers.findIndex(
-      item => item._id === member._id
-    );
+    const index = sessionMembers.findIndex(item => item._id === member._id);
     const newSessionMembers = sessionMembers.slice();
-    const sessionMember = newSessionMembers[indexSelected];
+    const sessionMember = newSessionMembers[index];
 
-    newSessionMembers[indexSelected] = {
+    newSessionMembers[index] = {
       ...sessionMember,
       attendet: !sessionMember.attendet
     };
@@ -154,7 +152,7 @@ function CreateSession({
     }
   }
 
-  function validate() {
+  function validateNewSession() {
     const errors = {};
 
     if (session.date === "") {
@@ -180,7 +178,7 @@ function CreateSession({
       session._id = editSession._id;
     }
 
-    const errors = validate();
+    const errors = validateNewSession();
 
     if (errors) {
       setErrors(errors);
@@ -220,13 +218,13 @@ function CreateSession({
             <InfoLine>
               Check attendance <i className="fas fa-user-check" />
             </InfoLine>
-            <Members name="attendees" onChange={handleMemberChange}>
+            <MembersContainer name="attendees" onChange={handleMemberChange}>
               {selectedGroup !== "Select Group"
                 ? sessionMembers
                     .filter(member => member.group === selectedGroup)
                     .map((member, index) => renderGroupMember(member, index))
                 : ""}
-            </Members>
+            </MembersContainer>
             <Input
               name="topic"
               value={session.topic}
@@ -242,9 +240,12 @@ function CreateSession({
             />
             {errors.content && <StyledError>{errors.content}</StyledError>}
             <InfoLine>Choose Cathegories</InfoLine>
-            <TagList name="categories" onChange={handleCategoryChange}>
-              {categories.map(category => renderCategory(category))}
-            </TagList>
+            <CategoryContainer
+              name="categories"
+              onChange={handleCategoryChange}
+            >
+              {categoryData.map(category => renderCategory(category))}
+            </CategoryContainer>
             <Devider />
             <ButtonContainer>
               <ButtonLink to="/Sessions">

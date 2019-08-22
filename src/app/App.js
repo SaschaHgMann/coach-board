@@ -14,10 +14,10 @@ import Settings from "../pages/Settings";
 import { getFromLocal, setToLocal } from "../services/localStorage";
 import GlobalStyles from "./GlobalStyles";
 import Layout from "../components/Layout";
-import memberData from "../pages/__mock__/members";
-import groupData from "../pages/group-data";
+import memberData from "../pages/mock/members";
+import groupData from "../pages/mock/groups";
 import Search from "../pages/Search";
-import coachData from "../pages/__mock__/coaches";
+import coachData from "../pages/mock/coaches";
 import {
   getSessionCards,
   postSessionCards,
