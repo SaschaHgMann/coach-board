@@ -81,7 +81,6 @@ function Login({ onLogin, history, activeCoach, ...props }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(activeCoach);
 
     const errors = validate();
 

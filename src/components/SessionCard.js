@@ -92,15 +92,11 @@ function SessionCard({
   function handleEditSession() {
     history.push(`/createsession/edit/${id}`);
   }
-  // console.log(new Date(date).getFullYear());
-  // console.log(new Date(date).getFullYear());
-  // console.log(new Date(date).getMonth());
-  // console.log(new Date(date).toLocaleDateString("de-de"));
+
   return (
     <Card>
       <ContentHeader
         title={group}
-        //date={date}
         date={moment(date).format("dddd, DD. MMM YYYY")}
       />
       <ContentBody>
@@ -140,8 +136,8 @@ function SessionCard({
 }
 
 SessionCard.propTypes = {
-  group: PropTypes.string.isRequired,
-  topic: PropTypes.string.isRequired,
+  group: PropTypes.string,
+  topic: PropTypes.string,
   content: PropTypes.string,
   categories: PropTypes.arrayOf(PropTypes.string),
   author: PropTypes.string,

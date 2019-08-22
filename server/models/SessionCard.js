@@ -1,14 +1,27 @@
 const mongoose = require("mongoose");
 
 const sessionCardSchema = new mongoose.Schema({
-  title: String,
-  // required: true
-  date: String,
-  topic: String,
-  content: String,
-  tags: [String],
-  attendees: [Object],
-  author: String
+  date: {
+    type: String
+  },
+  topic: {
+    type: String
+  },
+  content: {
+    type: String
+  },
+  categories: {
+    type: [String]
+  },
+  attendees: {
+    type: [Object]
+  },
+  author: {
+    type: String
+  },
+  group: {
+    type: String
+  }
 });
 
 module.exports = mongoose.model("SessionCard", sessionCardSchema);

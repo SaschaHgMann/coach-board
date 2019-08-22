@@ -3,10 +3,12 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const fs = require("fs");
 const path = require("path");
+//const bodyParser = require("body-parser");
 
 // setup server
 const app = express();
 app.use(express.json());
+const api = require("./server-api");
 
 // read .env file
 dotenv.config();
@@ -31,13 +33,12 @@ mongoose
 // static file serving
 app.use(express.static(path.join(__dirname, "build")));
 
+// init api
+api(app);
+
 // catch all handler for client deeplinks
 app.get("/*", function(req, res) {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
+  res.sendFile(path.join(__dirname, "build", "../public/index.html"));
 });
-
-app.use("/api/sessions", require("./api/sessions"));
-// app.use("/api/members", require("./api/members"));
-// ...
 
 app.listen(process.env.PORT || 4000);

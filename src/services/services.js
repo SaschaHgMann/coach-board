@@ -2,15 +2,15 @@ export function getSessionCards() {
   return fetch("/api/sessions").then(res => res.json());
 }
 
-export function postSessionCard(data) {
-  return fetchSessionCard("POST", data);
+export function postSessionCards(data) {
+  return fetchSessionCards("POST", data);
 }
 
-export function patchSessionCard(data, id) {
-  return fetchSessionCard("PATCH", data, id);
+export function patchSessionCards(data, id) {
+  return fetchSessionCards("PATCH", data, id);
 }
 
-export function deleteSessionCard(id) {
+export function deleteSessionCards(id) {
   return fetch("/api/sessions/" + id, {
     method: "DELETE",
     headers: {
@@ -19,7 +19,7 @@ export function deleteSessionCard(id) {
   }).then(res => res.json());
 }
 
-function fetchSessionCard(method, data, id = "") {
+function fetchSessionCards(method, data, id = "") {
   return fetch("/api/sessions/" + id, {
     method,
     headers: {
