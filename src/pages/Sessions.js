@@ -46,7 +46,7 @@ function Sessions({ sessions, groups, onDeleteSession, history }) {
     );
   }
 
-  function renderFilterButtons(group, index) {
+  function renderFilterButtons(group) {
     return (
       <FilterButton
         key={group}
@@ -58,7 +58,7 @@ function Sessions({ sessions, groups, onDeleteSession, history }) {
     );
   }
 
-  function handleFilterGroups(event, index) {
+  function handleFilterGroups(event) {
     setSelectedGroup(event.target.name);
   }
 

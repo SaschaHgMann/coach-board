@@ -59,28 +59,20 @@ function App() {
       updateSessionEdited(result)
     );
   }
-  /////
-  // function handleDelete(id) {
-  //   deleteProject(id).then(result => {
-  //     const index = projects.findIndex(project => project._id === id);
-  //     setProjects([...projects.slice(0, index), ...projects.slice(index + 1)]);
-  //   });
-  // }
-  /////
+
   function handleDeleteSession(id) {
     console.log(id);
+    const Confirm = prompt("Sure to delete? Confirm (yes)");
+    if (Confirm === "yes") {
+      deleteSessionCards(id).then(() => {
+        const Index = sessionCards.findIndex(session => session._id === id);
 
-    deleteSessionCards(id).then(() => {
-      const Index = sessionCards.findIndex(session => session._id === id);
-
-      const Confirm = prompt("Sure to delete? Confirm (yes)");
-      if (Confirm === "yes") {
         setSessionCards([
           ...sessionCards.splice(0, Index),
           ...sessionCards.splice(Index + 1)
         ]);
-      }
-    });
+      });
+    }
   }
 
   function handleLogin(username) {

@@ -104,14 +104,14 @@ function CreateSession({
   function handleMemberChange() {
     setSession({ ...session, attendees: attendetSessionMember });
   }
-
+  /* eslint-disable*/
   React.useEffect(() => {
     setSession({ ...session, categories: selectedCategories });
   }, [selectedCategories]);
-
   React.useEffect(() => {
     setSession({ ...session, attendees: attendetSessionMember });
   }, [attendetSessionMember]);
+  /* eslint-disable*/
 
   function renderGroupOptions(group) {
     return <option key={group}>{group}</option>;
