@@ -19,7 +19,6 @@ import Textarea from "../components/Textarea";
 import categories from "./category-data";
 import MemberCard from "../components/MemberCard";
 import StyledError from "../components/StyledError";
-import uuidv1 from "uuid/v1";
 
 const StyledContentBody = styled(ContentBody)`
   width: 100%;
@@ -63,9 +62,7 @@ function CreateSession({
     sessions.find(session => session._id === match.params.id);
 
   const [session, setSession] = React.useState({
-    _id: (editSession && editSession._id) || uuidv1(),
     date: (editSession && editSession.date) || "",
-    // group: (editSession && editSession.group) || "",
     topic: (editSession && editSession.topic) || "",
     content: (editSession && editSession.content) || "",
     attendees: (editSession && editSession.attendees) || [],
@@ -107,14 +104,14 @@ function CreateSession({
   function handleMemberChange() {
     setSession({ ...session, attendees: attendetSessionMember });
   }
-
+  /* eslint-disable*/
   React.useEffect(() => {
     setSession({ ...session, categories: selectedCategories });
   }, [selectedCategories]);
-
   React.useEffect(() => {
     setSession({ ...session, attendees: attendetSessionMember });
   }, [attendetSessionMember]);
+  /* eslint-disable*/
 
   function renderGroupOptions(group) {
     return <option key={group}>{group}</option>;
@@ -128,12 +125,8 @@ function CreateSession({
     return (
       <MemberCard
         key={index}
-        name={member.name}
-        group={member.group}
-        age={member.age}
-        rank={member.rank}
-        date={member.date}
-        status={member.attendet}
+        {...member}
+        attendet={member.attendet}
         onClick={() => handleAttendance(member)}
       />
     );
@@ -183,6 +176,9 @@ function CreateSession({
     event.preventDefault();
     session.group = selectedGroup;
     session.author = activeCoach.username;
+    if (editSession) {
+      session._id = editSession._id;
+    }
 
     const errors = validate();
 

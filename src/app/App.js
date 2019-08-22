@@ -11,74 +11,73 @@ import Sessions from "../pages/Sessions";
 import Groups from "../pages/Groups";
 import Members from "../pages/Members";
 import Settings from "../pages/Settings";
-import sessionsData from "../pages/__mock__/sessions.json";
 import { getFromLocal, setToLocal } from "../services/localStorage";
 import GlobalStyles from "./GlobalStyles";
 import Layout from "../components/Layout";
-// import Header from "../components/Header";
 import memberData from "../pages/__mock__/members";
 import groupData from "../pages/group-data";
 import Search from "../pages/Search";
 import coachData from "../pages/__mock__/coaches";
+import {
+  getSessionCards,
+  postSessionCards,
+  patchSessionCards,
+  deleteSessionCards
+} from "../services/services";
 
 function App() {
-  const [sessionCards, setSessionCards] = React.useState(
-    getFromLocal("sessionCards") || sessionsData
-  );
+  const [sessionCards, setSessionCards] = React.useState([]);
 
-  const [memberCards] = React.useState(
-    getFromLocal("memberCards") || memberData
-  );
-  const [groups] = React.useState(getFromLocal("groups") || groupData);
-
-  const [coaches] = React.useState(getFromLocal("coaches") || coachData);
+  React.useEffect(() => {
+    getSessionCards().then(result => setSessionCards(result));
+  }, []);
 
   const [activeCoach, setActiveCoach] = React.useState(
     getFromLocal("activeCoach") || {}
   );
-
-  React.useEffect(() => setToLocal("sessionCards", sessionCards), [
-    sessionCards
-  ]);
-
   React.useEffect(() => {
     setToLocal("activeCoach", activeCoach);
   }, [activeCoach]);
 
-  // React.useEffect(() => setToLocal("memberCards", memberCards), [memberCards]);
-  // React.useEffect(() => setToLocal("groups", groups), [groups]);
-  // React.useEffect(() => setToLocal("coaches", coaches), [coaches]);
-
   function handleCreateSession(session) {
-    setSessionCards([session, ...sessionCards]);
-  }
-
-  function handleEditSession(session) {
-    const sessionEdited = sessionCards.map(elem => {
-      if (elem._id === session._id) {
-        elem = session;
-      }
-      return elem;
-    });
-    setSessionCards(sessionEdited);
-  }
-
-  function handleDeleteSession(_id) {
-    const SessionIndex = sessionCards.findIndex(
-      sessionCard => sessionCard._id === _id
+    postSessionCards(session).then(result =>
+      setSessionCards([result, ...sessionCards])
     );
+  }
+
+  function updateSessionEdited(data) {
+    const index = sessionCards.findIndex(session => session._id === data._id);
+    setSessionCards([
+      ...sessionCards.slice(0, index),
+      data,
+      ...sessionCards.slice(index + 1)
+    ]);
+  }
+
+  function handleEdit(session) {
+    patchSessionCards(session, session._id).then(result =>
+      updateSessionEdited(result)
+    );
+  }
+
+  function handleDeleteSession(id) {
+    console.log(id);
     const Confirm = prompt("Sure to delete? Confirm (yes)");
     if (Confirm === "yes") {
-      setSessionCards([
-        ...sessionCards.slice(0, SessionIndex),
-        ...sessionCards.slice(SessionIndex + 1)
-      ]);
+      deleteSessionCards(id).then(() => {
+        const Index = sessionCards.findIndex(session => session._id === id);
+
+        setSessionCards([
+          ...sessionCards.splice(0, Index),
+          ...sessionCards.splice(Index + 1)
+        ]);
+      });
     }
   }
 
   function handleLogin(username) {
-    const index = coaches.findIndex(coach => coach.username === username);
-    const coach = coaches[index];
+    const index = coachData.findIndex(coach => coach.username === username);
+    const coach = coachData[index];
     setActiveCoach(coach);
   }
   // function handleLogout() {
@@ -104,9 +103,9 @@ function App() {
                     headTitle="Edit session"
                     formTitle="Edit your session"
                     subTitle="Correct details of your session"
-                    groups={groups}
-                    members={memberCards}
-                    onPasteSession={handleEditSession}
+                    groups={groupData}
+                    members={memberData}
+                    onPasteSession={handleEdit}
                     sessions={sessionCards}
                     activeCoach={activeCoach}
                     {...props}
@@ -125,8 +124,8 @@ function App() {
                     headTitle="New session"
                     formTitle="Add your session"
                     subTitle="Fill in details & check attendees"
-                    groups={groups}
-                    members={memberCards}
+                    groups={groupData}
+                    members={memberData}
                     onPasteSession={handleCreateSession}
                     activeCoach={activeCoach}
                     {...props}
@@ -153,7 +152,7 @@ function App() {
               render={props =>
                 activeCoach.username ? (
                   <Sessions
-                    groups={groups}
+                    groups={groupData}
                     sessions={sessionCards}
                     onDeleteSession={handleDeleteSession}
                     {...props}
@@ -170,7 +169,7 @@ function App() {
               path="/members"
               render={props =>
                 activeCoach.username ? (
-                  <Members members={memberCards} {...props} />
+                  <Members members={memberData} {...props} />
                 ) : (
                   <Redirect to="/" />
                 )
@@ -184,9 +183,9 @@ function App() {
                 activeCoach.username ? (
                   <Search
                     sessions={sessionCards}
-                    members={memberCards}
+                    members={memberData}
                     onDeleteSession={handleDeleteSession}
-                    onEditSession={handleEditSession}
+                    onEditSession={handleEdit}
                     {...props}
                   />
                 ) : (

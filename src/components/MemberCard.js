@@ -5,7 +5,7 @@ import Headline from "./Headline";
 import styled from "styled-components";
 
 const getColor = props => {
-  return props.status ? "lightgreen" : "#cecccc";
+  return props.attendet ? "lightgreen" : "#cecccc";
 };
 
 const StyledCard = styled(Card)`
@@ -19,9 +19,9 @@ const MemberDetails = styled.div`
   margin: 5px 0;
 `;
 
-function MemberCard({ name, group, age, status, rank, date, onClick }) {
+function MemberCard({ name, group, age, attendet, rank, date, onClick }) {
   return (
-    <StyledCard status={status} onClick={onClick}>
+    <StyledCard attendet={attendet} onClick={onClick}>
       <Headline size="Sub">{name}</Headline>
       <MemberDetails>
         {group}, {age}, {rank}, {date}

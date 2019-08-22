@@ -53,7 +53,7 @@ function Login({ onLogin, history, activeCoach, ...props }) {
   const [password, setPassword] = React.useState("");
   const [errors, setErrors] = React.useState({});
 
-  console.log(activeCoach);
+  //console.log(activeCoach);
 
   //setActiveCoach({});
 

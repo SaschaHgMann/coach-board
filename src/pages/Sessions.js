@@ -23,7 +23,7 @@ const StyledButtonLink = styled(ButtonLink)`
   margin-left: 10px;
 `;
 
-function Sessions({ sessions, groups, onDeleteSession, activeCoach, history }) {
+function Sessions({ sessions, groups, onDeleteSession, history }) {
   const trainingGroups = ["All", ...groups];
   const [selectedGroup, setSelectedGroup] = React.useState("All");
 
@@ -31,7 +31,7 @@ function Sessions({ sessions, groups, onDeleteSession, activeCoach, history }) {
     return (
       <SessionCard
         key={index}
-        group={sessionCard.group}
+        group={sessionCard.group} // {...sessionCard}
         topic={sessionCard.topic}
         content={sessionCard.content}
         categories={sessionCard.categories}
@@ -46,7 +46,7 @@ function Sessions({ sessions, groups, onDeleteSession, activeCoach, history }) {
     );
   }
 
-  function renderFilterButtons(group, index) {
+  function renderFilterButtons(group) {
     return (
       <FilterButton
         key={group}
@@ -58,7 +58,7 @@ function Sessions({ sessions, groups, onDeleteSession, activeCoach, history }) {
     );
   }
 
-  function handleFilterGroups(event, index) {
+  function handleFilterGroups(event) {
     setSelectedGroup(event.target.name);
   }
 
@@ -67,10 +67,27 @@ function Sessions({ sessions, groups, onDeleteSession, activeCoach, history }) {
       <Header title="Sessions" />
       <Container>
         {selectedGroup === "All"
-          ? sessions.map((sessionCard, index) =>
-              renderSessionCard(sessionCard, index)
-            )
+          ? sessions
+              .slice()
+              .sort(function(a, b) {
+                if (a.dateCreated < b.dateCreated) {
+                  return 1;
+                } else {
+                  return -1;
+                }
+              })
+              .map((sessionCard, index) =>
+                renderSessionCard(sessionCard, index)
+              )
           : sessions
+              .slice()
+              .sort(function(a, b) {
+                if (a.dateCreated < b.dateCreated) {
+                  return 1;
+                } else {
+                  return -1;
+                }
+              })
               .filter(sessionCard => sessionCard.group === selectedGroup)
               .map((sessionCard, index) =>
                 renderSessionCard(sessionCard, index)
