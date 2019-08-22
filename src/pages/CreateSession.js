@@ -20,7 +20,6 @@ import categories from "./category-data";
 import MemberCard from "../components/MemberCard";
 import StyledError from "../components/StyledError";
 import uuidv1 from "uuid/v1";
-//import { postSessionCards } from "../services/services";
 
 const StyledContentBody = styled(ContentBody)`
   width: 100%;
@@ -64,7 +63,7 @@ function CreateSession({
     sessions.find(session => session._id === match.params.id);
 
   const [session, setSession] = React.useState({
-    //_id: (editSession && editSession._id) || uuidv1(),
+    //id: (editSession && editSession.id) || "",
     date: (editSession && editSession.date) || "",
     // group: (editSession && editSession.group) || "",
     topic: (editSession && editSession.topic) || "",

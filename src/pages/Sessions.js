@@ -67,10 +67,27 @@ function Sessions({ sessions, groups, onDeleteSession, history }) {
       <Header title="Sessions" />
       <Container>
         {selectedGroup === "All"
-          ? sessions.map((sessionCard, index) =>
-              renderSessionCard(sessionCard, index)
-            )
+          ? sessions
+              .slice()
+              .sort(function(a, b) {
+                if (a.dateCreated < b.dateCreated) {
+                  return 1;
+                } else {
+                  return -1;
+                }
+              })
+              .map((sessionCard, index) =>
+                renderSessionCard(sessionCard, index)
+              )
           : sessions
+              .slice()
+              .sort(function(a, b) {
+                if (a.dateCreated < b.dateCreated) {
+                  return 1;
+                } else {
+                  return -1;
+                }
+              })
               .filter(sessionCard => sessionCard.group === selectedGroup)
               .map((sessionCard, index) =>
                 renderSessionCard(sessionCard, index)

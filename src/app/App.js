@@ -11,16 +11,13 @@ import Sessions from "../pages/Sessions";
 import Groups from "../pages/Groups";
 import Members from "../pages/Members";
 import Settings from "../pages/Settings";
-//import sessionsData from "../pages/__mock__/sessions.json";
 import { getFromLocal, setToLocal } from "../services/localStorage";
 import GlobalStyles from "./GlobalStyles";
 import Layout from "../components/Layout";
-// import Header from "../components/Header";
 import memberData from "../pages/__mock__/members";
 import groupData from "../pages/group-data";
 import Search from "../pages/Search";
 import coachData from "../pages/__mock__/coaches";
-
 import { getSessionCards, postSessionCards } from "../services/services";
 
 function App() {
@@ -30,10 +27,6 @@ function App() {
     getSessionCards().then(result => setSessionCards(result));
   }, []);
 
-  // React.useEffect(() => postSessionCards("sessionCards", sessionCards), [
-  //   sessionCards
-  // ]);
-
   const [activeCoach, setActiveCoach] = React.useState(
     getFromLocal("activeCoach") || {}
   );
@@ -42,7 +35,6 @@ function App() {
   }, [activeCoach]);
 
   function handleCreateSession(session) {
-    console.log(session);
     postSessionCards(session).then(result =>
       setSessionCards([result, ...sessionCards])
     );

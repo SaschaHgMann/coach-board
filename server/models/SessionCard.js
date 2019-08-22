@@ -21,6 +21,10 @@ const sessionCardSchema = new mongoose.Schema({
   },
   group: {
     type: String
+  },
+  dateCreated: {
+    type: Date,
+    default: Date.now()
   }
 });
 
