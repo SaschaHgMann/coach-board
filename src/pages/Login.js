@@ -21,7 +21,7 @@ const LogoSVG = styled.img`
   text-shadow: 1px 1px 2px black, 0 0 5px #fff8f0;
 `;
 
-const StyledButton = styled(Button)`
+const LoginButton = styled(Button)`
   margin: 5px;
   width: 90px;
   height: 40px;
@@ -123,9 +123,9 @@ function Login({ onLogin, history, activeCoach }) {
           onChange={handlePasswordChange}
         />
         {errors.password && <StyledError>{errors.password}</StyledError>}
-        <StyledButton type="submit" onClick={() => onLogin(username)}>
+        <LoginButton type="submit" onClick={() => onLogin(username)}>
           Login
-        </StyledButton>
+        </LoginButton>
       </Form>
     </Layout>
   );

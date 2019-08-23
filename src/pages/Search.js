@@ -13,6 +13,7 @@ const SearchInput = styled(Input)`
   padding: 10px;
   width: 80%;
   border-radius: 20px;
+  /* &:focus: {} */
 `;
 
 const StyledContainer = styled(Container)`
@@ -28,12 +29,21 @@ function Search({ sessions, onDeleteSession, history }) {
   }
   const options = {
     shouldSort: true,
-    threshold: 0.4,
+    threshold: 0.2,
     location: 0,
     distance: 100,
     maxPatternLength: 32,
     minMatchCharLength: 1,
-    keys: ["group", "topic", "content", "categories", "author"] //date??!!??
+    keys: [
+      "group",
+      "topic",
+      "content",
+      "categories",
+      "author",
+      "attendees.name",
+      "attendees.rank",
+      "date"
+    ] //date??!!??
   };
   const fuse = new Fuse(sessions, options);
   const result = fuse.search(input);
