@@ -1,20 +1,10 @@
 import React from "react";
 import Header from "../components/Header";
-import Input from "../components/Input";
+import { SearchInput } from "../components/Inputs";
 import styled from "styled-components";
 import Fuse from "fuse.js";
 import Container from "../components/Container";
 import SessionCard from "../components/SessionCard";
-
-const SearchInput = styled(Input)`
-  position: absolute;
-  top: 70px;
-  margin: 0;
-  padding: 10px;
-  width: 80%;
-  border-radius: 20px;
-  /* &:focus: {} */
-`;
 
 const StyledContainer = styled(Container)`
   margin-top: 140px;
@@ -41,9 +31,9 @@ function Search({ sessions, onDeleteSession, history }) {
       "categories",
       "author",
       "attendees.name",
-      "attendees.rank",
+      "attendees.belt",
       "date"
-    ] //date??!!??
+    ]
   };
   const fuse = new Fuse(sessions, options);
   const result = fuse.search(input);

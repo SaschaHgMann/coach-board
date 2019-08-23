@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Button from "../components/Button";
+import { Button } from "../components/Buttons";
 
 function ButtonLink({ children, to, ...other }) {
   return (
@@ -9,7 +9,5 @@ function ButtonLink({ children, to, ...other }) {
     </Link>
   );
 }
-
-//PropTypes
 
 export default ButtonLink;

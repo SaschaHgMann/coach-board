@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import Layout from "../components/Layout";
-import Button from "../components/Button";
-import Input from "../components/Input";
-import StyledError from "../components/StyledError";
+import { Input } from "../components/Inputs";
+import { LoginError } from "../components/StyledErrors";
+import { LoginButton } from "../components/Buttons";
+import { LoginForm } from "../components/Forms";
 
 const Logo = styled.div`
   font-family: "Bahianita", "cursive";
@@ -21,26 +21,6 @@ const LogoSVG = styled.img`
   text-shadow: 1px 1px 2px black, 0 0 5px #fff8f0;
 `;
 
-const LoginButton = styled(Button)`
-  margin: 5px;
-  width: 90px;
-  height: 40px;
-  border-radius: 20px;
-  background-color: #fff8f0;
-  font-size: 20px;
-  font-weight: bold;
-  box-shadow: 3px 2px 4px rgba(255, 248, 240, 0.5);
-  background-image: linear-gradient(to top, #292929 -45%, #fff8f0);
-`;
-
-const Form = styled.form`
-  margin-top: 380px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-`;
-
 const StyledInput = styled(Input)`
   margin: 5px;
   padding: 10px;
@@ -52,8 +32,6 @@ function Login({ onLogin, history, activeCoach }) {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [errors, setErrors] = React.useState({});
-
-  //setActiveCoach({});
 
   function handleUsernameChange(event) {
     const value = event.target.value;
@@ -69,10 +47,10 @@ function Login({ onLogin, history, activeCoach }) {
     const errors = {};
 
     if (username.trim() === "") {
-      errors.username = "Please put in a valid username";
+      errors.username = "Please enter a valid username";
     }
     if (password.length === 0) {
-      errors.password = "Please put in a valid password";
+      errors.password = "Please enter a valid password";
     }
     return Object.keys(errors).length === 0 ? null : errors;
   }
@@ -101,12 +79,14 @@ function Login({ onLogin, history, activeCoach }) {
   }
 
   return (
-    <Layout>
+    <>
       <Logo>
         <LogoSVG src="/Board_Logo.svg" />
         Coach Board
       </Logo>
-      <Form onSubmit={handleSubmit}>
+      <LoginForm onSubmit={handleSubmit}>
+        {errors.username && <LoginError>{errors.username}</LoginError>}
+        {errors.password && <LoginError>{errors.password}</LoginError>}
         <StyledInput
           name="username"
           value={username}
@@ -114,7 +94,6 @@ function Login({ onLogin, history, activeCoach }) {
           type="text"
           onChange={handleUsernameChange}
         />
-        {errors.username && <StyledError>{errors.username}</StyledError>}
         <StyledInput
           name="pw"
           value={password}
@@ -122,12 +101,11 @@ function Login({ onLogin, history, activeCoach }) {
           type="password"
           onChange={handlePasswordChange}
         />
-        {errors.password && <StyledError>{errors.password}</StyledError>}
         <LoginButton type="submit" onClick={() => onLogin(username)}>
           Login
         </LoginButton>
-      </Form>
-    </Layout>
+      </LoginForm>
+    </>
   );
 }
 
