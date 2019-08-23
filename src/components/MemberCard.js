@@ -19,12 +19,12 @@ const MemberDetails = styled.div`
   margin: 5px 0;
 `;
 
-function MemberCard({ name, group, age, attendet, rank, date, onClick }) {
+function MemberCard({ name, group, age, attendet, belt, onClick }) {
   return (
     <StyledCard attendet={attendet} onClick={onClick}>
       <Headline size="Sub">{name}</Headline>
       <MemberDetails>
-        {group}, {age}, {rank}, {date}
+        {group}, {age}, {belt}
       </MemberDetails>
     </StyledCard>
   );

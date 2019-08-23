@@ -16,7 +16,7 @@ function Members({ members }) {
         name={memberCard.name}
         group={memberCard.group}
         age={memberCard.age}
-        rank={memberCard.rank}
+        belt={memberCard.belt}
         date={memberCard.date}
       />
     );

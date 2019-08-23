@@ -5,28 +5,18 @@ import Header from "../components/Header";
 import SessionCard from "../components/SessionCard";
 import Container from "../components/Container";
 import ButtonContainer from "../components/ButtonContainer";
-// import colors from "../utils/colors";
-
-const FilterButton = styled.button`
-  height: 28px;
-  padding: 2px 5px;
-  background-image: linear-gradient(to top, #292929 -45%, #fff8f0);
-  font-family: "Ubuntu", sans-serif;
-  font-size: 14px;
-  border: none;
-  border-radius: 10px;
-  :hover {
-    background-image: linear-gradient(to top, #292929 -35%, lightgreen);
-  }
-`;
+import { FilterButton } from "../components/Buttons";
 
 const StyledButtonLink = styled(ButtonLink)`
+  position: fixed;
+  right: 10px;
+  bottom: 3px;
   margin-left: 10px;
 `;
 
 function Sessions({ sessions, groups, onDeleteSession, history }) {
-  const trainingGroups = ["All", ...groups];
-  const [selectedGroup, setSelectedGroup] = React.useState("All");
+  const trainingGroups = ["ALL", ...groups];
+  const [selectedGroup, setSelectedGroup] = React.useState("ALL");
 
   function renderSessionCard(sessionCard, index) {
     return (
@@ -61,7 +51,7 @@ function Sessions({ sessions, groups, onDeleteSession, history }) {
     <>
       <Header title="Sessions" />
       <Container>
-        {selectedGroup === "All"
+        {selectedGroup === "ALL"
           ? sessions
               .slice()
               .sort(function(a, b) {

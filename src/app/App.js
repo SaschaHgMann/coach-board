@@ -61,8 +61,8 @@ function App() {
   }
 
   function handleDeleteSession(id) {
-    const Confirm = prompt("Sure to delete? Confirm (yes)");
-    if (Confirm === "yes") {
+    const Confirm = window.confirm("Sure to delete?");
+    if (Confirm === true) {
       deleteSessionCards(id).then(() => {
         const Index = sessionCards.findIndex(session => session._id === id);
 

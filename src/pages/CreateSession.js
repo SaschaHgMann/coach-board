@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
-import Button from "../components/Button";
+import { Button } from "../components/Buttons";
 import ButtonLink from "../components/ButtonLink";
 import Container from "../components/Container";
 import ContentBody from "../components/ContentBody";
@@ -9,16 +9,15 @@ import ContentFooter from "../components/ContentFooter";
 import ContentHeader from "../components/ContentHeader";
 import Devider from "../components/Devider";
 import DropDown from "../components/DropDown";
-import Form from "../components/Form";
+import { SessionForm } from "../components/Forms";
 import Header from "../components/Header";
 import Headline from "../components/Headline";
 import InfoLine from "../components/InfoLine";
-import Input from "../components/Input";
+import { Input, Textarea } from "../components/Inputs";
 import Tag from "../components/Tag";
-import Textarea from "../components/Textarea";
 import categoryData from "../pages/mock/categories";
 import MemberCard from "../components/MemberCard";
-import StyledError from "../components/StyledError";
+import { SessionError } from "../components/StyledErrors";
 
 const StyledContentBody = styled(ContentBody)`
   width: 100%;
@@ -193,7 +192,7 @@ function CreateSession({
     <>
       <Header title={headTitle} />
       <Container>
-        <Form onSubmit={handleSubmit}>
+        <SessionForm onSubmit={handleSubmit}>
           <ContentHeader title={formTitle} />
           <StyledContentBody>
             <Headline size="Sub">{subTitle}</Headline>
@@ -206,7 +205,7 @@ function CreateSession({
               onChange={handleChange}
               placeholder="Select Date"
             />
-            {errors.date && <StyledError>{errors.date}</StyledError>}
+            {errors.date && <SessionError>{errors.date}</SessionError>}
             <DropDown
               name="group"
               value={session.group}
@@ -214,7 +213,7 @@ function CreateSession({
             >
               {groupOptions.map(group => renderGroupOptions(group))}
             </DropDown>
-            {errors.group && <StyledError>{errors.group}</StyledError>}
+            {errors.group && <SessionError>{errors.group}</SessionError>}
             <InfoLine>
               Check attendance <i className="fas fa-user-check" />
             </InfoLine>
@@ -231,14 +230,14 @@ function CreateSession({
               onChange={handleChange}
               placeholder="Topic of session"
             />
-            {errors.topic && <StyledError>{errors.topic}</StyledError>}
+            {errors.topic && <SessionError>{errors.topic}</SessionError>}
             <Textarea
               name="content"
               value={session.content}
               onChange={handleChange}
               placeholder="Exercises, incidents & general informations for other coaches"
             />
-            {errors.content && <StyledError>{errors.content}</StyledError>}
+            {errors.content && <SessionError>{errors.content}</SessionError>}
             <InfoLine>Choose Cathegories</InfoLine>
             <CategoryContainer
               name="categories"
@@ -260,7 +259,7 @@ function CreateSession({
           <ContentFooter>
             Thanks for teaching: {activeCoach.username}
           </ContentFooter>
-        </Form>
+        </SessionForm>
       </Container>
     </>
   );
