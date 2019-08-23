@@ -61,7 +61,6 @@ function App() {
   }
 
   function handleDeleteSession(id) {
-    console.log(id);
     const Confirm = prompt("Sure to delete? Confirm (yes)");
     if (Confirm === "yes") {
       deleteSessionCards(id).then(() => {

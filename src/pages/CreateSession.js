@@ -56,6 +56,17 @@ function CreateSession({
   formTitle,
   subTitle
 }) {
+  const [errors, setErrors] = React.useState({});
+  const groupOptions = ["Select Group", ...groups];
+  const [selectedCategories, setSelectedCategories] = React.useState([]);
+  const [selectedGroup, setSelectedGroup] = React.useState("");
+  const [sessionMembers, setSessionMembers] = React.useState(
+    members.map(member => ({ ...member, attendet: false }))
+  );
+  const [attendetSessionMembers, setAttendetSessionMembers] = React.useState(
+    []
+  );
+
   const editSession =
     sessions &&
     match.params.id &&
@@ -69,46 +80,35 @@ function CreateSession({
     categories: (editSession && editSession.categories) || []
   });
 
-  const groupOptions = ["Select Group", ...groups];
-  const [selectedGroup, setSelectedGroup] = React.useState("");
-  const [selectedCategories, setSelectedCategories] = React.useState([]);
-  const [sessionMembers, setSessionMembers] = React.useState(
-    members.map(member => ({ ...member, attendet: false }))
-  );
-  const [attendetSessionMember, setAttendetSessionMember] = React.useState([]);
-  const [errors, setErrors] = React.useState({});
-
   function handleAttendance(member) {
     const index = sessionMembers.findIndex(item => item._id === member._id);
     const newSessionMembers = sessionMembers.slice();
-    const sessionMember = newSessionMembers[index];
+    const sessionMemberAtt = newSessionMembers[index];
 
     newSessionMembers[index] = {
-      ...sessionMember,
-      attendet: !sessionMember.attendet
+      ...sessionMemberAtt,
+      attendet: !sessionMemberAtt.attendet
     };
     setSessionMembers(newSessionMembers);
-    setAttendetSessionMember([sessionMember, ...attendetSessionMember]);
+    setAttendetSessionMembers([sessionMemberAtt, ...attendetSessionMembers]);
   }
 
   function handleChange(event) {
     setSession({ ...session, [event.target.name]: event.target.value });
   }
-
   function handleCategoryChange() {
     setSession({ ...session, categories: selectedCategories });
   }
-
   function handleMemberChange() {
-    setSession({ ...session, attendees: attendetSessionMember });
+    setSession({ ...session, attendees: attendetSessionMembers });
   }
   /* eslint-disable*/
   React.useEffect(() => {
     setSession({ ...session, categories: selectedCategories });
   }, [selectedCategories]);
   React.useEffect(() => {
-    setSession({ ...session, attendees: attendetSessionMember });
-  }, [attendetSessionMember]);
+    setSession({ ...session, attendees: attendetSessionMembers });
+  }, [attendetSessionMembers]);
   /* eslint-disable*/
 
   function renderGroupOptions(group) {

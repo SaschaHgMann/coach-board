@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import SessionCard from "../components/SessionCard";
 import Container from "../components/Container";
 import ButtonContainer from "../components/ButtonContainer";
+// import colors from "../utils/colors";
 
 const FilterButton = styled.button`
   height: 28px;

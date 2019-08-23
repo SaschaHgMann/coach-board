@@ -6,7 +6,6 @@ function Layout({ children }) {
   return (
     <Fullscreen>
       <BackgroundImage src="/Background.jpg" />
-      {/* {window.location.pathname !== "/" ? <Header>{headTitle}</Header> : null} */}
       {children}
     </Fullscreen>
   );
