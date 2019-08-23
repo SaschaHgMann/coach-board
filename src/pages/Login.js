@@ -48,12 +48,10 @@ const StyledInput = styled(Input)`
   border-radius: 20px;
 `;
 
-function Login({ onLogin, history, activeCoach, ...props }) {
+function Login({ onLogin, history, activeCoach }) {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [errors, setErrors] = React.useState({});
-
-  //console.log(activeCoach);
 
   //setActiveCoach({});
 
