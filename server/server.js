@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const fs = require("fs");
 const path = require("path");
-//const bodyParser = require("body-parser");
 
 // setup server
 const app = express();
@@ -38,7 +37,7 @@ api(app);
 
 // catch all handler for client deeplinks
 app.get("/*", function(req, res) {
-  res.sendFile(path.join(__dirname, "../build", "../public/index.html"));
+  res.sendFile(path.join(__dirname, "../build/index.html"));
 });
 
 app.listen(process.env.PORT || 4000);

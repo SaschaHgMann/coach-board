@@ -23,7 +23,6 @@ module.exports = function(app) {
 
   app.delete("/api/sessions/:id", (req, res) => {
     const { id } = req.params;
-    console.log(id);
     SessionCard.findByIdAndRemove(id)
       .then(session => res.json({ success: true }))
       .catch(err => res.json(err));
