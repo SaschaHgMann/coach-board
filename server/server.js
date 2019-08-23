@@ -38,7 +38,7 @@ api(app);
 
 // catch all handler for client deeplinks
 app.get("/*", function(req, res) {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
+  res.sendFile(path.join(__dirname, "build", "../public/index.html"));
 });
 
 app.listen(process.env.PORT || 4000);
