@@ -203,7 +203,6 @@ function CreateSession({
               name="date"
               value={session.date}
               onChange={handleChange}
-              placeholder="Select Date"
             />
             {errors.date && <SessionError>{errors.date}</SessionError>}
             <DropDown

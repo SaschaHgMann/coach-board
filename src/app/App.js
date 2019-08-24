@@ -39,6 +39,10 @@ function App() {
     setToLocal("activeCoach", activeCoach);
   }, [activeCoach]);
 
+  function handleCreateMember(member) {
+    console.log(member);
+  }
+
   function handleCreateSession(session) {
     postSessionCards(session).then(result =>
       setSessionCards([result, ...sessionCards])
@@ -174,7 +178,20 @@ function App() {
                 )
               }
             />
-            <Route exact path="/settings" component={Settings} />
+            <Route
+              exact
+              path="/settings"
+              render={props =>
+                activeCoach.username ? (
+                  <Settings
+                    groups={groupData}
+                    onPasteMember={handleCreateMember}
+                  />
+                ) : (
+                  <Redirect to="/" />
+                )
+              }
+            />
             <Route
               exact
               path="/search"

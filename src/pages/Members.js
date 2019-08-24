@@ -8,16 +8,18 @@ const StyledContainer = styled(Container)`
   padding: 60px 20px 10px 20px;
 `;
 
-function Members({ members }) {
-  function renderMemberCard(memberCard, index) {
+function Members({ members, history }) {
+  function renderMemberCard(member, index) {
     return (
       <MemberCard
         key={index}
-        name={memberCard.name}
-        group={memberCard.group}
-        age={memberCard.age}
-        belt={memberCard.belt}
-        date={memberCard.date}
+        name={member.name}
+        group={member.group}
+        age={member.age}
+        belt={member.belt}
+        date={member.date}
+        history={history}
+        members={member}
       />
     );
   }
