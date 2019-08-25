@@ -40,15 +40,17 @@ function App() {
   }, [activeCoach]);
 
   const [memberCards, setMemberCards] = React.useState(
-    getFromLocal("memberCards") || {}
+    memberData,
+    getFromLocal("memberCards") || []
   );
+
   React.useEffect(() => {
     setToLocal("memberCards", memberCards);
   }, [memberCards]);
 
   function handleCreateMember(member) {
-    console.log(member);
     setMemberCards([member, ...memberCards]);
+    setToLocal("memberCards", memberCards);
   }
 
   function handleCreateSession(session) {
@@ -91,19 +93,12 @@ function App() {
     const coach = coachData[index];
     setActiveCoach(coach);
   }
-  // function handleLogout() {
-  //   setActiveCoach({});
-  // }
 
   return (
     <>
       <Router>
         <GlobalStyles />
         <Layout>
-          {/* {window.location.pathname !== "/" ? (
-            <Header title={headTitle} />
-          ) : null} */}
-
           <Switch>
             <Route
               exact
@@ -180,7 +175,7 @@ function App() {
               path="/members"
               render={props =>
                 activeCoach.username ? (
-                  <Members members={memberData} {...props} />
+                  <Members members={memberCards} {...props} />
                 ) : (
                   <Redirect to="/" />
                 )
@@ -194,6 +189,7 @@ function App() {
                   <Settings
                     groups={groupData}
                     onPasteMember={handleCreateMember}
+                    {...props}
                   />
                 ) : (
                   <Redirect to="/" />

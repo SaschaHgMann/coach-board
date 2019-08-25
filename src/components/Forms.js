@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const SessionForm = styled.form`
+export const CreateForm = styled.form`
   margin: 20px;
   border-radius: 10px;
 `;
