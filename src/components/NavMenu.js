@@ -47,7 +47,7 @@ function NavMenu({ showNavMenu, onNavClick }) {
 
   return (
     <NavContainer showNavMenu={showNavMenu}>
-      <NavHeader src="/NavHeader.jpg" />
+      <NavHeader src="./images/NavHeader.jpg" />
       {navItems.map(item => (
         <NavItem key={item.label} to={item.to} onClick={onNavClick}>
           {item.label}

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const SessionError = styled.div`
+export const CreateError = styled.div`
   margin: 5px 20px;
   padding: 5px;
   border: 2px solid red;

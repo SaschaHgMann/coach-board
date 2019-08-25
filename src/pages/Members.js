@@ -8,8 +8,9 @@ const StyledContainer = styled(Container)`
   padding: 60px 20px 10px 20px;
 `;
 
-function Members({ members }) {
+function Members({ members, history }) {
   function renderMemberCard(memberCard, index) {
+    // console.log(memberCard);
     return (
       <MemberCard
         key={index}
@@ -18,6 +19,8 @@ function Members({ members }) {
         age={memberCard.age}
         belt={memberCard.belt}
         date={memberCard.date}
+        history={history}
+        members={memberCard}
       />
     );
   }
@@ -26,9 +29,13 @@ function Members({ members }) {
     <>
       <Header title="Members" />
       <StyledContainer>
-        {members.map((memberCard, index) =>
-          renderMemberCard(memberCard, index)
-        )}
+        {members &&
+          members.map((member, index) => renderMemberCard(member, index))}
+
+        {/* {members &&
+          members.map(member =>
+            renderMemberCard(member.memberCard, member.key)
+          )} */}
       </StyledContainer>
     </>
   );

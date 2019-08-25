@@ -5,6 +5,8 @@ const ContentBody = styled.div`
   margin: 0px;
   padding: 5px;
   background-color: ${colors.light};
+  display: flex;
+  flex-direction: column;
 `;
 
 export default ContentBody;

@@ -1,12 +1,13 @@
 import styled from "styled-components";
 
-export const SessionForm = styled.form`
+export const CreateForm = styled.form`
   margin: 20px;
   border-radius: 10px;
 `;
 
 export const LoginForm = styled.form`
-  margin-top: 380px;
+  position: fixed;
+  bottom: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;

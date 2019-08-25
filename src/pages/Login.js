@@ -4,22 +4,7 @@ import { Input } from "../components/Inputs";
 import { LoginError } from "../components/StyledErrors";
 import { LoginButton } from "../components/Buttons";
 import { LoginForm } from "../components/Forms";
-
-const Logo = styled.div`
-  font-family: "Bahianita", "cursive";
-  font-size: 60px;
-  color: #fff8f0;
-  text-shadow: 1px 1px 2px black, 0 0 5px #fff8f0;
-  height: 80px;
-  margin-top: 20px;
-  padding-right: 12%;
-`;
-
-const LogoSVG = styled.img`
-  height: 60px;
-  color: #fff8f0;
-  text-shadow: 1px 1px 2px black, 0 0 5px #fff8f0;
-`;
+import Logo from "../components/Logo";
 
 const StyledInput = styled(Input)`
   margin: 5px;
@@ -80,10 +65,11 @@ function Login({ onLogin, history, activeCoach }) {
 
   return (
     <>
-      <Logo>
+      {/* <Logo>
         <LogoSVG src="/Board_Logo.svg" />
         Coach Board
-      </Logo>
+      </Logo> */}
+      <Logo />
       <LoginForm onSubmit={handleSubmit}>
         {errors.username && <LoginError>{errors.username}</LoginError>}
         {errors.password && <LoginError>{errors.password}</LoginError>}

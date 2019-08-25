@@ -28,7 +28,7 @@ const Content = styled.p`
 const AttendeeContainer = styled.div`
   margin: 0;
   padding: 5px;
-  display: ${props => (props.aktiv ? "block" : "none")};
+  display: ${props => (props.active ? "block" : "none")};
 `;
 
 const CoachContainer = styled.div`
@@ -89,7 +89,7 @@ function SessionCard({
           <div>
             <AttendeeButton
               onClick={() => setShowAttendees(!showAttendees)}
-              aktiv={showAttendees}
+              active={showAttendees}
             >
               <i className="fas fa-user-check" /> {attendees.length}
             </AttendeeButton>
@@ -100,7 +100,7 @@ function SessionCard({
           {categories && categories.map(renderCategory)}
         </CategoryContainer>
         <Content>{content}</Content>
-        <AttendeeContainer aktiv={showAttendees}>
+        <AttendeeContainer active={showAttendees}>
           {attendees && attendees.map(renderAttendees)}
         </AttendeeContainer>
       </ContentBody>
