@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "../components/Header";
+import PropTypes from "prop-types";
 import Container from "../components/Container";
 import Card from "../components/Card";
 import styled from "styled-components";
@@ -197,5 +198,9 @@ function Groups({ members, history }) {
     </>
   );
 }
+
+Groups.propTypes = {
+  members: PropTypes.arrayOf(PropTypes.object).isRequired
+};
 
 export default Groups;

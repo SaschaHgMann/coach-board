@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Header from "../components/Header";
 import MemberCard from "../components/MemberCard";
 import Container from "../components/Container";
@@ -34,4 +35,9 @@ function Members({ members, history }) {
     </>
   );
 }
+
+Members.propTypes = {
+  members: PropTypes.arrayOf(PropTypes.object).isRequired
+};
+
 export default Members;

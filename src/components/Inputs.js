@@ -28,5 +28,4 @@ export const SearchInput = styled(Input)`
   padding: 10px;
   width: 80%;
   border-radius: 20px;
-  /* &:focus: {} */
 `;

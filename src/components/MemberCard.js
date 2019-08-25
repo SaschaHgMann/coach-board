@@ -33,11 +33,9 @@ function MemberCard({ name, group, age, attendet, belt, onClick }) {
 
 MemberCard.propTypes = {
   name: PropTypes.string.isRequired,
-  avatar: PropTypes.string,
   age: PropTypes.number.isRequired,
   group: PropTypes.string.isRequired,
-  rank: PropTypes.string,
-  date: PropTypes.string,
+  belt: PropTypes.string,
   onClick: PropTypes.func
 };
 

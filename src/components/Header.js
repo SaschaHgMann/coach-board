@@ -35,7 +35,6 @@ function Header({ title, ...props }) {
       <NavMenu
         showNavMenu={showNavMenu}
         onNavClick={() => setShowNavMenu(false)}
-        // handleClick={handleLogOut}
       />
       <StyledHeadline size="Header">{title}</StyledHeadline>
       <SearchButton />

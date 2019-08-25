@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 import Header from "../components/Header";
 import Container from "../components/Container";
 import { CreateForm } from "../components/Forms";
@@ -32,16 +33,11 @@ function Settings({ history, groups, members, match, onPasteMember }) {
   const groupOptions = ["Select Group", ...groups];
   const [selectedGroup, setSelectedGroup] = React.useState("");
 
-  const editMember =
-    members &&
-    match.params.id &&
-    members.find(member => member._id === match.params.id);
-
   const [member, setMember] = React.useState({
-    _id: (editMember && editMember._id) || uuid(),
-    name: (editMember && editMember.name) || "",
-    birthdate: (editMember && editMember.birthdate) || "",
-    belt: (editMember && editMember.belt) || ""
+    _id: uuid(),
+    name: "",
+    birthdate: "",
+    belt: ""
   });
 
   function renderGroupOptions(group) {
@@ -62,9 +58,6 @@ function Settings({ history, groups, members, match, onPasteMember }) {
     if (member.name === "") {
       errors.name = "Enter full name please!";
     }
-    if (member.entry === "") {
-      errors.entry = "Entry please!";
-    }
     if (member.belt === "") {
       errors.belt = "Fill in color of belt please!";
     }
@@ -80,9 +73,6 @@ function Settings({ history, groups, members, match, onPasteMember }) {
   function handleSubmit(event) {
     event.preventDefault();
     member.group = selectedGroup;
-    if (editMember) {
-      member._id = editMember._id;
-    }
 
     const errors = validate();
 
@@ -153,5 +143,9 @@ function Settings({ history, groups, members, match, onPasteMember }) {
     </>
   );
 }
+
+Settings.propTypes = {
+  groups: PropTypes.arrayOf(PropTypes.string).isRequired
+};
 
 export default Settings;
