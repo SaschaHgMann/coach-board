@@ -11,7 +11,7 @@ import ContentFooter from "./ContentFooter";
 import MemberCard from "./MemberCard";
 import moment from "moment";
 import { getFromLocal } from "../services/localStorage";
-import { AttendeeButton, FeatureButton } from "./Buttons";
+import { MemberButton, FeatureButton } from "./Buttons";
 
 const CategoryContainer = styled.div`
   display: flex;
@@ -87,12 +87,12 @@ function SessionCard({
         <Headline size="Sub">
           {topic}
           <div>
-            <AttendeeButton
+            <MemberButton
               onClick={() => setShowAttendees(!showAttendees)}
               active={showAttendees}
             >
               <i className="fas fa-user-check" /> {attendees.length}
-            </AttendeeButton>
+            </MemberButton>
           </div>
         </Headline>
         <Devider />

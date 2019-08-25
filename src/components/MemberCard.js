@@ -12,6 +12,7 @@ const StyledCard = styled(Card)`
   margin: 10px 0;
   border: solid 2px #292929;
   padding-left: 5px;
+  box-shadow: none;
   background-image: linear-gradient(to top, #292929 -35%, ${getColor});
 `;
 
