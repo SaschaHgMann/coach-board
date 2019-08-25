@@ -11,7 +11,7 @@ import { Input } from "../components/Inputs";
 import InfoLine from "../components/InfoLine";
 import DropDown from "../components/DropDown";
 // import ButtonContainer from "../components/ButtonContainer";
-import { Button } from "../components/Buttons";
+import { Button, FeatureButton } from "../components/Buttons";
 import ContentFooter from "../components/ContentFooter";
 
 const ButtonContainer = styled.div`
@@ -20,9 +20,16 @@ const ButtonContainer = styled.div`
   padding: 5px;
 `;
 
+// const MemberAddForm = styled.div`
+//   margin: 0;
+//   padding: 0;
+//   display: ${props => (props.active ? "block" : "none")};
+// `;
+
 function Settings({ history, groups, members, match, onPasteMember }) {
   const groupOptions = ["Select Group", ...groups];
   const [selectedGroup, setSelectedGroup] = React.useState("");
+  //  const [showMemberAdd, setShowMemberAdd] = React.useState(false);
 
   const editMember =
     members &&
@@ -74,7 +81,16 @@ function Settings({ history, groups, members, match, onPasteMember }) {
         <SessionForm onSubmit={handleSubmit}>
           <ContentHeader title="New Member" />
           <ContentBody>
-            <Headline size="Sub">Create a new Member</Headline>
+            <div>
+              <Headline size="Sub">Create a new Member</Headline>
+              {/* <FeatureButton
+                onClick={() => setShowMemberAdd(!showMemberAdd)}
+                active={showMemberAdd}
+              >
+                <i className="fas fa-plus-circle" />
+              </FeatureButton> */}
+            </div>
+            {/* <MemberAddForm active={showMemberAdd}> */}
             <Devider />
             <Input
               type="text"
@@ -101,11 +117,12 @@ function Settings({ history, groups, members, match, onPasteMember }) {
             <Input
               type="text"
               name="belt"
-              placeholder="Belt (e.g. white, yellow ..."
+              placeholder="Belt (e.g. white, yellow ...)"
               value={member.belt}
               onChange={handleChange}
             />
             <Devider />
+            {/* </MemberAddForm> */}
             <ButtonContainer>
               <Button>
                 <i className="fas fa-ban" />

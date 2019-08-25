@@ -39,8 +39,16 @@ function App() {
     setToLocal("activeCoach", activeCoach);
   }, [activeCoach]);
 
+  const [memberCards, setMemberCards] = React.useState(
+    getFromLocal("memberCards") || {}
+  );
+  React.useEffect(() => {
+    setToLocal("memberCards", memberCards);
+  }, [memberCards]);
+
   function handleCreateMember(member) {
     console.log(member);
+    setMemberCards([member, ...memberCards]);
   }
 
   function handleCreateSession(session) {

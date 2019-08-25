@@ -23,7 +23,7 @@ const BackgroundImage = styled.img`
 function Layout({ children }) {
   return (
     <Fullscreen>
-      <BackgroundImage src="/Background.jpg" />
+      <BackgroundImage src="./images/Background.jpg" />
       {children}
     </Fullscreen>
   );

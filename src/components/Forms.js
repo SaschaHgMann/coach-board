@@ -6,7 +6,8 @@ export const SessionForm = styled.form`
 `;
 
 export const LoginForm = styled.form`
-  margin-top: 380px;
+  position: fixed;
+  bottom: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
