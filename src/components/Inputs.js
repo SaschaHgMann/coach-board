@@ -9,6 +9,7 @@ export const Input = styled.input`
   font-size: 16px;
   font-family: "Ubuntu", sans-serif;
   overflow-x: auto;
+  outline: none;
 `;
 
 export const Textarea = styled.textarea`
@@ -19,6 +20,7 @@ export const Textarea = styled.textarea`
   padding: 3px;
   font-size: 16px;
   font-family: "Ubuntu", sans-serif;
+  outline: none;
 `;
 
 export const SearchInput = styled(Input)`
@@ -28,4 +30,5 @@ export const SearchInput = styled(Input)`
   padding: 10px;
   width: 80%;
   border-radius: 20px;
+  outline: none;
 `;

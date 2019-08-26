@@ -40,8 +40,7 @@ function App() {
   }, [activeCoach]);
 
   const [memberCards, setMemberCards] = React.useState(
-    memberData,
-    getFromLocal("memberCards") || []
+    getFromLocal("memberCards") || memberData
   );
 
   React.useEffect(() => {
@@ -50,7 +49,6 @@ function App() {
 
   function handleCreateMember(member) {
     setMemberCards([member, ...memberCards]);
-    setToLocal("memberCards", memberCards);
   }
 
   function handleCreateSession(session) {

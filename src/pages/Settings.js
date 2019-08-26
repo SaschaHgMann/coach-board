@@ -36,6 +36,7 @@ function Settings({ history, groups, members, match, onPasteMember }) {
   const [member, setMember] = React.useState({
     _id: uuid(),
     name: "",
+    age: parseInt() || 0,
     birthdate: "",
     belt: ""
   });
@@ -61,8 +62,8 @@ function Settings({ history, groups, members, match, onPasteMember }) {
     if (member.belt === "") {
       errors.belt = "Fill in color of belt please!";
     }
-    if (member.age === "") {
-      errors.age = "Fill in color of belt please!";
+    if (member.age <= 3) {
+      errors.age = "Enter valid age please!";
     }
     if (selectedGroup === "" || selectedGroup === "Select Group") {
       errors.group = "Select correct group please!";
@@ -110,9 +111,7 @@ function Settings({ history, groups, members, match, onPasteMember }) {
                 onChange={handleChange}
                 placeholder="Age (e.g. 10...)"
               />
-
               {errors.age && <CreateError>{errors.age}</CreateError>}
-
               <DropDown
                 name="group"
                 value={member.group}
