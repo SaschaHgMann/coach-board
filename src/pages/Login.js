@@ -65,10 +65,6 @@ function Login({ onLogin, history, activeCoach }) {
 
   return (
     <>
-      {/* <Logo>
-        <LogoSVG src="/Board_Logo.svg" />
-        Coach Board
-      </Logo> */}
       <Logo />
       <LoginForm onSubmit={handleSubmit}>
         {errors.username && <LoginError>{errors.username}</LoginError>}

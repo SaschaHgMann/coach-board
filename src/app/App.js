@@ -169,7 +169,17 @@ function App() {
                 )
               }
             />
-            <Route exact path="/groups" component={Groups} />
+            <Route
+              exact
+              path="/groups"
+              render={props =>
+                activeCoach.username ? (
+                  <Groups members={memberCards} {...props} />
+                ) : (
+                  <Redirect to="/" />
+                )
+              }
+            />
             <Route
               exact
               path="/members"

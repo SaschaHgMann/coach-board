@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Header from "../components/Header";
 import { SearchInput } from "../components/Inputs";
 import styled from "styled-components";
@@ -60,5 +61,9 @@ function Search({ sessions, onDeleteSession, history }) {
     </>
   );
 }
+
+Search.propTypes = {
+  sessions: PropTypes.arrayOf(PropTypes.object).isRequired
+};
 
 export default Search;

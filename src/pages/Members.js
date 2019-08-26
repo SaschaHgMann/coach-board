@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Header from "../components/Header";
 import MemberCard from "../components/MemberCard";
 import Container from "../components/Container";
@@ -10,7 +11,6 @@ const StyledContainer = styled(Container)`
 
 function Members({ members, history }) {
   function renderMemberCard(memberCard, index) {
-    // console.log(memberCard);
     return (
       <MemberCard
         key={index}
@@ -31,13 +31,13 @@ function Members({ members, history }) {
       <StyledContainer>
         {members &&
           members.map((member, index) => renderMemberCard(member, index))}
-
-        {/* {members &&
-          members.map(member =>
-            renderMemberCard(member.memberCard, member.key)
-          )} */}
       </StyledContainer>
     </>
   );
 }
+
+Members.propTypes = {
+  members: PropTypes.arrayOf(PropTypes.object).isRequired
+};
+
 export default Members;

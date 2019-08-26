@@ -24,3 +24,16 @@ to {
 
 }
 `;
+
+export const fadeInGroup = keyframes`
+from {
+  opacity: 0;
+  transform: translate3d(-40px, 0, -150px) 
+  /* rotate3d(-2, 1, 0, 35deg); */
+}
+
+to {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+`;

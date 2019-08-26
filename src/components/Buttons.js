@@ -25,7 +25,7 @@ export const LoginButton = styled(Button)`
   box-shadow: 3px 2px 4px rgba(255, 248, 240, 0.5);
 `;
 
-export const AttendeeButton = styled.button`
+export const MemberButton = styled.button`
   margin: 0;
   font-size: 20px;
   border: solid 1px;
