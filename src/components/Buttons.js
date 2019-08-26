@@ -14,6 +14,7 @@ export const Button = styled.button`
     ${colors.light}
   );
   font-size: 24px;
+  outline: none;
 `;
 
 export const LoginButton = styled(Button)`
@@ -23,6 +24,7 @@ export const LoginButton = styled(Button)`
   font-size: 20px;
   font-weight: bold;
   box-shadow: 3px 2px 4px rgba(255, 248, 240, 0.5);
+  outline: none;
 `;
 
 export const MemberButton = styled.button`
@@ -33,6 +35,7 @@ export const MemberButton = styled.button`
   background: ${colors.light};
   box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.5);
   text-shadow: ${props => (props.aktiv ? "0px 0px 5px lightgreen" : "none")};
+  outline: none;
 `;
 
 export const FeatureButton = styled.button`
@@ -44,6 +47,7 @@ export const FeatureButton = styled.button`
   color: ${colors.dark};
   border-radius: 10px;
   font-size: 20px;
+  outline: none;
 `;
 
 export const FilterButton = styled.button`
@@ -59,6 +63,7 @@ export const FilterButton = styled.button`
   font-size: 14px;
   border: none;
   border-radius: 15px;
+  outline: none;
   :hover {
     background-image: linear-gradient(
       to top,

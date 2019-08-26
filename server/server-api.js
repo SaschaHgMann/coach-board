@@ -1,6 +1,5 @@
 module.exports = function(app) {
   const SessionCard = require("./models/SessionCard");
-  //const Member = require("../models/Members");
 
   app.get("/api/sessions", (req, res) => {
     SessionCard.find()
