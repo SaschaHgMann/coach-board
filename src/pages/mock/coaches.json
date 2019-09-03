@@ -6,12 +6,28 @@
   },
   {
     "_id": 2.0,
-    "username": "Claudia",
+    "username": "Alex",
     "password": "2345"
   },
   {
     "_id": 3.0,
-    "username": "Dennis",
+    "username": "Claudia",
     "password": "3456"
+  },
+  {
+    "_id": 4.0,
+    "username": "Sven",
+    "password": "4567"
+  },
+  {
+    "_id": 5.0,
+    "username": "Christian",
+    "password": "5678"
+  }
+  ,
+  {
+    "_id": 6.0,
+    "username": "Dennis",
+    "password": "6789"
   }
 ]
