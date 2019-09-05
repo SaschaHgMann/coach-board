@@ -7,6 +7,8 @@ const NavButton = styled.button`
   font-size: 22px;
   color: #fff8f0;
   opacity: 0.7;
+  background: none;
+  border: none;
 `;
 
 function NavMenuButton({ showNavMenu, setShowNavMenu }) {

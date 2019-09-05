@@ -91,15 +91,15 @@ function Groups({ members, history }) {
       <Header title="Groups" />
       <Container>
         <StyledCard>
-          <ImageContainer>
+          <ImageContainer
+              onClick={() => setShowBonsais(!showBonsais)}
+              active={showBonsais}
+          >
             <StyledImage src="./images/Group_Bonsais.jpg" />
             <BannerTitle>
               <div>Bonsais</div>
             </BannerTitle>
-            <StyledMemberButton
-              onClick={() => setShowBonsais(!showBonsais)}
-              active={showBonsais}
-            >
+            <StyledMemberButton>
               <i className="fas fa-users" />
               {members.filter(member => member.group === "Bonsais").length}
             </StyledMemberButton>
@@ -117,15 +117,15 @@ function Groups({ members, history }) {
           </MemberContainer>
         </StyledCard>
         <StyledCard>
-          <ImageContainer>
+          <ImageContainer
+            onClick={() => setShowKids(!showKids)}
+            active={showKids}
+          >
             <StyledImage src="./images/Group_Kids.jpg" />
             <BannerTitle>
               <div>Kids</div>
             </BannerTitle>
-            <StyledMemberButton
-              onClick={() => setShowKids(!showKids)}
-              active={showKids}
-            >
+            <StyledMemberButton>
               <i className="fas fa-users" />
               {members.filter(member => member.group === "Kids").length}
             </StyledMemberButton>
@@ -143,15 +143,15 @@ function Groups({ members, history }) {
           </MemberContainer>
         </StyledCard>
         <StyledCard>
-          <ImageContainer>
+          <ImageContainer
+             onClick={() => setShowYouth(!showYouth)}
+             active={showYouth}
+          >
             <StyledImage src="./images/Group_Youth.jpg" />
             <BannerTitle>
               <div>Youth</div>
             </BannerTitle>
-            <StyledMemberButton
-              onClick={() => setShowYouth(!showYouth)}
-              active={showYouth}
-            >
+            <StyledMemberButton>
               <i className="fas fa-users" />
               {members.filter(member => member.group === "Youth").length}
             </StyledMemberButton>
@@ -169,15 +169,15 @@ function Groups({ members, history }) {
           </MemberContainer>
         </StyledCard>
         <StyledCard>
-          <ImageContainer>
+          <ImageContainer
+            active={showSeniors}
+            onClick={() => setShowSeniors(!showSeniors)}
+          >
             <StyledImage src="./images/Group_Seniors.jpg" />
             <BannerTitle>
               <div>Seniors</div>
             </BannerTitle>
-            <StyledMemberButton
-              onClick={() => setShowSeniors(!showSeniors)}
-              active={showSeniors}
-            >
+            <StyledMemberButton>
               <i className="fas fa-users" />
               {members.filter(member => member.group === "Seniors").length}
             </StyledMemberButton>

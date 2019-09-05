@@ -36,7 +36,8 @@ function Settings({ history, groups, members, match, onPasteMember }) {
   const [member, setMember] = React.useState({
     _id: uuid(),
     name: "",
-    age: parseInt() || 0,
+    age: "",
+    // age: parseInt() || 0,
     birthdate: "",
     belt: ""
   });
@@ -63,10 +64,10 @@ function Settings({ history, groups, members, match, onPasteMember }) {
       errors.belt = "Fill in color of belt please!";
     }
     if (member.age <= 3) {
-      errors.age = "Enter valid age please!";
+      errors.age = "Enter date of birth please!";
     }
     if (selectedGroup === "" || selectedGroup === "Select Group") {
-      errors.group = "Select correct group please!";
+      errors.group = "Select a group please!";
     }
     return Object.keys(errors).length === 0 ? null : errors;
   }
@@ -83,7 +84,7 @@ function Settings({ history, groups, members, match, onPasteMember }) {
     }
 
     onPasteMember(member);
-    history.replace("/members");
+    history.replace("/groups");
   }
 
   return (
@@ -105,7 +106,7 @@ function Settings({ history, groups, members, match, onPasteMember }) {
               />
               {errors.name && <CreateError>{errors.name}</CreateError>}
               <Input
-                type="number"
+                type="date"
                 name="age"
                 value={member.age}
                 onChange={handleChange}

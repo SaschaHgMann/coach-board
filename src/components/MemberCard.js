@@ -3,6 +3,7 @@ import Card from "./Card";
 import PropTypes from "prop-types";
 import Headline from "./Headline";
 import styled from "styled-components";
+import moment from "moment";
 
 const getColor = props => {
   return props.attendet ? "lightgreen" : "#cecccc";
@@ -21,6 +22,7 @@ const MemberDetails = styled.div`
 `;
 
 function MemberCard({ name, group, age, attendet, belt, onClick }) {
+  age = parseInt(moment().diff(age, 'years',true));
   return (
     <StyledCard attendet={attendet} onClick={onClick}>
       <Headline size="Sub">{name}</Headline>

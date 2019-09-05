@@ -9,6 +9,8 @@ const StyledSearchButton = styled.button`
   font-size: 22px;
   color: #fff8f0;
   opacity: 0.7;
+  background: none;
+  border: none;
 `;
 
 function SearchButton({ children, to, ...other }) {

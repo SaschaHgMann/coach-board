@@ -13,6 +13,18 @@ const NavContainer = styled.div`
   flex-direction: column;
   transform: translate3d(${props => (props.showNavMenu ? 0 : -250)}px, 0, 0);
   transition: all 0.4s;
+  overflow-y: auto;
+`;
+
+const TransparentBackground = styled.div`
+  background: #494949;
+  position: absolute;
+  top: 0px;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+  opacity: 0.5;
+  display: ${props => (props.showNavMenu ? "block" : "none")};
 `;
 
 const NavHeader = styled.img`
@@ -35,17 +47,20 @@ const NavItem = styled(NavLink)`
   border: none;
 `;
 
+
 function NavMenu({ showNavMenu, onNavClick }) {
   const navItems = [
     { to: "/sessions", label: "Sessions" },
     { to: "/createsession", label: "New Session" },
     { to: "/groups", label: "Groups" },
-    { to: "/members", label: "Members" },
+    // { to: "/members", label: "Members" },
     { to: "/settings", label: "Settings" },
     { to: "/", label: "Logout" }
   ];
 
-  return (
+  return ( 
+    <>
+    <TransparentBackground showNavMenu={showNavMenu} onClick={onNavClick}/>
     <NavContainer showNavMenu={showNavMenu}>
       <NavHeader src="./images/NavHeader.jpg" />
       {navItems.map(item => (
@@ -54,6 +69,7 @@ function NavMenu({ showNavMenu, onNavClick }) {
         </NavItem>
       ))}
     </NavContainer>
+    </>
   );
 }
 
