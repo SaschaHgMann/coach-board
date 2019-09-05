@@ -11,6 +11,7 @@ const StyledContainer = styled(Container)`
 
 function Members({ members, history }) {
   function renderMemberCard(memberCard, index) {
+    console.log(members)
     return (
       <MemberCard
         key={index}
