@@ -73,17 +73,20 @@ function Groups({ members, history }) {
   const [showBonsais, setShowBonsais] = React.useState(false);
   const [showKids, setShowKids] = React.useState(false);
   const [showYouth, setShowYouth] = React.useState(false);
-  const [showSeniors, setShowSeniors] = React.useState(false);
+  const [showSeniors, setShowSeniors] = React.useState(false); 
+
+
 
   function renderGroupMember(memberCard, index) {
     return (
       <MemberCard
         key={index}
         {...memberCard}
+        id={memberCard._id}
         history={history}
         members={memberCard}
       />
-    );
+    );    
   }
 
   return (
