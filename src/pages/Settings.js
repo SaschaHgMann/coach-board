@@ -84,7 +84,7 @@ function Settings({ history, groups, members, match, onPasteMember }) {
     }
 
     onPasteMember(member);
-    history.replace("/members");
+    history.replace("/groups");
   }
 
   return (
