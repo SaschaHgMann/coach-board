@@ -1,5 +1,6 @@
 module.exports = function(app) {
 
+  ///// Sessions Api
   const SessionCard = require("./models/SessionCard");
   app.get("/api/sessions", (req, res) => {
     SessionCard.find()
@@ -24,6 +25,7 @@ module.exports = function(app) {
       .catch(err => res.json(err));
   });
 
+  ///// Members Api
   const MemberCard = require("./models/MemberCard");
   app.get("/api/members", (req, res) => {
     MemberCard.find()
