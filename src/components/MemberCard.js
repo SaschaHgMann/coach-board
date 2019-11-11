@@ -21,13 +21,16 @@ const MemberDetails = styled.div`
   margin: 5px 0;
 `;
 
-function MemberCard({ name, group, age, attendet, belt, onClick }) {
+function MemberCard({ name, group, age, attendet, belt, memberImg, onClick }) {
   age = parseInt(moment().diff(age, 'years',true));
-  return (
+  
+  // console.log(memberImg)
+
+  return (  
     <StyledCard attendet={attendet} onClick={onClick}>
       <Headline size="Sub">{name}</Headline>
       <MemberDetails>
-        {group}, {age}, {belt}
+        {group}, {age}, {belt}, {memberImg}
       </MemberDetails>
     </StyledCard>
   );

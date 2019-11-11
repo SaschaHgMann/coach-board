@@ -13,7 +13,8 @@ import DropDown from "../components/DropDown";
 import { Button } from "../components/Buttons";
 import ContentFooter from "../components/ContentFooter";
 import { CreateError } from "../components/StyledErrors";
-// import uuid from "uuid/v4";
+import PicUploader from "../components/PicUploader"
+
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -34,11 +35,10 @@ function Settings({ history, groups, members, match, onPasteMember }) {
   const [selectedGroup, setSelectedGroup] = React.useState("");
 
   const [member, setMember] = React.useState({
-    // _id: uuid(),
     name: "",
     age: "",
-    // birthdate: "",
-    belt: ""
+    belt: "",
+    memberImg: ""
   });
 
   function renderGroupOptions(group) {
@@ -83,8 +83,16 @@ function Settings({ history, groups, members, match, onPasteMember }) {
     }
 
     onPasteMember(member);
-    console.log(member)
+    console.log(member.memberImg)
     history.replace("/groups");
+  }
+
+  function handleImageChange(url) 
+  {
+    setMember({
+      ...member,
+      memberImg:url
+    })
   }
 
   return (
@@ -97,6 +105,10 @@ function Settings({ history, groups, members, match, onPasteMember }) {
             <Headline size="Sub">Create a new Member</Headline>
             <MemberAddForm>
               <Devider />
+              <PicUploader
+                image={member.memberImg}
+                onImageChange={handleImageChange}>
+              </PicUploader>
               <Input
                 type="text"
                 name="name"

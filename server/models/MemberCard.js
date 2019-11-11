@@ -13,6 +13,9 @@ const memberCardSchema = new mongoose.Schema({
   group: {
     type: String
   },
+  memberImg: {
+    type: String
+  },
   dateCreated: {
     type: Date,
     default: Date.now()
