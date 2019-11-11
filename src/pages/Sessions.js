@@ -12,7 +12,7 @@ const StyledButtonLink = styled(ButtonLink)`
   right: 10px;
   bottom: 3px;
   margin-left: 10px;
-`;
+`; 
 
 function Sessions({ sessions, groups, onDeleteSession, history }) {
   const trainingGroups = ["ALL", ...groups];

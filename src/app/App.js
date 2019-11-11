@@ -22,16 +22,12 @@ import {
   getSessionCards,
   postSessionCards,
   patchSessionCards,
-  deleteSessionCards
+  deleteSessionCards,
+  getMemberCards,
+  postMemberCards
 } from "../services/services";
 
 function App() {
-  const [sessionCards, setSessionCards] = React.useState([]);
-
-  React.useEffect(() => {
-    getSessionCards().then(result => setSessionCards(result));
-  }, []);
-
   const [activeCoach, setActiveCoach] = React.useState(
     getFromLocal("activeCoach") || {}
   );
@@ -39,16 +35,36 @@ function App() {
     setToLocal("activeCoach", activeCoach);
   }, [activeCoach]);
 
-  const [memberCards, setMemberCards] = React.useState(
-    getFromLocal("memberCards") || memberData
-  );
+
+  const [sessionCards, setSessionCards] = React.useState([]);
 
   React.useEffect(() => {
-    setToLocal("memberCards", memberCards);
-  }, [memberCards]);
+    getSessionCards().then(result => setSessionCards(result));
+  }, []);
+
+  const [memberCards, setMemberCards] = React.useState([]);
+
+  React.useEffect(() => {
+    getMemberCards().then(result => setMemberCards(result));
+  }, []);
+
+
+  // const [memberCards, setMemberCards] = React.useState(
+  //   getFromLocal("memberCards") || memberData
+  // );
+
+  // React.useEffect(() => {
+  //   setToLocal("memberCards", memberCards);
+  // }, [memberCards]);
+
+  // function handleCreateMember(member) {
+  //   setMemberCards([member, ...memberCards]);
+  // }
 
   function handleCreateMember(member) {
-    setMemberCards([member, ...memberCards]);
+    postMemberCards(member).then(result =>
+      setMemberCards([result, ...memberCards])
+    );
   }
 
   function handleCreateSession(session) {
@@ -65,7 +81,6 @@ function App() {
       ...sessionCards.slice(index + 1)
     ]);
   }
-
   function handleEdit(session) {
     patchSessionCards(session, session._id).then(result =>
       updateSessionEdited(result)
@@ -77,7 +92,6 @@ function App() {
     if (Confirm === true) {
       deleteSessionCards(id).then(() => {
         const Index = sessionCards.findIndex(session => session._id === id);
-
         setSessionCards([
           ...sessionCards.splice(0, Index),
           ...sessionCards.splice(Index + 1)
@@ -211,7 +225,7 @@ function App() {
                 activeCoach.username ? (
                   <Search
                     sessions={sessionCards}
-                    members={memberData}
+                    members={memberCards}
                     onDeleteSession={handleDeleteSession}
                     onEditSession={handleEdit}
                     {...props}

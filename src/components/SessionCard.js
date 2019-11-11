@@ -81,7 +81,7 @@ function SessionCard({
     <Card>
       <ContentHeader
         title={group}
-        date={moment(date).format("dddd, DD. MMM YYYY")}
+        date={moment(date).format("dddd, DD. MMM YYYY")} 
       />
       <ContentBody>
         <Headline size="Sub">

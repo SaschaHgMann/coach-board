@@ -13,7 +13,7 @@ import DropDown from "../components/DropDown";
 import { Button } from "../components/Buttons";
 import ContentFooter from "../components/ContentFooter";
 import { CreateError } from "../components/StyledErrors";
-import uuid from "uuid/v4";
+// import uuid from "uuid/v4";
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -34,11 +34,10 @@ function Settings({ history, groups, members, match, onPasteMember }) {
   const [selectedGroup, setSelectedGroup] = React.useState("");
 
   const [member, setMember] = React.useState({
-    _id: uuid(),
+    // _id: uuid(),
     name: "",
     age: "",
-    // age: parseInt() || 0,
-    birthdate: "",
+    // birthdate: "",
     belt: ""
   });
 
@@ -84,6 +83,7 @@ function Settings({ history, groups, members, match, onPasteMember }) {
     }
 
     onPasteMember(member);
+    console.log(member)
     history.replace("/groups");
   }
 
